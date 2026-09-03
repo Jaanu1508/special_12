@@ -1,3 +1,5 @@
+// HEART ANIMATION
+
 const heartsContainer = document.querySelector(".hearts");
 
 const heartSymbols = ["❤️", "💋"];
@@ -16,4 +18,35 @@ for (let i = 0; i < 100; i++) {
     heart.style.animationDelay = -(Math.random() * 15) + "s";
 
     heartsContainer.appendChild(heart);
+}
+
+
+// LOGIN INFORMATION
+
+const correctUsername = "12102025";
+const correctPassword = "AKNAABNA";
+
+
+// LOGIN FUNCTION
+
+function login() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    if (username === correctUsername && password === correctPassword) {
+
+        message.textContent = "IDENTITY VERIFIED ✓";
+        message.style.color = "white";
+
+        setTimeout(() => {
+            window.location.href = "page2.html";
+        }, 1500);
+
+    } else {
+
+        message.textContent = "ACCESS DENIED ✕";
+        message.style.color = "#ff4444";
+    }
 }
