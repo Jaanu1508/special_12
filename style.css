@@ -6,115 +6,167 @@
 
 body {
     min-height: 100vh;
+    overflow: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background: linear-gradient(
-        135deg,
-        #180000,
-        #5c0000,
-        #160000
-    );
+    background: #3d0000;
 
-    color: white;
     font-family: Arial, sans-serif;
+    color: white;
 }
 
-/* Login box */
+/* HEART BACKGROUND */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+
+    bottom: -80px;
+
+    animation-name: floating;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    user-select: none;
+}
+
+@keyframes floating {
+
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-55vh) translateX(50px) rotate(20deg);
+    }
+
+    100% {
+        transform: translateY(-120vh) translateX(-50px) rotate(-20deg);
+        opacity: 0;
+    }
+}
+
+/* LOGIN CARD */
 
 .login-box {
+    position: relative;
+
+    z-index: 5;
+
     width: 360px;
+
     padding: 40px;
 
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.75);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
     border-radius: 20px;
 
     text-align: center;
 
-    box-shadow:
-        0 0 30px rgba(255, 0, 0, 0.35);
-
-    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
 }
 
-/* Lock */
-
 .lock {
-    font-size: 35px;
+    font-size: 38px;
     margin-bottom: 15px;
 }
 
-/* Title */
-
 h1 {
-    font-size: 25px;
+    font-size: 24px;
     letter-spacing: 4px;
     margin-bottom: 8px;
 }
 
-/* Subtitle */
-
 .subtitle {
     font-size: 11px;
     letter-spacing: 3px;
-    opacity: 0.6;
-    margin-bottom: 30px;
+    opacity: 0.7;
+    margin-bottom: 25px;
 }
 
-/* Labels */
+.line {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
 
 label {
     display: block;
+
     text-align: left;
 
     font-size: 11px;
     letter-spacing: 2px;
 
-    margin-top: 18px;
-    margin-bottom: 7px;
+    margin: 15px 0 7px;
 }
-
-/* Input boxes */
 
 input {
     width: 100%;
+
     padding: 12px;
 
     background: rgba(255, 255, 255, 0.08);
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
     border-radius: 8px;
 
     color: white;
+
     outline: none;
 }
 
-/* Input when clicked */
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
 input:focus {
     border-color: white;
 
-    box-shadow:
-        0 0 10px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
 }
-
-/* Login button */
 
 button {
     width: 100%;
+
     padding: 12px;
 
     margin-top: 25px;
 
     background: #b30000;
+
     color: white;
 
     border: none;
+
     border-radius: 8px;
 
     font-size: 13px;
+
     letter-spacing: 3px;
 
     cursor: pointer;
@@ -123,112 +175,16 @@ button {
 button:hover {
     background: #e00000;
 
-    box-shadow:
-        0 0 20px rgba(255, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
 }
-
-/* Message */
 
 #message {
     margin-top: 15px;
     font-size: 12px;
 }
 
-/* Date */
-
 .date {
-    margin-top: 25px;
-
     font-size: 12px;
     letter-spacing: 4px;
-
-    opacity: 0.5;
-}
-/* Floating hearts background */
-
-.hearts {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.login-box {
-    position: relative;
-    z-index: 2;
-}
-
-.heart {
-    position: absolute;
-    bottom: -50px;
-    font-size: 20px;
-    animation: floatHeart linear infinite;
-    opacity: 0.8;
-}
-
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.9;
-    }
-
-    50% {
-        transform: translateY(-50vh) translateX(30px) rotate(20deg);
-    }
-
-    100% {
-        transform: translateY(-110vh) translateX(-30px) rotate(-20deg);
-        opacity: 0;
-    }
-}
-.hearts {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.heart {
-    position: absolute;
-    bottom: -60px;
-    display: block;
-
-    animation-name: floatHeart;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-
-    opacity: 0.9;
-}
-
-.login-box {
-    position: relative;
-    z-index: 2;
-}
-
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.9;
-    }
-
-    50% {
-        transform: translateY(-55vh) translateX(35px) rotate(20deg);
-    }
-
-    100% {
-        transform: translateY(-120vh) translateX(-35px) rotate(-20deg);
-        opacity: 0;
-    }
+    opacity: 0.6;
 }
