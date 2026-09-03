@@ -186,3 +186,49 @@ button:hover {
         opacity: 0;
     }
 }
+.hearts {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -60px;
+    display: block;
+
+    animation-name: floatHeart;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    opacity: 0.9;
+}
+
+.login-box {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translateY(-55vh) translateX(35px) rotate(20deg);
+    }
+
+    100% {
+        transform: translateY(-120vh) translateX(-35px) rotate(-20deg);
+        opacity: 0;
+    }
+}
