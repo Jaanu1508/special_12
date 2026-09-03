@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catch My Heart ❤️</title>
+
+    <link rel="stylesheet" href="game.css">
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <div class="top-bar">
+            <span>❤️ CATCH MY HEART</span>
+            <span id="timer">TIME: 30</span>
+        </div>
+
+        <div class="game-area" id="gameArea">
+
+            <div class="message" id="gameMessage">
+                CATCH HIM. ❤️
+            </div>
+
+            <div class="player" id="player">
+                🏃‍♀️
+            </div>
+
+            <div class="boy" id="boy">
+                ❤️🏃‍♂️
+            </div>
+
+            <div class="obstacle obstacle1">🌹</div>
+            <div class="obstacle obstacle2">🌳</div>
+            <div class="obstacle obstacle3">🌹</div>
+
+        </div>
+
+        <div class="controls">
+            <p>← → or A / D to move</p>
+            <button onclick="startGame()">START GAME</button>
+        </div>
+
+    </div>
+
+    <div class="win-screen" id="winScreen">
+
+        <div class="win-box">
+
+            <div class="big-heart">❤️</div>
+
+            <h1>HEART RECOVERED</h1>
+
+            <p>
+                You caught him.
+            </p>
+
+            <p class="small">
+                But honestly...
+                <br>
+                he already had your heart. ❤️
+            </p>
+
+            <button onclick="continueStory()">
+                CONTINUE
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>
