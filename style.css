@@ -144,3 +144,45 @@ button:hover {
 
     opacity: 0.5;
 }
+/* Floating hearts background */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.login-box {
+    position: relative;
+    z-index: 2;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    animation: floatHeart linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(30px) rotate(20deg);
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(-30px) rotate(-20deg);
+        opacity: 0;
+    }
+}
