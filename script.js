@@ -1,6 +1,6 @@
 const heartsContainer = document.querySelector(".hearts");
 
-const heartSymbols = ["❤️", "🤍"];
+const heartSymbols = ["❤️", "💋"];
 
 for (let i = 0; i < 100; i++) {
     const heart = document.createElement("div");
