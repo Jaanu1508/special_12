@@ -41,7 +41,7 @@ function login() {
         message.style.color = "white";
 
         setTimeout(() => {
-            window.location.href = "page2.html";
+            window.location.href = "game.html";
         }, 1500);
 
     } else {
