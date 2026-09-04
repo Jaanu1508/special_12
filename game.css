@@ -19,11 +19,6 @@ body {
     overflow: hidden;
 }
 
-
-/* =========================
-   SKY
-========================= */
-
 .sky {
     position: absolute;
     inset: 0 0 45% 0;
