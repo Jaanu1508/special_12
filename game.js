@@ -1,841 +1,569 @@
-/* =========================================
-   ELEMENTS
-========================================= */
+```javascript
+const dora = document.getElementById("dora");
+const shinchan = document.getElementById("shinchan");
 
-const gameWorld =
-    document.getElementById("gameWorld");
+const objects = document.getElementById("objects");
 
-const dora =
-    document.getElementById("dora");
+const scoreText = document.getElementById("score");
+const distanceText = document.getElementById("distance");
 
-const shinchan =
-    document.getElementById("shinchan");
+const startScreen = document.getElementById("startScreen");
+const gameOver = document.getElementById("gameOver");
 
-const objectsContainer =
-    document.getElementById("objects");
+const finalScore = document.getElementById("finalScore");
 
-const timerDisplay =
-    document.getElementById("timer");
-
-const scoreDisplay =
-    document.getElementById("score");
-
-const message =
-    document.getElementById("message");
-
-const startScreen =
-    document.getElementById("startScreen");
-
-const winScreen =
-    document.getElementById("winScreen");
-
-const loseScreen =
-    document.getElementById("loseScreen");
-
-const startButton =
-    document.getElementById("startButton");
-
-const retryButton =
-    document.getElementById("retryButton");
-
-const nextButton =
-    document.getElementById("nextButton");
+const startBtn = document.getElementById("startBtn");
+const restartBtn = document.getElementById("restartBtn");
 
 
-/* =========================================
+/* =========================
    GAME VARIABLES
-========================================= */
-
-let running = false;
+========================= */
 
 let lane = 1;
 
-let doraLane = 1;
-
-let jump = false;
-
-let sliding = false;
-
-let jumpHeight = 0;
-
-let objects = [];
-
-let speed = 0.42;
-
-let score = 0;
-
-let timeLeft = 60;
-
-let lives = 3;
-
-let lastTime = 0;
-
-let spawnTimer = 0;
-
-let timer;
-
-
-/* =========================================
-   LANE POSITIONS
-========================================= */
-
 const lanes = [
-    25,
-    50,
-    75
+    "33.33%",
+    "50%",
+    "66.66%"
 ];
 
+let score = 0;
+let distance = 0;
 
-/* =========================================
+let speed = 5;
+
+let running = false;
+
+let jumping = false;
+let sliding = false;
+
+let obstacleTimer = 0;
+let coinTimer = 0;
+
+let objectsList = [];
+
+let animation;
+
+
+/*
+    THIS CONTROLS HOW CLOSE
+    SHINCHAN GETS TO DORA.
+*/
+
+let chaseDistance = 150;
+
+
+/* =========================
    START GAME
-========================================= */
+========================= */
+
+startBtn.addEventListener(
+    "click",
+    startGame
+);
+
+restartBtn.addEventListener(
+    "click",
+    startGame
+);
+
 
 function startGame() {
 
-    startScreen.classList.add("hidden");
+    score = 0;
 
-    winScreen.classList.add("hidden");
+    distance = 0;
 
-    loseScreen.classList.add("hidden");
-
-
-    running = true;
+    speed = 5;
 
     lane = 1;
 
-    doraLane = 1;
+    chaseDistance = 150;
 
-    speed = 0.42;
+    objects.innerHTML = "";
 
-    score = 0;
+    objectsList = [];
 
-    timeLeft = 60;
+    scoreText.textContent = "0";
 
-    lives = 3;
+    distanceText.textContent = "0";
 
+    startScreen.classList.add("hidden");
 
-    clearObjects();
+    gameOver.classList.add("hidden");
 
+    running = true;
 
-    updateDora();
+    jumping = false;
 
-
-    scoreDisplay.textContent =
-        "SCORE 0000";
-
-    timerDisplay.textContent =
-        "01:00";
-
+    sliding = false;
 
     dora.classList.add("running");
 
     shinchan.classList.add("running");
 
+    setLane();
 
-    message.textContent =
-        "CATCH HIM!";
+    cancelAnimationFrame(animation);
 
-
-    clearInterval(timer);
-
-
-    timer = setInterval(() => {
-
-        if (!running)
-            return;
-
-
-        timeLeft--;
-
-
-        timerDisplay.textContent =
-            "00:" +
-            String(timeLeft).padStart(2, "0");
-
-
-        if (timeLeft <= 0) {
-
-            loseGame();
-
-        }
-
-    }, 1000);
-
-
-    lastTime =
-        performance.now();
-
-
-    requestAnimationFrame(
-        gameLoop
-    );
-
+    animation =
+        requestAnimationFrame(gameLoop);
 }
 
 
-/* =========================================
-   GAME LOOP
-========================================= */
+/* =========================
+   MAIN GAME LOOP
+========================= */
 
 function gameLoop(time) {
 
-    if (!running)
-        return;
+    if (!running) return;
 
 
-    const delta =
-        Math.min(
-            time - lastTime,
-            40
-        );
+    distance += 0.1;
 
-
-    lastTime = time;
-
-
-    updateDora();
-
-    updateObjects(delta);
-
-    spawnTimer += delta;
-
-
-    if (spawnTimer > 750) {
-
-        spawnObject();
-
-        spawnTimer = 0;
-
-    }
+    distanceText.textContent =
+        Math.floor(distance);
 
 
     /*
-       Slowly increase speed
+       GAME GETS FASTER
     */
 
-    speed += 0.00004 * delta;
+    speed += 0.001;
 
 
-    if (speed > 0.9)
-        speed = 0.9;
+    /*
+       SHINCHAN GETS CLOSER
+       THE LONGER YOU RUN
+    */
+
+    chaseDistance -= 0.015;
 
 
-    if (speed > 0.65) {
+    /*
+       Minimum distance between
+       Dora and Shinchan.
+    */
 
-        gameWorld.classList.add("fast");
-
+    if (chaseDistance < 35) {
+        chaseDistance = 35;
     }
 
 
-    checkCatchShinchan();
+    updateShinchan();
 
 
-    requestAnimationFrame(
-        gameLoop
-    );
+    spawnObjects(time);
 
+    moveObjects();
+
+    checkCollisions();
+
+
+    animation =
+        requestAnimationFrame(gameLoop);
 }
 
 
-/* =========================================
-   DORA LANE MOVEMENT
-========================================= */
+/* =========================
+   DORA LANE
+========================= */
+
+function setLane() {
+
+    dora.style.left =
+        lanes[lane];
+
+    /*
+       Shinchan follows Dora's lane
+    */
+
+    shinchan.style.left =
+        lanes[lane];
+}
+
+
+/* =========================
+   SHINCHAN CHASE
+========================= */
+
+function updateShinchan() {
+
+    /*
+       Shinchan starts lower
+       and slowly moves upward
+       toward Dora.
+    */
+
+    const maxBottom = 4;
+
+    const movement =
+        (150 - chaseDistance) * 0.095;
+
+    shinchan.style.bottom =
+        (maxBottom + movement) + "%";
+
+
+    /*
+       When Shinchan reaches Dora,
+       game over.
+    */
+
+    if (chaseDistance <= 36) {
+
+        endGame();
+    }
+}
+
+
+/* =========================
+   MOVE LEFT
+========================= */
 
 function moveLeft() {
 
-    if (!running)
-        return;
-
+    if (!running) return;
 
     if (lane > 0) {
 
         lane--;
 
-        doraLane = lane;
-
-        updateDora();
-
+        setLane();
     }
-
 }
 
 
+/* =========================
+   MOVE RIGHT
+========================= */
+
 function moveRight() {
 
-    if (!running)
-        return;
-
+    if (!running) return;
 
     if (lane < 2) {
 
         lane++;
 
-        doraLane = lane;
-
-        updateDora();
-
+        setLane();
     }
-
 }
 
 
-/* =========================================
-   DORA POSITION
-========================================= */
-
-function updateDora() {
-
-    const percentage =
-        lanes[doraLane];
-
-
-    dora.style.left =
-        percentage + "%";
-
-
-    dora.style.transform =
-        `translateX(-50%) scale(${jump ? 1 : 0.9}) translateY(${-jumpHeight}px)`;
-
-}
-
-
-/* =========================================
+/* =========================
    JUMP
-========================================= */
+========================= */
 
-function doJump() {
+function jump() {
 
-    if (!running)
-        return;
+    if (!running) return;
 
+    if (jumping) return;
 
-    if (jump)
-        return;
+    jumping = true;
 
+    dora.classList.add("jumping");
 
-    jump = true;
+    setTimeout(() => {
 
+        dora.classList.remove("jumping");
 
-    let start =
-        performance.now();
+        jumping = false;
 
-
-    function jumpAnimation(now) {
-
-        if (!jump)
-            return;
-
-
-        let progress =
-            (now - start) / 700;
-
-
-        if (progress >= 1) {
-
-            jump = false;
-
-            jumpHeight = 0;
-
-            updateDora();
-
-            return;
-
-        }
-
-
-        /*
-           Parabolic jump
-        */
-
-        jumpHeight =
-            Math.sin(progress * Math.PI) * 130;
-
-
-        updateDora();
-
-
-        requestAnimationFrame(
-            jumpAnimation
-        );
-
-    }
-
-
-    requestAnimationFrame(
-        jumpAnimation
-    );
-
+    }, 550);
 }
 
 
-/* =========================================
+/* =========================
    SLIDE
-========================================= */
+========================= */
 
-function doSlide() {
+function slide() {
 
-    if (!running)
-        return;
+    if (!running) return;
 
-
-    if (sliding)
-        return;
-
+    if (sliding) return;
 
     sliding = true;
 
     dora.style.transform =
-        `translateX(-50%) translateY(-${jumpHeight}px) scaleY(.55) scaleX(1.15)`;
-
+        "translateX(-50%) scaleY(.55)";
 
     setTimeout(() => {
 
+        dora.style.transform =
+            "translateX(-50%)";
+
         sliding = false;
 
-        updateDora();
-
     }, 500);
-
 }
 
 
-/* =========================================
-   SPAWN OBJECT
-========================================= */
+/* =========================
+   SPAWN OBJECTS
+========================= */
 
-function spawnObject() {
+function spawnObjects(time) {
 
-    if (!running)
-        return;
+    if (
+        time - obstacleTimer >
+        900
+    ) {
+
+        createObstacle();
+
+        obstacleTimer = time;
+    }
 
 
-    const object =
+    if (
+        time - coinTimer >
+        500
+    ) {
+
+        createCoin();
+
+        coinTimer = time;
+    }
+}
+
+
+/* =========================
+   OBSTACLE
+========================= */
+
+function createObstacle() {
+
+    const obstacle =
         document.createElement("div");
 
+    obstacle.className =
+        "obstacle";
 
-    object.classList.add(
-        "game-object"
-    );
-
-
-    /*
-       Random lane
-    */
-
-    const objectLane =
+    const obstacleLane =
         Math.floor(
             Math.random() * 3
         );
 
+    obstacle.style.left =
+        lanes[obstacleLane];
 
-    object.dataset.lane =
-        objectLane;
+    obstacle.style.top =
+        "-80px";
 
+    objects.appendChild(obstacle);
 
-    /*
-       Random object
-    */
+    objectsList.push({
 
-    const random =
-        Math.random();
+        element: obstacle,
 
+        type: "obstacle",
 
-    if (random < .55) {
+        lane: obstacleLane,
 
-        object.classList.add(
-            "obstacle-rock"
-        );
-
-        object.dataset.type =
-            "obstacle";
-
-    }
-
-    else if (random < .78) {
-
-        object.classList.add(
-            "obstacle-cone"
-        );
-
-        object.dataset.type =
-            "obstacle";
-
-    }
-
-    else if (random < .90) {
-
-        object.classList.add(
-            "obstacle-box"
-        );
-
-        object.dataset.type =
-            "obstacle";
-
-    }
-
-    else {
-
-        object.classList.add(
-            "collectible"
-        );
-
-        object.textContent =
-            "♥";
-
-        object.dataset.type =
-            "heart";
-
-    }
-
-
-    object.style.left =
-        lanes[objectLane] + "%";
-
-
-    /*
-       Start at horizon
-    */
-
-    object.dataset.depth = 0;
-
-
-    objectsContainer.appendChild(
-        object
-    );
-
-
-    objects.push(object);
-
+        y: -80
+    });
 }
 
 
-/* =========================================
-   UPDATE OBJECTS
-========================================= */
+/* =========================
+   COIN
+========================= */
 
-function updateObjects(delta) {
+function createCoin() {
 
-    for (
-        let i = objects.length - 1;
-        i >= 0;
-        i--
-    ) {
+    const coin =
+        document.createElement("div");
 
-        const object =
-            objects[i];
+    coin.className =
+        "coin";
 
+    const coinLane =
+        Math.floor(
+            Math.random() * 3
+        );
 
-        let depth =
-            parseFloat(
-                object.dataset.depth
-            );
+    coin.style.left =
+        lanes[coinLane];
 
+    coin.style.top =
+        "-40px";
 
-        depth +=
-            speed *
-            delta /
-            100;
+    objects.appendChild(coin);
 
+    objectsList.push({
 
-        object.dataset.depth =
-            depth;
+        element: coin,
 
+        type: "coin",
 
-        /*
-           Perspective movement
-        */
+        lane: coinLane,
 
-        const top =
-            32 +
-            depth * 75;
-
-
-        const scale =
-            .1 +
-            depth * 1.5;
-
-
-        object.style.top =
-            top + "%";
-
-
-        object.style.transform =
-            `translateX(-50%) scale(${scale})`;
-
-
-        /*
-           Collision area
-        */
-
-        if (
-            depth > .82 &&
-            depth < 1.12
-        ) {
-
-            checkCollision(
-                object
-            );
-
-        }
-
-
-        /*
-           Remove when passed
-        */
-
-        if (depth > 1.2) {
-
-            object.remove();
-
-            objects.splice(i, 1);
-
-        }
-
-    }
-
+        y: -40
+    });
 }
 
 
-/* =========================================
-   COLLISION
-========================================= */
+/* =========================
+   MOVE OBJECTS
+========================= */
 
-function checkCollision(object) {
+function moveObjects() {
 
-    if (
-        Number(object.dataset.lane)
-        !== doraLane
-    ) {
+    objectsList.forEach(
+        (obj, index) => {
 
-        return;
+            obj.y +=
+                speed;
 
-    }
-
-
-    /*
-       Hearts
-    */
-
-    if (
-        object.dataset.type ===
-        "heart"
-    ) {
-
-        collectHeart(object);
-
-        return;
-
-    }
+            obj.element.style.top =
+                obj.y + "px";
 
 
-    /*
-       Jump over obstacle
-    */
+            if (
+                obj.y >
+                window.innerHeight
+            ) {
 
-    if (
-        jumpHeight > 55
-    ) {
+                obj.element.remove();
 
-        return;
-
-    }
-
-
-    /*
-       Hit obstacle
-    */
-
-    hitObstacle(object);
-
-}
-
-
-/* =========================================
-   HEART COLLECTION
-========================================= */
-
-function collectHeart(object) {
-
-    score += 100;
-
-
-    scoreDisplay.textContent =
-        "SCORE " +
-        String(score)
-            .padStart(4, "0");
-
-
-    message.textContent =
-        "+100 ❤️";
-
-
-    object.remove();
-
-
-    objects =
-        objects.filter(
-            item => item !== object
-        );
-
-
-    setTimeout(() => {
-
-        if (running) {
-
-            message.textContent =
-                "CATCH HIM!";
-
-        }
-
-    }, 500);
-
-}
-
-
-/* =========================================
-   OBSTACLE HIT
-========================================= */
-
-function hitObstacle(object) {
-
-    /*
-       Prevent repeated hits
-    */
-
-    if (
-        object.dataset.hit ===
-        "true"
-    ) {
-
-        return;
-
-    }
-
-
-    object.dataset.hit =
-        "true";
-
-
-    lives--;
-
-
-    object.remove();
-
-
-    objects =
-        objects.filter(
-            item => item !== object
-        );
-
-
-    score =
-        Math.max(
-            0,
-            score - 50
-        );
-
-
-    scoreDisplay.textContent =
-        "SCORE " +
-        String(score)
-            .padStart(4, "0");
-
-
-    message.textContent =
-        "OUCH! KEEP RUNNING!";
-
-
-    dora.animate(
-        [
-            {
-                transform:
-                    "translateX(-50%) translateX(-15px)"
-            },
-            {
-                transform:
-                    "translateX(-50%) translateX(15px)"
-            },
-            {
-                transform:
-                    "translateX(-50%) translateX(0)"
+                objectsList.splice(
+                    index,
+                    1
+                );
             }
-        ],
-        {
-            duration: 300
         }
     );
-
-
-    if (lives <= 0) {
-
-        setTimeout(
-            loseGame,
-            500
-        );
-
-    }
-
 }
 
 
-/* =========================================
-   CATCH SHINCHAN
-========================================= */
+/* =========================
+   COLLISIONS
+========================= */
 
-function checkCatchShinchan() {
+function checkCollisions() {
 
-    /*
-       As score increases,
-       Shinchan slowly comes closer.
-    */
-
-    const progress =
-        Math.min(
-            score / 2500,
-            1
-        );
+    const doraRect =
+        dora.getBoundingClientRect();
 
 
-    const scale =
-        .65 +
-        progress * .25;
+    objectsList.forEach(
+        (obj, index) => {
+
+            const objectRect =
+                obj.element
+                    .getBoundingClientRect();
 
 
-    shinchan.style.transform =
-        `translateX(-50%) scale(${scale})`;
+            if (
+                obj.lane === lane &&
+                collision(
+                    doraRect,
+                    objectRect
+                )
+            ) {
 
 
-    /*
-       At enough score,
-       Dora catches him.
-    */
+                /*
+                   COIN
+                */
 
-    if (
-        score >= 2500
-    ) {
+                if (
+                    obj.type === "coin"
+                ) {
 
-        winGame();
+                    score += 10;
 
-    }
+                    scoreText.textContent =
+                        score;
 
+                    obj.element.remove();
+
+                    objectsList.splice(
+                        index,
+                        1
+                    );
+                }
+
+
+                /*
+                   OBSTACLE
+                */
+
+                if (
+                    obj.type ===
+                    "obstacle"
+                ) {
+
+                    /*
+                       Jumping allows
+                       Dora to avoid it.
+                    */
+
+                    if (!jumping &&
+                        !sliding) {
+
+                        /*
+                           Shinchan gets
+                           MUCH closer.
+                        */
+
+                        chaseDistance -= 35;
+
+                        if (
+                            chaseDistance <
+                            35
+                        ) {
+
+                            chaseDistance =
+                                35;
+                        }
+
+                        obj.element.remove();
+
+                        objectsList.splice(
+                            index,
+                            1
+                        );
+                    }
+                }
+            }
+        }
+    );
 }
 
 
-/* =========================================
-   WIN
-========================================= */
+/* =========================
+   COLLISION FUNCTION
+========================= */
 
-function winGame() {
+function collision(a, b) {
 
-    if (!running)
-        return;
+    return !(
+        a.right < b.left ||
+        a.left > b.right ||
+        a.bottom < b.top ||
+        a.top > b.bottom
+    );
+}
 
+
+/* =========================
+   GAME OVER
+========================= */
+
+function endGame() {
+
+    if (!running) return;
 
     running = false;
 
-
-    clearInterval(timer);
-
+    cancelAnimationFrame(
+        animation
+    );
 
     dora.classList.remove(
         "running"
@@ -845,202 +573,181 @@ function winGame() {
         "running"
     );
 
+    finalScore.textContent =
+        score;
 
-    message.textContent =
-        "YOU CAUGHT HIM! ❤️";
-
-
-    score += 500;
-
-
-    scoreDisplay.textContent =
-        "SCORE " +
-        String(score)
-            .padStart(4, "0");
-
-
-    setTimeout(() => {
-
-        winScreen.classList.remove(
-            "hidden"
-        );
-
-    }, 800);
-
-}
-
-
-/* =========================================
-   LOSE
-========================================= */
-
-function loseGame() {
-
-    if (!running)
-        return;
-
-
-    running = false;
-
-
-    clearInterval(timer);
-
-
-    dora.classList.remove(
-        "running"
-    );
-
-    shinchan.classList.remove(
-        "running"
-    );
-
-
-    loseScreen.classList.remove(
+    gameOver.classList.remove(
         "hidden"
     );
-
 }
 
 
-/* =========================================
-   CLEAR OBJECTS
-========================================= */
-
-function clearObjects() {
-
-    objects.forEach(
-        object => object.remove()
-    );
-
-
-    objects = [];
-
-}
-
-
-/* =========================================
-   KEYBOARD
-========================================= */
+/* =========================
+   KEYBOARD CONTROLS
+========================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
         if (
-            [
-                "ArrowLeft",
-                "ArrowRight",
-                "ArrowUp",
-                "ArrowDown"
-            ].includes(event.key)
+            event.key ===
+            "ArrowLeft"
+        ) {
+
+            moveLeft();
+        }
+
+
+        if (
+            event.key ===
+            "ArrowRight"
+        ) {
+
+            moveRight();
+        }
+
+
+        if (
+            event.key ===
+            "ArrowUp" ||
+            event.key === " "
         ) {
 
             event.preventDefault();
 
+            jump();
         }
 
 
         if (
-            event.key === "ArrowLeft" ||
-            event.key.toLowerCase() === "a"
+            event.key ===
+            "ArrowDown"
         ) {
 
-            moveLeft();
-
+            slide();
         }
-
-
-        if (
-            event.key === "ArrowRight" ||
-            event.key.toLowerCase() === "d"
-        ) {
-
-            moveRight();
-
-        }
-
-
-        if (
-            event.key === "ArrowUp" ||
-            event.key.toLowerCase() === "w"
-        ) {
-
-            doJump();
-
-        }
-
-
-        if (
-            event.key === "ArrowDown" ||
-            event.key.toLowerCase() === "s"
-        ) {
-
-            doSlide();
-
-        }
-
     }
 );
 
 
-/* =========================================
+/* =========================
    MOBILE BUTTONS
-========================================= */
+========================= */
 
 document
-    .querySelector('[data-key="left"]')
-    .addEventListener(
-        "click",
-        moveLeft
-    );
+    .querySelectorAll(
+        ".controls button"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const action =
+                    button.dataset.action;
 
 
-document
-    .querySelector('[data-key="right"]')
-    .addEventListener(
-        "click",
-        moveRight
-    );
+                if (
+                    action === "left"
+                ) {
+
+                    moveLeft();
+                }
 
 
-document
-    .querySelector('[data-key="jump"]')
-    .addEventListener(
-        "click",
-        doJump
-    );
+                if (
+                    action === "right"
+                ) {
+
+                    moveRight();
+                }
 
 
-document
-    .querySelector('[data-key="slide"]')
-    .addEventListener(
-        "click",
-        doSlide
-    );
+                if (
+                    action === "jump"
+                ) {
+
+                    jump();
+                }
 
 
-/* =========================================
-   BUTTONS
-========================================= */
+                if (
+                    action === "slide"
+                ) {
 
-startButton.addEventListener(
-    "click",
-    startGame
-);
+                    slide();
+                }
 
-
-retryButton.addEventListener(
-    "click",
-    startGame
-);
+            }
+        );
+    });
 
 
-nextButton.addEventListener(
-    "click",
-    () => {
+/* =========================
+   SWIPE CONTROLS
+========================= */
 
-        window.location.href =
-            "archive.html";
+let startX = 0;
+let startY = 0;
 
+
+document.addEventListener(
+    "touchstart",
+    event => {
+
+        const touch =
+            event.changedTouches[0];
+
+        startX =
+            touch.screenX;
+
+        startY =
+            touch.screenY;
     }
 );
+
+
+document.addEventListener(
+    "touchend",
+    event => {
+
+        const touch =
+            event.changedTouches[0];
+
+        const dx =
+            touch.screenX -
+            startX;
+
+        const dy =
+            touch.screenY -
+            startY;
+
+
+        if (
+            Math.abs(dx) >
+            Math.abs(dy)
+        ) {
+
+            if (dx > 40) {
+                moveRight();
+            }
+
+            if (dx < -40) {
+                moveLeft();
+            }
+
+        } else {
+
+            if (dy < -40) {
+                jump();
+            }
+
+            if (dy > 40) {
+                slide();
+            }
+        }
+    }
+);
+```
