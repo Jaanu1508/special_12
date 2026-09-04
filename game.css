@@ -4,259 +4,1848 @@
     box-sizing: border-box;
 }
 
+:root {
+    --pink: #ff3d81;
+    --hot-pink: #ff1765;
+    --purple: #351052;
+    --dark: #08020d;
+    --white: #fff7fb;
+}
+
 body {
+
     min-height: 100vh;
 
-    background: #180000;
+    background:
+        radial-gradient(circle at top,
+        #461264,
+        #13051d 65%,
+        #050207);
 
     color: white;
 
-    font-family: Arial, sans-serif;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     overflow: hidden;
 }
 
-.game-container {
-    width: 100%;
-    max-width: 1000px;
 
-    padding: 20px;
-}
+.game-wrapper {
 
-.top-bar {
+    width: 100vw;
+    height: 100vh;
+
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 
-    padding: 15px 20px;
-
-    background: rgba(0, 0, 0, 0.7);
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    font-size: 13px;
-    letter-spacing: 2px;
 }
+
+
+/* ======================================
+   HUD
+====================================== */
+
+.hud {
+
+    height: 90px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 180px 1fr;
+
+    align-items: center;
+
+    padding: 12px 30px;
+
+    background:
+        rgba(5, 1, 10, .92);
+
+    border-bottom:
+        1px solid rgba(255, 70, 130, .5);
+
+    box-shadow:
+        0 0 30px rgba(255, 20, 100, .15);
+
+    z-index: 50;
+
+}
+
+
+.mission {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.hud-heart {
+
+    font-size: 42px;
+
+    color: #ff174f;
+
+    text-shadow:
+        0 0 15px #ff174f,
+        0 0 30px #ff174f;
+
+    animation:
+        pulseHeart 1.2s infinite;
+}
+
+
+.mission small,
+.timer-box small {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    opacity: .7;
+
+}
+
+
+.mission strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.mission span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 10px;
+
+    color: #ff79a7;
+
+    letter-spacing: 2px;
+
+}
+
+
+.timer-box {
+
+    text-align: center;
+
+    border:
+        1px solid rgba(255, 70, 130, .7);
+
+    border-radius: 15px;
+
+    padding: 8px;
+
+    box-shadow:
+        0 0 20px rgba(255, 40, 120, .15);
+}
+
+
+#timer {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+.score-box {
+
+    text-align: right;
+
+}
+
+
+#score {
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.lives {
+
+    margin-top: 5px;
+
+    font-size: 20px;
+
+    color: #ff285f;
+
+    text-shadow:
+        0 0 10px red;
+
+}
+
+
+/* ======================================
+   GAME AREA
+====================================== */
 
 .game-area {
+
     position: relative;
 
-    width: 100%;
-    height: 500px;
+    flex: 1;
 
     overflow: hidden;
 
     background:
+
         linear-gradient(
             to bottom,
-            #420000 0%,
-            #210000 65%,
-            #120000 65%,
-            #120000 100%
+            #170625 0%,
+            #542061 43%,
+            #d84b83 63%,
+            #54284d 64%,
+            #211326 100%
         );
 
-    border-left: 1px solid rgba(255,255,255,0.2);
-    border-right: 1px solid rgba(255,255,255,0.2);
 }
 
-.game-area::after {
+
+/* moon */
+
+.moon {
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: 20%;
+
+    top: 60px;
+
+    border-radius: 50%;
+
+    background: #ffd2e2;
+
+    box-shadow:
+        0 0 40px #ff8ab7,
+        0 0 100px rgba(255, 100, 170, .5);
+
+}
+
+
+/* ======================================
+   CITY
+====================================== */
+
+.city {
+
+    position: absolute;
+
+    bottom: 34%;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 180px;
+
+    display: flex;
+
+    align-items: end;
+
+    gap: 12px;
+
+    opacity: .65;
+
+}
+
+
+.building {
+
+    width: 100px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #291137,
+            #110816
+        );
+
+    position: relative;
+}
+
+
+.building::after {
+
     content: "";
 
     position: absolute;
 
-    bottom: 0;
-    left: 0;
+    inset: 15px;
 
-    width: 100%;
-    height: 3px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #ffb0c8 0 5px,
+            transparent 5px 22px
+        );
 
-    background: white;
+    opacity: .4;
 
-    opacity: 0.3;
 }
 
-.player,
-.boy {
+
+.b1 {
+    height: 130px;
+}
+
+.b2 {
+    height: 190px;
+}
+
+.b3 {
+    height: 145px;
+}
+
+.b4 {
+    height: 210px;
+}
+
+.b5 {
+    height: 155px;
+}
+
+.b6 {
+    height: 185px;
+}
+
+
+/* ======================================
+   TREES
+====================================== */
+
+.tree {
+
     position: absolute;
 
-    font-size: 45px;
+    bottom: 30%;
 
-    bottom: 35px;
+    z-index: 2;
 
-    z-index: 5;
-
-    user-select: none;
-
-    transition: left 0.05s linear;
 }
 
-.player {
-    left: 100px;
+
+.tree-left {
+    left: 3%;
 }
 
-.boy {
-    left: 700px;
-
-    animation: running 0.3s infinite alternate;
+.tree-right {
+    right: 4%;
 }
 
-@keyframes running {
 
-    from {
-        transform: translateY(0);
-    }
+.tree-top {
 
-    to {
-        transform: translateY(-8px);
-    }
+    width: 150px;
+    height: 150px;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #ff639a,
+            #7d2058 70%
+        );
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 30px rgba(255, 70, 130, .25);
+
 }
 
-.obstacle {
+
+.tree-trunk {
+
+    width: 22px;
+    height: 100px;
+
+    background: #371b20;
+
+    margin: -5px auto 0;
+
+}
+
+
+/* ======================================
+   LAMPS
+====================================== */
+
+.lamp {
+
     position: absolute;
 
-    bottom: 35px;
+    bottom: 31%;
 
-    font-size: 40px;
+    width: 6px;
+
+    height: 160px;
+
+    background: #19151d;
 
     z-index: 3;
+
 }
 
-.obstacle1 {
-    left: 350px;
-}
 
-.obstacle2 {
-    left: 520px;
-}
+.lamp::before {
 
-.obstacle3 {
-    left: 820px;
-}
+    content: "";
 
-.message {
     position: absolute;
 
-    top: 30px;
+    top: -5px;
+    left: -18px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #ffd08a;
+
+    box-shadow:
+        0 0 20px #ffb25c,
+        0 0 50px rgba(255, 160, 70, .7);
+
+}
+
+
+.lamp1 {
+    left: 28%;
+}
+
+.lamp2 {
+    right: 26%;
+}
+
+
+/* ======================================
+   GROUND
+====================================== */
+
+.game-area::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    height: 34%;
+
+    background:
+
+        repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 0 2px,
+            transparent 2px 80px
+        ),
+
+        linear-gradient(
+            to bottom,
+            #3b2435,
+            #160c18
+        );
+
+    border-top:
+        3px solid rgba(255, 180, 210, .15);
+
+    z-index: 1;
+
+}
+
+
+/* ======================================
+   CHARACTERS
+====================================== */
+
+.character {
+
+    position: absolute;
+
+    bottom: 25%;
+
+    z-index: 20;
+
+    transform-origin: bottom center;
+
+}
+
+
+.character-shadow {
+
+    position: absolute;
+
+    bottom: -8px;
+
     left: 50%;
 
     transform: translateX(-50%);
 
-    font-size: 22px;
+    width: 80px;
+    height: 16px;
 
-    letter-spacing: 4px;
+    background: rgba(0,0,0,.4);
 
-    text-align: center;
+    border-radius: 50%;
+
+    filter: blur(4px);
+
+}
+
+
+/* ======================================
+   DORA
+====================================== */
+
+.dora {
+
+    left: 10%;
+
+    width: 120px;
+
+    height: 190px;
+
+}
+
+
+.dora-hair {
+
+    position: absolute;
+
+    top: 0;
+    left: 13px;
+
+    width: 95px;
+    height: 78px;
+
+    background: #54271d;
+
+    border-radius:
+        48% 48% 42% 42%;
+
+    z-index: 1;
+
+}
+
+
+.dora-head {
+
+    position: absolute;
+
+    top: 15px;
+    left: 25px;
+
+    width: 75px;
+    height: 72px;
+
+    background: #c98250;
+
+    border-radius:
+        45% 45% 48% 48%;
+
+    z-index: 2;
+
+}
+
+
+.dora-eye {
+
+    position: absolute;
+
+    top: 25px;
+
+    width: 12px;
+    height: 17px;
+
+    background: white;
+
+    border: 3px solid #3c1d14;
+
+    border-radius: 50%;
+
+}
+
+
+.dora-eye::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+    height: 7px;
+
+    background: #111;
+
+    border-radius: 50%;
+
+    left: 2px;
+    top: 3px;
+
+}
+
+
+.left-eye {
+    left: 20px;
+}
+
+.right-eye {
+    right: 20px;
+}
+
+
+.dora-mouth {
+
+    position: absolute;
+
+    width: 17px;
+    height: 9px;
+
+    border-bottom:
+        3px solid #632219;
+
+    border-radius: 50%;
+
+    left: 29px;
+    top: 50px;
+
+}
+
+
+.dora-body {
+
+    position: absolute;
+
+    top: 78px;
+    left: 25px;
+
+    width: 75px;
+    height: 62px;
+
+    background: #f35b91;
+
+    border-radius:
+        15px 15px 20px 20px;
+
+    z-index: 2;
+
+}
+
+
+.backpack {
+
+    position: absolute;
+
+    left: -15px;
+    top: 5px;
+
+    width: 25px;
+    height: 52px;
+
+    background: #6933a1;
+
+    border-radius: 10px;
+
+}
+
+
+.dora-arm {
+
+    position: absolute;
+
+    width: 13px;
+    height: 58px;
+
+    background: #c98250;
+
+    border-radius: 20px;
+
+    top: 5px;
+
+    transform-origin: top center;
+
+}
+
+
+.dora .arm-left {
+
+    left: -7px;
+
+    transform: rotate(55deg);
+
+}
+
+
+.dora .arm-right {
+
+    right: -7px;
+
+    transform: rotate(-55deg);
+
+}
+
+
+.dora-leg {
+
+    position: absolute;
+
+    top: 132px;
+
+    width: 15px;
+    height: 62px;
+
+    background: #d8844f;
+
+    border-radius: 15px;
+
+    transform-origin: top center;
+
+}
+
+
+.dora .leg-left {
+    left: 40px;
+}
+
+.dora .leg-right {
+    left: 70px;
+}
+
+
+.dora-shoe {
+
+    position: absolute;
+
+    bottom: -5px;
+
+    width: 35px;
+    height: 16px;
+
+    background: white;
+
+    border-radius: 50% 50% 40% 40%;
+
+    border:
+        3px solid #ff4e83;
+
+}
+
+
+/* ======================================
+   SHINCHAN
+====================================== */
+
+.shinchan {
+
+    right: 13%;
+
+    width: 155px;
+
+    height: 245px;
+
+}
+
+
+.shin-hair {
+
+    position: absolute;
+
+    top: 0;
+    left: 18px;
+
+    width: 120px;
+    height: 40px;
+
+    z-index: 4;
+
+}
+
+
+.shin-hair i {
+
+    position: absolute;
+
+    width: 48px;
+    height: 30px;
+
+    background: #111;
+
+    border-radius:
+        50% 50% 0 0;
+
+    transform: rotate(-20deg);
+
+}
+
+
+.shin-hair i:nth-child(1) {
+    left: 0;
+    top: 5px;
+}
+
+.shin-hair i:nth-child(2) {
+    left: 30px;
+    top: 0;
+}
+
+.shin-hair i:nth-child(3) {
+    left: 60px;
+    top: 5px;
+}
+
+.shin-hair i:nth-child(4) {
+    left: 88px;
+    top: 10px;
+}
+
+
+.shin-head {
+
+    position: absolute;
+
+    top: 20px;
+    left: 25px;
+
+    width: 105px;
+    height: 100px;
+
+    background: #f1b078;
+
+    border-radius:
+        45% 45% 50% 50%;
+
+    z-index: 3;
+
+}
+
+
+.shin-eye {
+
+    position: absolute;
+
+    top: 38px;
+
+    width: 22px;
+    height: 26px;
+
+    background: white;
+
+    border: 4px solid #111;
+
+    border-radius: 50%;
+
+}
+
+
+.shin-eye::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 8px;
+    height: 12px;
+
+    background: #111;
+
+    border-radius: 50%;
+
+    top: 5px;
+    left: 4px;
+
+}
+
+
+.eye-left {
+    left: 25px;
+}
+
+.eye-right {
+    right: 25px;
+}
+
+
+.shin-mouth {
+
+    position: absolute;
+
+    width: 28px;
+    height: 18px;
+
+    background: #4a1718;
+
+    border-radius: 50%;
+
+    left: 39px;
+    bottom: 14px;
+
+}
+
+
+.shin-body {
+
+    position: absolute;
+
+    top: 113px;
+    left: 28px;
+
+    width: 100px;
+    height: 70px;
+
+    background: #e83737;
+
+    border-radius:
+        20px 20px 15px 15px;
+
+    z-index: 2;
+
+}
+
+
+.shin-arm {
+
+    position: absolute;
+
+    width: 15px;
+    height: 67px;
+
+    background: #f1b078;
+
+    border-radius: 20px;
+
+    top: 0;
+
+    transform-origin: top center;
+
+}
+
+
+.shin .arm-left {
+
+    left: -9px;
+
+    transform: rotate(55deg);
+
+}
+
+
+.shin .arm-right {
+
+    right: -9px;
+
+    transform: rotate(-60deg);
+
+}
+
+
+.shin-leg {
+
+    position: absolute;
+
+    top: 174px;
+
+    width: 18px;
+    height: 73px;
+
+    background: #f1b078;
+
+    border-radius: 20px;
+
+    transform-origin: top center;
+
+}
+
+
+.shinchan .leg-left {
+    left: 50px;
+}
+
+.shinchan .leg-right {
+    left: 88px;
+}
+
+
+.shin-shoe {
+
+    position: absolute;
+
+    bottom: -5px;
+
+    width: 42px;
+    height: 18px;
+
+    background: white;
+
+    border-radius: 50%;
+
+}
+
+
+/* ======================================
+   RUNNING ANIMATION
+====================================== */
+
+.character.running {
+
+    animation:
+        bodyRun .22s infinite alternate ease-in-out;
+
+}
+
+
+.character.running .leg-left {
+
+    animation:
+        legRun1 .22s infinite alternate ease-in-out;
+
+}
+
+
+.character.running .leg-right {
+
+    animation:
+        legRun2 .22s infinite alternate ease-in-out;
+
+}
+
+
+.character.running .arm-left {
+
+    animation:
+        armRun1 .22s infinite alternate ease-in-out;
+
+}
+
+
+.character.running .arm-right {
+
+    animation:
+        armRun2 .22s infinite alternate ease-in-out;
+
+}
+
+
+@keyframes bodyRun {
+
+    from {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    to {
+        transform: translateY(-7px) rotate(2deg);
+    }
+
+}
+
+
+@keyframes legRun1 {
+
+    from {
+        transform: rotate(45deg);
+    }
+
+    to {
+        transform: rotate(-45deg);
+    }
+
+}
+
+
+@keyframes legRun2 {
+
+    from {
+        transform: rotate(-45deg);
+    }
+
+    to {
+        transform: rotate(45deg);
+    }
+
+}
+
+
+@keyframes armRun1 {
+
+    from {
+        transform: rotate(-55deg);
+    }
+
+    to {
+        transform: rotate(55deg);
+    }
+
+}
+
+
+@keyframes armRun2 {
+
+    from {
+        transform: rotate(55deg);
+    }
+
+    to {
+        transform: rotate(-55deg);
+    }
+
+}
+
+
+/* ======================================
+   HEART
+====================================== */
+
+.stolen-heart {
+
+    position: absolute;
+
+    top: -55px;
+    left: 55px;
+
+    width: 55px;
+    height: 55px;
 
     z-index: 10;
 
-    text-shadow: 0 0 15px red;
+    animation:
+        floatingHeart .7s infinite alternate;
+
 }
 
-.controls {
-    text-align: center;
 
-    padding: 20px;
+.stolen-heart span {
 
-    background: rgba(0,0,0,0.7);
+    position: absolute;
+
+    font-size: 58px;
+
+    color: #ff174f;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 10px #ff174f,
+        0 0 30px #ff174f;
+
 }
 
-.controls p {
-    font-size: 12px;
 
-    opacity: 0.6;
+@keyframes floatingHeart {
 
-    margin-bottom: 15px;
+    to {
+        transform: translateY(-8px) scale(1.08);
+    }
+
 }
 
-button {
-    padding: 12px 30px;
 
-    background: #b30000;
+/* ======================================
+   OBSTACLES
+====================================== */
+
+.obstacle {
+
+    position: absolute;
+
+    bottom: 25%;
+
+    z-index: 15;
+
+}
+
+
+.rock {
+
+    width: 48px;
+    height: 36px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8a6879,
+            #332633
+        );
+
+    border-radius:
+        50% 40% 30% 35%;
+
+    box-shadow:
+        inset -5px -5px 0 rgba(0,0,0,.3);
+
+}
+
+
+.rock1 {
+    left: 35%;
+}
+
+.rock2 {
+    left: 75%;
+}
+
+
+.cone {
+
+    width: 30px;
+    height: 55px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #ff4b5f 0 12px,
+            white 12px 24px
+        );
+
+    clip-path:
+        polygon(
+            50% 0,
+            100% 100%,
+            0 100%
+        );
+
+    left: 53%;
+
+}
+
+
+.box {
+
+    width: 58px;
+    height: 55px;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #9a5c37 0 8px,
+            #6c3828 8px 16px
+        );
+
+    right: 5%;
+
+    border:
+        3px solid #3d201a;
+
+}
+
+
+/* ======================================
+   DUST
+====================================== */
+
+.dust {
+
+    position: absolute;
+
+    width: 25px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.3);
+
+    z-index: 18;
+
+    opacity: 0;
+
+}
+
+
+.running ~ .dust {
+    animation: dustMove .5s infinite;
+}
+
+
+@keyframes dustMove {
+
+    0% {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: .6;
+    }
+
+    100% {
+        transform: translateX(-80px) scale(1.5);
+        opacity: 0;
+    }
+
+}
+
+
+/* ======================================
+   CHASE MESSAGE
+====================================== */
+
+.chase-message {
+
+    position: absolute;
+
+    top: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
 
     color: white;
 
-    border: none;
+    text-shadow:
+        0 0 15px #ff286b;
+
+    z-index: 40;
+
+}
+
+
+/* ======================================
+   CONTROLS
+====================================== */
+
+.controls {
+
+    position: absolute;
+
+    left: 25px;
+    top: 25px;
+
+    z-index: 50;
+
+    padding: 15px;
+
+    background:
+        rgba(10, 2, 15, .7);
+
+    border:
+        1px solid rgba(255, 120, 170, .5);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+.controls span {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.controls button {
+
+    width: 40px;
+    height: 38px;
+
+    margin: 2px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid #ff5b91;
+
+    color: white;
 
     border-radius: 8px;
 
     cursor: pointer;
 
-    letter-spacing: 2px;
+    font-weight: bold;
+
 }
 
-button:hover {
-    background: #e00000;
 
-    box-shadow: 0 0 20px rgba(255,0,0,0.6);
+.controls button:hover {
+
+    background: #ff3d81;
+
 }
 
-.win-screen {
+
+/* ======================================
+   MISSION OVERLAY
+====================================== */
+
+.mission-overlay,
+.win-screen,
+.lose-screen {
+
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0,0,0,0.92);
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        rgba(4, 0, 8, .82);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 100;
+
+}
+
+
+.mission-card,
+.win-card,
+.lose-card {
+
+    width: min(450px, 90%);
+
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(50, 10, 65, .96),
+            rgba(12, 3, 20, .98)
+        );
+
+    border:
+        1px solid rgba(255, 80, 140, .6);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 0 60px rgba(255, 30, 110, .2);
+
+}
+
+
+.tiny-label {
+
+    color: #ff7ba7;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.mission-card h1 {
+
+    margin-top: 18px;
+
+    font-size: 30px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.heart-big,
+.victory-heart,
+.sad-heart {
+
+    margin: 20px;
+
+    font-size: 75px;
+
+    color: #ff245d;
+
+    text-shadow:
+        0 0 20px #ff245d,
+        0 0 50px #ff245d;
+
+    animation:
+        pulseHeart 1s infinite;
+
+}
+
+
+.mission-card p {
+
+    letter-spacing: 5px;
+
+}
+
+
+.target,
+.status {
+
+    margin-top: 15px;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    opacity: .7;
+
+}
+
+
+.status span {
+
+    color: #ff4d87;
+
+}
+
+
+.mission-card button,
+.win-card button,
+.lose-card button {
+
+    margin-top: 30px;
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff185c,
+            #ff5790
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 25px rgba(255, 30, 100, .3);
+
+}
+
+
+/* ======================================
+   WIN
+====================================== */
+
+.win-screen,
+.lose-screen {
 
     display: none;
 
-    justify-content: center;
-    align-items: center;
-
-    z-index: 100;
 }
 
-.win-box {
+
+.win-small {
+
+    color: #ff7da7;
+
+    letter-spacing: 4px;
+
+    font-size: 11px;
+
+}
+
+
+.win-card h1 {
+
+    margin: 15px 0;
+
+    font-size: 31px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.heart-recovered {
+
+    display: inline-block;
+
+    padding: 8px 15px;
+
+    border:
+        1px solid #ff4c83;
+
+    border-radius: 30px;
+
+    color: #ff83aa;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.win-card p {
+
+    margin-top: 20px;
+
+    opacity: .7;
+
+}
+
+
+.romantic {
+
+    color: #ff8caf;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+
+}
+
+
+/* ======================================
+   OBJECTIVE
+====================================== */
+
+.objective {
+
+    height: 105px;
+
     text-align: center;
 
-    padding: 50px;
+    padding: 12px;
 
-    max-width: 450px;
+    background:
+        #0b030f;
 
-    border: 1px solid rgba(255,255,255,0.3);
+    border-top:
+        1px solid rgba(255, 70, 130, .3);
+
+    z-index: 50;
+
+}
+
+
+.objective-title {
+
+    color: #ff719e;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.objective p {
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.progress {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 12px;
+
+}
+
+
+.progress-line {
+
+    width: 120px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff3d81,
+            #ff9aba
+        );
+
+}
+
+
+.progress-character,
+.progress-target {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    padding: 7px 12px;
+
+    border:
+        1px solid rgba(255, 100, 160, .4);
 
     border-radius: 20px;
 
-    background: #210000;
-
-    box-shadow: 0 0 50px rgba(255,0,0,0.3);
 }
 
-.big-heart {
-    font-size: 70px;
 
-    animation: heartbeat 1s infinite;
+.progress-heart {
+
+    font-size: 22px;
+
+    color: #ff245d;
+
 }
 
-@keyframes heartbeat {
 
-    0%, 100% {
+/* ======================================
+   ANIMATION
+====================================== */
+
+@keyframes pulseHeart {
+
+    0%,100% {
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.15);
     }
+
 }
 
-.win-box h1 {
-    margin: 20px 0;
 
-    letter-spacing: 3px;
-}
+/* ======================================
+   MOBILE
+====================================== */
 
-.win-box p {
-    margin: 12px;
+@media(max-width:700px) {
 
-    font-size: 18px;
-}
+    .hud {
 
-.win-box .small {
-    font-size: 14px;
+        grid-template-columns:
+            1fr 100px 1fr;
 
-    line-height: 1.7;
+        padding: 8px;
 
-    opacity: 0.8;
+        height: 75px;
+
+    }
+
+
+    .mission strong {
+
+        font-size: 11px;
+
+    }
+
+
+    .mission span {
+
+        font-size: 8px;
+
+    }
+
+
+    .hud-heart {
+
+        font-size: 25px;
+
+    }
+
+
+    #timer {
+
+        font-size: 19px;
+
+    }
+
+
+    #score {
+
+        font-size: 10px;
+
+    }
+
+
+    .controls {
+
+        left: 8px;
+
+        top: 15px;
+
+        transform: scale(.8);
+
+        transform-origin: left top;
+
+    }
+
+
+    .dora {
+
+        transform: scale(.75);
+
+        transform-origin: bottom center;
+
+    }
+
+
+    .shinchan {
+
+        transform: scale(.82);
+
+        transform-origin: bottom center;
+
+    }
+
+
+    .objective {
+
+        height: 80px;
+
+    }
+
+
+    .progress-line {
+
+        width: 50px;
+
+    }
+
 }
