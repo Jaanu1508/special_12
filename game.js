@@ -1,5 +1,9 @@
-const gameArea =
-    document.getElementById("gameArea");
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const gameWorld =
+    document.getElementById("gameWorld");
 
 const dora =
     document.getElementById("dora");
@@ -7,17 +11,20 @@ const dora =
 const shinchan =
     document.getElementById("shinchan");
 
+const objectsContainer =
+    document.getElementById("objects");
+
 const timerDisplay =
     document.getElementById("timer");
 
 const scoreDisplay =
     document.getElementById("score");
 
-const chaseMessage =
-    document.getElementById("chaseMessage");
+const message =
+    document.getElementById("message");
 
-const missionOverlay =
-    document.getElementById("missionOverlay");
+const startScreen =
+    document.getElementById("startScreen");
 
 const winScreen =
     document.getElementById("winScreen");
@@ -31,72 +38,93 @@ const startButton =
 const retryButton =
     document.getElementById("retryButton");
 
-const continueButton =
-    document.getElementById("continueButton");
+const nextButton =
+    document.getElementById("nextButton");
 
 
 /* =========================================
    GAME VARIABLES
 ========================================= */
 
-let doraX = 100;
+let running = false;
 
-let shinX = 700;
+let lane = 1;
 
-let gameRunning = false;
+let doraLane = 1;
 
-let timeLeft = 45;
+let jump = false;
+
+let sliding = false;
+
+let jumpHeight = 0;
+
+let objects = [];
+
+let speed = 0.42;
 
 let score = 0;
 
+let timeLeft = 60;
+
+let lives = 3;
+
 let lastTime = 0;
 
-let shinDirection = 1;
+let spawnTimer = 0;
 
-let keys = {};
-
-let animationFrame;
-
-let timerInterval;
+let timer;
 
 
 /* =========================================
-   START
+   LANE POSITIONS
+========================================= */
+
+const lanes = [
+    25,
+    50,
+    75
+];
+
+
+/* =========================================
+   START GAME
 ========================================= */
 
 function startGame() {
 
-    missionOverlay.style.display = "none";
+    startScreen.classList.add("hidden");
 
-    winScreen.style.display = "none";
+    winScreen.classList.add("hidden");
 
-    loseScreen.style.display = "none";
-
-
-    doraX = 100;
-
-    shinX =
-        Math.max(
-            gameArea.clientWidth - 280,
-            500
-        );
+    loseScreen.classList.add("hidden");
 
 
-    timeLeft = 45;
+    running = true;
+
+    lane = 1;
+
+    doraLane = 1;
+
+    speed = 0.42;
 
     score = 0;
 
+    timeLeft = 60;
 
-    updatePositions();
+    lives = 3;
+
+
+    clearObjects();
+
+
+    updateDora();
+
 
     scoreDisplay.textContent =
-        "SCORE : 0";
+        "SCORE 0000";
 
     timerDisplay.textContent =
-        "00:45";
-
-
-    gameRunning = true;
+        "01:00";
 
 
     dora.classList.add("running");
@@ -104,39 +132,43 @@ function startGame() {
     shinchan.classList.add("running");
 
 
-    chaseMessage.textContent =
+    message.textContent =
         "CATCH HIM!";
 
 
-    clearInterval(timerInterval);
+    clearInterval(timer);
 
 
-    timerInterval =
-        setInterval(() => {
+    timer = setInterval(() => {
 
-            if (!gameRunning)
-                return;
-
-            timeLeft--;
-
-            timerDisplay.textContent =
-                "00:" +
-                String(timeLeft).padStart(2, "0");
+        if (!running)
+            return;
 
 
-            if (timeLeft <= 0) {
-
-                loseGame();
-
-            }
-
-        }, 1000);
+        timeLeft--;
 
 
-    lastTime = performance.now();
+        timerDisplay.textContent =
+            "00:" +
+            String(timeLeft).padStart(2, "0");
 
-    animationFrame =
-        requestAnimationFrame(gameLoop);
+
+        if (timeLeft <= 0) {
+
+            loseGame();
+
+        }
+
+    }, 1000);
+
+
+    lastTime =
+        performance.now();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
@@ -145,155 +177,421 @@ function startGame() {
    GAME LOOP
 ========================================= */
 
-function gameLoop(timestamp) {
+function gameLoop(time) {
 
-    if (!gameRunning)
+    if (!running)
         return;
 
 
     const delta =
         Math.min(
-            (timestamp - lastTime) / 16.67,
-            2
+            time - lastTime,
+            40
         );
 
 
-    lastTime = timestamp;
+    lastTime = time;
 
 
-    moveDora(delta);
+    updateDora();
 
-    moveShinchan(delta);
+    updateObjects(delta);
 
-    checkCatch();
+    spawnTimer += delta;
 
 
-    animationFrame =
-        requestAnimationFrame(gameLoop);
+    if (spawnTimer > 750) {
+
+        spawnObject();
+
+        spawnTimer = 0;
+
+    }
+
+
+    /*
+       Slowly increase speed
+    */
+
+    speed += 0.00004 * delta;
+
+
+    if (speed > 0.9)
+        speed = 0.9;
+
+
+    if (speed > 0.65) {
+
+        gameWorld.classList.add("fast");
+
+    }
+
+
+    checkCatchShinchan();
+
+
+    requestAnimationFrame(
+        gameLoop
+    );
 
 }
 
 
 /* =========================================
-   DORA MOVEMENT
+   DORA LANE MOVEMENT
 ========================================= */
 
-function moveDora(delta) {
+function moveLeft() {
 
-    const moveSpeed = 6 * delta;
-
-
-    let moving = false;
+    if (!running)
+        return;
 
 
-    if (
-        keys["arrowright"] ||
-        keys["d"]
-    ) {
+    if (lane > 0) {
 
-        doraX += moveSpeed;
+        lane--;
 
-        moving = true;
+        doraLane = lane;
+
+        updateDora();
 
     }
 
+}
 
-    if (
-        keys["arrowleft"] ||
-        keys["a"]
-    ) {
 
-        doraX -= moveSpeed;
+function moveRight() {
 
-        moving = true;
+    if (!running)
+        return;
+
+
+    if (lane < 2) {
+
+        lane++;
+
+        doraLane = lane;
+
+        updateDora();
 
     }
 
-
-    const maxX =
-        gameArea.clientWidth - 150;
+}
 
 
-    if (doraX < 10)
-        doraX = 10;
+/* =========================================
+   DORA POSITION
+========================================= */
 
+function updateDora() {
 
-    if (doraX > maxX)
-        doraX = maxX;
+    const percentage =
+        lanes[doraLane];
 
 
     dora.style.left =
-        doraX + "px";
+        percentage + "%";
 
 
-    if (moving) {
-
-        dora.classList.add("running");
-
-    }
-    else {
-
-        dora.classList.remove("running");
-
-    }
+    dora.style.transform =
+        `translateX(-50%) scale(${jump ? 1 : 0.9}) translateY(${-jumpHeight}px)`;
 
 }
 
 
 /* =========================================
-   SHINCHAN MOVEMENT
+   JUMP
 ========================================= */
 
-function moveShinchan(delta) {
+function doJump() {
+
+    if (!running)
+        return;
+
+
+    if (jump)
+        return;
+
+
+    jump = true;
+
+
+    let start =
+        performance.now();
+
+
+    function jumpAnimation(now) {
+
+        if (!jump)
+            return;
+
+
+        let progress =
+            (now - start) / 700;
+
+
+        if (progress >= 1) {
+
+            jump = false;
+
+            jumpHeight = 0;
+
+            updateDora();
+
+            return;
+
+        }
+
+
+        /*
+           Parabolic jump
+        */
+
+        jumpHeight =
+            Math.sin(progress * Math.PI) * 130;
+
+
+        updateDora();
+
+
+        requestAnimationFrame(
+            jumpAnimation
+        );
+
+    }
+
+
+    requestAnimationFrame(
+        jumpAnimation
+    );
+
+}
+
+
+/* =========================================
+   SLIDE
+========================================= */
+
+function doSlide() {
+
+    if (!running)
+        return;
+
+
+    if (sliding)
+        return;
+
+
+    sliding = true;
+
+    dora.style.transform =
+        `translateX(-50%) translateY(-${jumpHeight}px) scaleY(.55) scaleX(1.15)`;
+
+
+    setTimeout(() => {
+
+        sliding = false;
+
+        updateDora();
+
+    }, 500);
+
+}
+
+
+/* =========================================
+   SPAWN OBJECT
+========================================= */
+
+function spawnObject() {
+
+    if (!running)
+        return;
+
+
+    const object =
+        document.createElement("div");
+
+
+    object.classList.add(
+        "game-object"
+    );
+
 
     /*
-        Shinchan keeps running.
-
-        He changes direction
-        near the edges so the
-        chase feels alive.
+       Random lane
     */
 
-
-    const speed =
-        2.7 * delta;
-
-
-    shinX +=
-        shinDirection * speed;
+    const objectLane =
+        Math.floor(
+            Math.random() * 3
+        );
 
 
-    const leftLimit =
-        gameArea.clientWidth * 0.45;
+    object.dataset.lane =
+        objectLane;
 
 
-    const rightLimit =
-        gameArea.clientWidth - 160;
+    /*
+       Random object
+    */
+
+    const random =
+        Math.random();
 
 
-    if (shinX > rightLimit) {
+    if (random < .55) {
 
-        shinDirection = -1;
+        object.classList.add(
+            "obstacle-rock"
+        );
+
+        object.dataset.type =
+            "obstacle";
+
+    }
+
+    else if (random < .78) {
+
+        object.classList.add(
+            "obstacle-cone"
+        );
+
+        object.dataset.type =
+            "obstacle";
+
+    }
+
+    else if (random < .90) {
+
+        object.classList.add(
+            "obstacle-box"
+        );
+
+        object.dataset.type =
+            "obstacle";
+
+    }
+
+    else {
+
+        object.classList.add(
+            "collectible"
+        );
+
+        object.textContent =
+            "♥";
+
+        object.dataset.type =
+            "heart";
 
     }
 
 
-    if (shinX < leftLimit) {
+    object.style.left =
+        lanes[objectLane] + "%";
 
-        shinDirection = 1;
+
+    /*
+       Start at horizon
+    */
+
+    object.dataset.depth = 0;
+
+
+    objectsContainer.appendChild(
+        object
+    );
+
+
+    objects.push(object);
+
+}
+
+
+/* =========================================
+   UPDATE OBJECTS
+========================================= */
+
+function updateObjects(delta) {
+
+    for (
+        let i = objects.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const object =
+            objects[i];
+
+
+        let depth =
+            parseFloat(
+                object.dataset.depth
+            );
+
+
+        depth +=
+            speed *
+            delta /
+            100;
+
+
+        object.dataset.depth =
+            depth;
+
+
+        /*
+           Perspective movement
+        */
+
+        const top =
+            32 +
+            depth * 75;
+
+
+        const scale =
+            .1 +
+            depth * 1.5;
+
+
+        object.style.top =
+            top + "%";
+
+
+        object.style.transform =
+            `translateX(-50%) scale(${scale})`;
+
+
+        /*
+           Collision area
+        */
+
+        if (
+            depth > .82 &&
+            depth < 1.12
+        ) {
+
+            checkCollision(
+                object
+            );
+
+        }
+
+
+        /*
+           Remove when passed
+        */
+
+        if (depth > 1.2) {
+
+            object.remove();
+
+            objects.splice(i, 1);
+
+        }
 
     }
-
-
-    shinchan.style.left =
-        shinX + "px";
-
-
-    shinchan.style.right =
-        "auto";
-
-
-    shinchan.classList.add("running");
 
 }
 
@@ -302,176 +600,225 @@ function moveShinchan(delta) {
    COLLISION
 ========================================= */
 
-function checkCatch() {
+function checkCollision(object) {
 
-    const doraCenter =
-        doraX + 60;
+    if (
+        Number(object.dataset.lane)
+        !== doraLane
+    ) {
 
-
-    const shinCenter =
-        shinX + 77;
-
-
-    const distance =
-        Math.abs(
-            doraCenter - shinCenter
-        );
-
-
-    if (distance < 105) {
-
-        winGame();
+        return;
 
     }
 
 
     /*
-       Score increases when
-       Dora gets closer.
+       Hearts
     */
 
-    if (distance < 300) {
+    if (
+        object.dataset.type ===
+        "heart"
+    ) {
 
-        score += 1;
+        collectHeart(object);
 
-        scoreDisplay.textContent =
-            "SCORE : " +
-            score;
+        return;
 
     }
 
+
+    /*
+       Jump over obstacle
+    */
+
+    if (
+        jumpHeight > 55
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+       Hit obstacle
+    */
+
+    hitObstacle(object);
+
 }
 
 
 /* =========================================
-   UPDATE POSITIONS
+   HEART COLLECTION
 ========================================= */
 
-function updatePositions() {
+function collectHeart(object) {
 
-    dora.style.left =
-        doraX + "px";
-
-
-    shinchan.style.left =
-        shinX + "px";
+    score += 100;
 
 
-    shinchan.style.right =
-        "auto";
-
-}
-
-
-/* =========================================
-   KEYBOARD
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        const key =
-            event.key.toLowerCase();
+    scoreDisplay.textContent =
+        "SCORE " +
+        String(score)
+            .padStart(4, "0");
 
 
-        if (
-            key === "arrowleft" ||
-            key === "arrowright" ||
-            key === "a" ||
-            key === "d"
-        ) {
+    message.textContent =
+        "+100 ❤️";
 
-            event.preventDefault();
 
-            keys[key] = true;
+    object.remove();
+
+
+    objects =
+        objects.filter(
+            item => item !== object
+        );
+
+
+    setTimeout(() => {
+
+        if (running) {
+
+            message.textContent =
+                "CATCH HIM!";
 
         }
 
-    }
-);
+    }, 500);
 
-
-document.addEventListener(
-    "keyup",
-    function(event) {
-
-        const key =
-            event.key.toLowerCase();
-
-
-        keys[key] = false;
-
-    }
-);
+}
 
 
 /* =========================================
-   MOBILE / BUTTON CONTROLS
+   OBSTACLE HIT
 ========================================= */
 
-document
-    .querySelectorAll(".controls button")
-    .forEach(button => {
+function hitObstacle(object) {
 
-        const key =
-            button.dataset.key.toLowerCase();
+    /*
+       Prevent repeated hits
+    */
+
+    if (
+        object.dataset.hit ===
+        "true"
+    ) {
+
+        return;
+
+    }
 
 
-        button.addEventListener(
-            "mousedown",
-            () => {
+    object.dataset.hit =
+        "true";
 
-                keys[key] = true;
 
-            }
+    lives--;
+
+
+    object.remove();
+
+
+    objects =
+        objects.filter(
+            item => item !== object
         );
 
 
-        button.addEventListener(
-            "mouseup",
-            () => {
-
-                keys[key] = false;
-
-            }
+    score =
+        Math.max(
+            0,
+            score - 50
         );
 
 
-        button.addEventListener(
-            "mouseleave",
-            () => {
+    scoreDisplay.textContent =
+        "SCORE " +
+        String(score)
+            .padStart(4, "0");
 
-                keys[key] = false;
 
+    message.textContent =
+        "OUCH! KEEP RUNNING!";
+
+
+    dora.animate(
+        [
+            {
+                transform:
+                    "translateX(-50%) translateX(-15px)"
+            },
+            {
+                transform:
+                    "translateX(-50%) translateX(15px)"
+            },
+            {
+                transform:
+                    "translateX(-50%) translateX(0)"
             }
+        ],
+        {
+            duration: 300
+        }
+    );
+
+
+    if (lives <= 0) {
+
+        setTimeout(
+            loseGame,
+            500
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   CATCH SHINCHAN
+========================================= */
+
+function checkCatchShinchan() {
+
+    /*
+       As score increases,
+       Shinchan slowly comes closer.
+    */
+
+    const progress =
+        Math.min(
+            score / 2500,
+            1
         );
 
 
-        button.addEventListener(
-            "touchstart",
-            event => {
-
-                event.preventDefault();
-
-                keys[key] = true;
-
-            }
-        );
+    const scale =
+        .65 +
+        progress * .25;
 
 
-        button.addEventListener(
-            "touchend",
-            event => {
+    shinchan.style.transform =
+        `translateX(-50%) scale(${scale})`;
 
-                event.preventDefault();
 
-                keys[key] = false;
+    /*
+       At enough score,
+       Dora catches him.
+    */
 
-            }
-        );
+    if (
+        score >= 2500
+    ) {
 
-    });
+        winGame();
+
+    }
+
+}
 
 
 /* =========================================
@@ -480,24 +827,26 @@ document
 
 function winGame() {
 
-    if (!gameRunning)
+    if (!running)
         return;
 
 
-    gameRunning = false;
+    running = false;
 
 
-    clearInterval(timerInterval);
-
-    cancelAnimationFrame(animationFrame);
+    clearInterval(timer);
 
 
-    dora.classList.remove("running");
+    dora.classList.remove(
+        "running"
+    );
 
-    shinchan.classList.remove("running");
+    shinchan.classList.remove(
+        "running"
+    );
 
 
-    chaseMessage.textContent =
+    message.textContent =
         "YOU CAUGHT HIM! ❤️";
 
 
@@ -505,16 +854,18 @@ function winGame() {
 
 
     scoreDisplay.textContent =
-        "SCORE : " +
-        score;
+        "SCORE " +
+        String(score)
+            .padStart(4, "0");
 
 
     setTimeout(() => {
 
-        winScreen.style.display =
-            "flex";
+        winScreen.classList.remove(
+            "hidden"
+        );
 
-    }, 700);
+    }, 800);
 
 }
 
@@ -525,49 +876,151 @@ function winGame() {
 
 function loseGame() {
 
-    if (!gameRunning)
+    if (!running)
         return;
 
 
-    gameRunning = false;
+    running = false;
 
 
-    clearInterval(timerInterval);
-
-    cancelAnimationFrame(animationFrame);
+    clearInterval(timer);
 
 
-    dora.classList.remove("running");
+    dora.classList.remove(
+        "running"
+    );
 
-    shinchan.classList.remove("running");
+    shinchan.classList.remove(
+        "running"
+    );
 
 
-    chaseMessage.textContent =
-        "HE ESCAPED!";
-
-
-    setTimeout(() => {
-
-        loseScreen.style.display =
-            "flex";
-
-    }, 500);
+    loseScreen.classList.remove(
+        "hidden"
+    );
 
 }
 
 
 /* =========================================
-   RETRY
+   CLEAR OBJECTS
 ========================================= */
 
-retryButton.addEventListener(
-    "click",
-    startGame
+function clearObjects() {
+
+    objects.forEach(
+        object => object.remove()
+    );
+
+
+    objects = [];
+
+}
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            [
+                "ArrowLeft",
+                "ArrowRight",
+                "ArrowUp",
+                "ArrowDown"
+            ].includes(event.key)
+        ) {
+
+            event.preventDefault();
+
+        }
+
+
+        if (
+            event.key === "ArrowLeft" ||
+            event.key.toLowerCase() === "a"
+        ) {
+
+            moveLeft();
+
+        }
+
+
+        if (
+            event.key === "ArrowRight" ||
+            event.key.toLowerCase() === "d"
+        ) {
+
+            moveRight();
+
+        }
+
+
+        if (
+            event.key === "ArrowUp" ||
+            event.key.toLowerCase() === "w"
+        ) {
+
+            doJump();
+
+        }
+
+
+        if (
+            event.key === "ArrowDown" ||
+            event.key.toLowerCase() === "s"
+        ) {
+
+            doSlide();
+
+        }
+
+    }
 );
 
 
 /* =========================================
-   START BUTTON
+   MOBILE BUTTONS
+========================================= */
+
+document
+    .querySelector('[data-key="left"]')
+    .addEventListener(
+        "click",
+        moveLeft
+    );
+
+
+document
+    .querySelector('[data-key="right"]')
+    .addEventListener(
+        "click",
+        moveRight
+    );
+
+
+document
+    .querySelector('[data-key="jump"]')
+    .addEventListener(
+        "click",
+        doJump
+    );
+
+
+document
+    .querySelector('[data-key="slide"]')
+    .addEventListener(
+        "click",
+        doSlide
+    );
+
+
+/* =========================================
+   BUTTONS
 ========================================= */
 
 startButton.addEventListener(
@@ -576,31 +1029,18 @@ startButton.addEventListener(
 );
 
 
-/* =========================================
-   NEXT CHAPTER
-========================================= */
-
-continueButton.addEventListener(
+retryButton.addEventListener(
     "click",
-    function() {
+    startGame
+);
 
-        /*
-          We'll connect this to
-          archive.html when we
-          build the next page.
-        */
+
+nextButton.addEventListener(
+    "click",
+    () => {
 
         window.location.href =
             "archive.html";
 
     }
 );
-
-
-/* =========================================
-   INITIAL POSITION
-========================================= */
-
-shinchan.style.left = "700px";
-
-dora.style.left = "100px";
