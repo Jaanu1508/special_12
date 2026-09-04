@@ -1,195 +1,610 @@
-const player = document.getElementById("player");
-const boy = document.getElementById("boy");
-const gameArea = document.getElementById("gameArea");
-const timerDisplay = document.getElementById("timer");
-const message = document.getElementById("gameMessage");
-const winScreen = document.getElementById("winScreen");
+/* =========================================
+   ELEMENTS
+========================================= */
 
-let playerX = 100;
-let boyX = 700;
+const gameArea =
+    document.getElementById("gameArea");
+
+const dora =
+    document.getElementById("dora");
+
+const shinchan =
+    document.getElementById("shinchan");
+
+const timerDisplay =
+    document.getElementById("timer");
+
+const scoreDisplay =
+    document.getElementById("score");
+
+const chaseMessage =
+    document.getElementById("chaseMessage");
+
+const missionOverlay =
+    document.getElementById("missionOverlay");
+
+const winScreen =
+    document.getElementById("winScreen");
+
+const loseScreen =
+    document.getElementById("loseScreen");
+
+const startButton =
+    document.getElementById("startButton");
+
+const retryButton =
+    document.getElementById("retryButton");
+
+const continueButton =
+    document.getElementById("continueButton");
+
+
+/* =========================================
+   GAME VARIABLES
+========================================= */
+
+let doraX = 100;
+
+let shinX = 700;
 
 let gameRunning = false;
-let timeLeft = 30;
 
-let timer;
+let timeLeft = 45;
 
-const speed = 8;
+let score = 0;
+
+let lastTime = 0;
+
+let shinDirection = 1;
+
+let keys = {};
+
+let animationFrame;
+
+let timerInterval;
 
 
-/* START GAME */
+/* =========================================
+   START
+========================================= */
 
 function startGame() {
 
+    missionOverlay.style.display = "none";
+
+    winScreen.style.display = "none";
+
+    loseScreen.style.display = "none";
+
+
+    doraX = 100;
+
+    shinX =
+        Math.max(
+            gameArea.clientWidth - 280,
+            500
+        );
+
+
+    timeLeft = 45;
+
+    score = 0;
+
+
+    updatePositions();
+
+    scoreDisplay.textContent =
+        "SCORE : 0";
+
+    timerDisplay.textContent =
+        "00:45";
+
+
     gameRunning = true;
 
-    timeLeft = 30;
 
-    playerX = 100;
-    boyX = 700;
+    dora.classList.add("running");
 
-    player.style.left = playerX + "px";
-    boy.style.left = boyX + "px";
+    shinchan.classList.add("running");
 
-    timerDisplay.textContent = "TIME: " + timeLeft;
 
-    message.textContent = "CATCH HIM. ❤️";
+    chaseMessage.textContent =
+        "CATCH HIM!";
 
-    clearInterval(timer);
 
-    timer = setInterval(() => {
+    clearInterval(timerInterval);
 
-        timeLeft--;
 
-        timerDisplay.textContent =
-            "TIME: " + timeLeft;
+    timerInterval =
+        setInterval(() => {
 
-        if (timeLeft <= 0) {
+            if (!gameRunning)
+                return;
 
-            clearInterval(timer);
+            timeLeft--;
 
-            gameRunning = false;
+            timerDisplay.textContent =
+                "00:" +
+                String(timeLeft).padStart(2, "0");
 
-            message.textContent =
-                "HE ESCAPED 😭 TRY AGAIN";
 
-        }
+            if (timeLeft <= 0) {
 
-    }, 1000);
+                loseGame();
+
+            }
+
+        }, 1000);
+
+
+    lastTime = performance.now();
+
+    animationFrame =
+        requestAnimationFrame(gameLoop);
+
 }
 
 
-/* KEYBOARD CONTROLS */
+/* =========================================
+   GAME LOOP
+========================================= */
 
-document.addEventListener("keydown", function(event) {
+function gameLoop(timestamp) {
 
-    if (!gameRunning) return;
+    if (!gameRunning)
+        return;
 
-    const key = event.key.toLowerCase();
 
-    if (key === "arrowright" || key === "d") {
+    const delta =
+        Math.min(
+            (timestamp - lastTime) / 16.67,
+            2
+        );
 
-        playerX += speed;
+
+    lastTime = timestamp;
+
+
+    moveDora(delta);
+
+    moveShinchan(delta);
+
+    checkCatch();
+
+
+    animationFrame =
+        requestAnimationFrame(gameLoop);
+
+}
+
+
+/* =========================================
+   DORA MOVEMENT
+========================================= */
+
+function moveDora(delta) {
+
+    const moveSpeed = 6 * delta;
+
+
+    let moving = false;
+
+
+    if (
+        keys["arrowright"] ||
+        keys["d"]
+    ) {
+
+        doraX += moveSpeed;
+
+        moving = true;
 
     }
 
-    if (key === "arrowleft" || key === "a") {
 
-        playerX -= speed;
+    if (
+        keys["arrowleft"] ||
+        keys["a"]
+    ) {
+
+        doraX -= moveSpeed;
+
+        moving = true;
 
     }
 
-
-    /* Keep player inside screen */
 
     const maxX =
-        gameArea.clientWidth - 60;
+        gameArea.clientWidth - 150;
 
-    if (playerX < 0) {
-        playerX = 0;
+
+    if (doraX < 10)
+        doraX = 10;
+
+
+    if (doraX > maxX)
+        doraX = maxX;
+
+
+    dora.style.left =
+        doraX + "px";
+
+
+    if (moving) {
+
+        dora.classList.add("running");
+
+    }
+    else {
+
+        dora.classList.remove("running");
+
     }
 
-    if (playerX > maxX) {
-        playerX = maxX;
-    }
+}
 
 
-    player.style.left =
-        playerX + "px";
+/* =========================================
+   SHINCHAN MOVEMENT
+========================================= */
 
-
-    /* Check if player caught Rajesh */
-
-    checkCollision();
-
-});
-
-
-/* RAJESH MOVEMENT */
-
-setInterval(() => {
-
-    if (!gameRunning) return;
+function moveShinchan(delta) {
 
     /*
-       Rajesh randomly moves
-       left and right.
+        Shinchan keeps running.
+
+        He changes direction
+        near the edges so the
+        chase feels alive.
     */
 
-    const movement =
-        Math.random() > 0.5 ? 1 : -1;
 
-    boyX += movement * 12;
+    const speed =
+        2.7 * delta;
 
 
-    const maxX =
-        gameArea.clientWidth - 80;
+    shinX +=
+        shinDirection * speed;
 
-    if (boyX < 50) {
-        boyX = 50;
+
+    const leftLimit =
+        gameArea.clientWidth * 0.45;
+
+
+    const rightLimit =
+        gameArea.clientWidth - 160;
+
+
+    if (shinX > rightLimit) {
+
+        shinDirection = -1;
+
     }
 
-    if (boyX > maxX) {
-        boyX = maxX;
+
+    if (shinX < leftLimit) {
+
+        shinDirection = 1;
+
     }
 
-    boy.style.left =
-        boyX + "px";
+
+    shinchan.style.left =
+        shinX + "px";
 
 
-    checkCollision();
+    shinchan.style.right =
+        "auto";
 
-}, 400);
+
+    shinchan.classList.add("running");
+
+}
 
 
-/* COLLISION */
+/* =========================================
+   COLLISION
+========================================= */
 
-function checkCollision() {
+function checkCatch() {
+
+    const doraCenter =
+        doraX + 60;
+
+
+    const shinCenter =
+        shinX + 77;
+
 
     const distance =
-        Math.abs(playerX - boyX);
+        Math.abs(
+            doraCenter - shinCenter
+        );
 
-    if (distance < 55) {
+
+    if (distance < 105) {
 
         winGame();
 
     }
 
+
+    /*
+       Score increases when
+       Dora gets closer.
+    */
+
+    if (distance < 300) {
+
+        score += 1;
+
+        scoreDisplay.textContent =
+            "SCORE : " +
+            score;
+
+    }
+
 }
 
 
-/* WIN */
+/* =========================================
+   UPDATE POSITIONS
+========================================= */
+
+function updatePositions() {
+
+    dora.style.left =
+        doraX + "px";
+
+
+    shinchan.style.left =
+        shinX + "px";
+
+
+    shinchan.style.right =
+        "auto";
+
+}
+
+
+/* =========================================
+   KEYBOARD
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        const key =
+            event.key.toLowerCase();
+
+
+        if (
+            key === "arrowleft" ||
+            key === "arrowright" ||
+            key === "a" ||
+            key === "d"
+        ) {
+
+            event.preventDefault();
+
+            keys[key] = true;
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keyup",
+    function(event) {
+
+        const key =
+            event.key.toLowerCase();
+
+
+        keys[key] = false;
+
+    }
+);
+
+
+/* =========================================
+   MOBILE / BUTTON CONTROLS
+========================================= */
+
+document
+    .querySelectorAll(".controls button")
+    .forEach(button => {
+
+        const key =
+            button.dataset.key.toLowerCase();
+
+
+        button.addEventListener(
+            "mousedown",
+            () => {
+
+                keys[key] = true;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "mouseup",
+            () => {
+
+                keys[key] = false;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "mouseleave",
+            () => {
+
+                keys[key] = false;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "touchstart",
+            event => {
+
+                event.preventDefault();
+
+                keys[key] = true;
+
+            }
+        );
+
+
+        button.addEventListener(
+            "touchend",
+            event => {
+
+                event.preventDefault();
+
+                keys[key] = false;
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   WIN
+========================================= */
 
 function winGame() {
 
-    if (!gameRunning) return;
+    if (!gameRunning)
+        return;
+
 
     gameRunning = false;
 
-    clearInterval(timer);
 
-    message.textContent =
-        "YOU CAUGHT HIM ❤️";
+    clearInterval(timerInterval);
+
+    cancelAnimationFrame(animationFrame);
+
+
+    dora.classList.remove("running");
+
+    shinchan.classList.remove("running");
+
+
+    chaseMessage.textContent =
+        "YOU CAUGHT HIM! ❤️";
+
+
+    score += 500;
+
+
+    scoreDisplay.textContent =
+        "SCORE : " +
+        score;
+
 
     setTimeout(() => {
 
         winScreen.style.display =
             "flex";
 
-    }, 600);
+    }, 700);
 
 }
 
 
-/* CONTINUE */
+/* =========================================
+   LOSE
+========================================= */
 
-function continueStory() {
+function loseGame() {
 
-    /*
-       We'll connect this to
-       the next page later.
-    */
+    if (!gameRunning)
+        return;
 
-    window.location.href =
-        "archive.html";
+
+    gameRunning = false;
+
+
+    clearInterval(timerInterval);
+
+    cancelAnimationFrame(animationFrame);
+
+
+    dora.classList.remove("running");
+
+    shinchan.classList.remove("running");
+
+
+    chaseMessage.textContent =
+        "HE ESCAPED!";
+
+
+    setTimeout(() => {
+
+        loseScreen.style.display =
+            "flex";
+
+    }, 500);
 
 }
+
+
+/* =========================================
+   RETRY
+========================================= */
+
+retryButton.addEventListener(
+    "click",
+    startGame
+);
+
+
+/* =========================================
+   START BUTTON
+========================================= */
+
+startButton.addEventListener(
+    "click",
+    startGame
+);
+
+
+/* =========================================
+   NEXT CHAPTER
+========================================= */
+
+continueButton.addEventListener(
+    "click",
+    function() {
+
+        /*
+          We'll connect this to
+          archive.html when we
+          build the next page.
+        */
+
+        window.location.href =
+            "archive.html";
+
+    }
+);
+
+
+/* =========================================
+   INITIAL POSITION
+========================================= */
+
+shinchan.style.left = "700px";
+
+dora.style.left = "100px";
