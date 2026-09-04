@@ -1,7 +1,3 @@
-/* =========================================
-   ELEMENTS
-========================================= */
-
 const gameArea =
     document.getElementById("gameArea");
 
