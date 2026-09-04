@@ -1,10 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dora & Shinchan ❤️</title>
+
+    <title>Catch My Heart ❤️</title>
+
     <link rel="stylesheet" href="game.css">
 </head>
 
@@ -12,154 +14,360 @@
 
 <div id="game">
 
-    <div class="sky">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
+    <!-- BACKGROUND -->
+    <div class="sky"></div>
+
+    <div class="moon">♥</div>
+
+    <div class="city"></div>
+
+    <div class="trees left"></div>
+    <div class="trees right"></div>
+
+
+    <!-- GAME ROAD -->
+
+    <div class="road">
+
+        <div class="lane l1"></div>
+        <div class="lane l2"></div>
+
+        <div class="roadGlow"></div>
+
+        <!-- OBSTACLES / HEARTS -->
+        <div id="objects"></div>
+
+
+        <!-- SHINCHAN -->
+        <img
+            id="shinchan"
+            class="runner shinchan"
+            src="shinchan.png"
+            alt="Shinchan"
+        >
+
+
+        <!-- DORA -->
+        <img
+            id="dora"
+            class="runner dora"
+            src="dora.png"
+            alt="Dora"
+        >
+
     </div>
 
-    <div class="hud">
-        <div>❤️ <span id="score">0</span></div>
-        <div>🏃 <span id="distance">0</span> m</div>
-    </div>
 
-    <!-- START -->
-    <div id="startScreen" class="screen">
+    <!-- HUD -->
 
-        <div class="title">DORA'S LOVE RUN ❤️</div>
+    <header class="hud">
 
-        <div class="introCharacters">
-            <div class="bigDora">👧🏻</div>
-            <div class="heart">❤️</div>
-            <div class="bigShin">🧒🏻</div>
+        <!-- MISSION -->
+
+        <div class="panel mission">
+
+            <span class="bigHeart">♥</span>
+
+            <div>
+
+                <b>
+                    MISSION : CATCH MY HEART
+                </b>
+
+                <small>
+                    TARGET : SHINCHAN
+                </small>
+
+            </div>
+
         </div>
 
-        <p>
-            Dora is running away...<br>
-            <b>Shinchan is chasing her! 😂</b>
-        </p>
 
-        <button id="startBtn">START RUN 💕</button>
+        <!-- TIMER -->
+
+        <div class="panel timer">
+
+            <small>
+                TIME
+            </small>
+
+            <strong id="time">
+                00:45
+            </strong>
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div class="panel score">
+
+            <b>
+                SCORE :
+                <span id="score">0</span>
+            </b>
+
+            <span id="lives">
+                ♥ ♥ ♥
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- DESKTOP CONTROLS -->
+
+    <aside class="controls">
+
+        <b>
+            CONTROLS
+        </b>
+
+        <div>
+
+            <button data-key="ArrowLeft">
+                ←
+            </button>
+
+            <button data-key="ArrowRight">
+                →
+            </button>
+
+        </div>
+
+
+        <div>
+
+            <button data-key="a">
+                A
+            </button>
+
+            <button data-key="d">
+                D
+            </button>
+
+        </div>
+
 
         <small>
-            ← → Change lane &nbsp; | &nbsp;
-            ↑ Jump &nbsp; | &nbsp;
-            ↓ Slide
+            MOVE DORA
         </small>
 
-    </div>
+    </aside>
 
 
-    <!-- WORLD -->
-    <div class="world">
+    <!-- DORA SPEECH -->
 
-        <div class="track">
+    <div class="speech doraSpeech">
 
-            <div class="laneLine leftLine"></div>
-            <div class="laneLine rightLine"></div>
-
-            <div id="objects"></div>
-
-            <!-- DORA -->
-            <div id="dora" class="dora character">
-
-                <div class="doraHair"></div>
-
-                <div class="doraHead">
-
-                    <div class="eye leftEye"></div>
-                    <div class="eye rightEye"></div>
-
-                    <div class="smile"></div>
-
-                </div>
-
-                <div class="doraBody">
-                    <div class="doraShirt"></div>
-                    <div class="doraShorts"></div>
-                </div>
-
-                <div class="doraLegs">
-                    <div class="doraLeg leg1"></div>
-                    <div class="doraLeg leg2"></div>
-                </div>
-
-                <div class="shoe shoe1"></div>
-                <div class="shoe shoe2"></div>
-
-            </div>
-
-
-            <!-- SHINCHAN CHASER -->
-            <div id="shinchan" class="shinchan character">
-
-                <div class="shinHead">
-
-                    <div class="shinHair"></div>
-
-                    <div class="shinEye eye1"></div>
-                    <div class="shinEye eye2"></div>
-
-                    <div class="shinMouth"></div>
-
-                </div>
-
-                <div class="shinBody">
-                    <div class="shinShirt"></div>
-                    <div class="shinShorts"></div>
-                </div>
-
-                <div class="shinLegs">
-                    <div class="shinLeg shinLeg1"></div>
-                    <div class="shinLeg shinLeg2"></div>
-                </div>
-
-                <div class="shinShoe shinShoe1"></div>
-                <div class="shinShoe shinShoe2"></div>
-
-            </div>
-
-        </div>
+        NOT TODAY,
+        <br>
+        SHINCHAN! 😤
 
     </div>
 
 
-    <!-- GAME OVER -->
-    <div id="gameOver" class="screen hidden">
+    <!-- SHINCHAN SPEECH -->
 
-        <div class="gameOverTitle">SHINCHAN CAUGHT DORA! 😂</div>
+    <div class="speech shinSpeech">
 
-        <div class="caught">
-            🧒🏻 ❤️ 👧🏻
-        </div>
+        CATCH ME
+        <br>
+        IF YOU CAN!
+
+    </div>
+
+
+    <!-- OBJECTIVE -->
+
+    <section class="objective">
+
+        <h2>
+            ♥ OBJECTIVE ♥
+        </h2>
 
         <p>
-            He finally caught you! 😭😂
+            CATCH SHINCHAN AND GET YOUR HEART BACK! ❤️
         </p>
 
-        <div class="final">
-            Score: <span id="finalScore">0</span>
+
+        <div class="path">
+
+            <span>
+                🧑🏻‍🦰
+            </span>
+
+            <i></i>
+
+            <span>
+                🌹
+            </span>
+
+            <i></i>
+
+            <span>
+                🪨
+            </span>
+
+            <i></i>
+
+            <span>
+                📦
+            </span>
+
+            <i></i>
+
+            <span>
+                ❤️
+            </span>
+
         </div>
 
-        <button id="restartBtn">RUN AGAIN ❤️</button>
-
-    </div>
+    </section>
 
 
     <!-- MOBILE CONTROLS -->
-    <div class="controls">
 
-        <button data-action="left">←</button>
-        <button data-action="jump">↑</button>
-        <button data-action="slide">↓</button>
-        <button data-action="right">→</button>
+    <div class="touchPad">
+
+        <button data-key="ArrowUp">
+            ↑
+        </button>
+
+
+        <div>
+
+            <button data-key="ArrowLeft">
+                ←
+            </button>
+
+            <button data-key="ArrowRight">
+                →
+            </button>
+
+        </div>
+
+
+        <button data-key="ArrowDown">
+            ↓
+        </button>
+
+    </div>
+
+
+    <!-- START SCREEN -->
+
+    <div id="start" class="overlay">
+
+        <div class="startCard">
+
+            <div class="heartLogo">
+                ♥
+            </div>
+
+
+            <h1>
+                CATCH MY HEART
+            </h1>
+
+
+            <p>
+
+                Shinchan stole your heart.
+                <br>
+
+                Go catch him. ❤️
+
+            </p>
+
+
+            <button id="startBtn">
+                START RUN
+            </button>
+
+
+            <small>
+
+                ← → move
+                &nbsp;
+                ↑ jump
+                &nbsp;
+                ↓ slide
+
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- WIN SCREEN -->
+
+    <div id="win" class="overlay hidden">
+
+        <div class="startCard">
+
+            <div class="heartLogo">
+                ♥
+            </div>
+
+
+            <h1>
+                YOU CAUGHT HIM! ❤️
+            </h1>
+
+
+            <p>
+
+                Mission complete.
+                <br>
+
+                Your heart is back where it belongs.
+
+            </p>
+
+
+            <button onclick="location.reload()">
+                RUN AGAIN
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOSE SCREEN -->
+
+    <div id="lose" class="overlay hidden">
+
+        <div class="startCard">
+
+            <h1>
+                MISSION FAILED 💔
+            </h1>
+
+
+            <p>
+                Shinchan got away...
+            </p>
+
+
+            <button onclick="location.reload()">
+                TRY AGAIN
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
+
+<!-- GAME JAVASCRIPT -->
+
 <script src="game.js"></script>
 
 </body>
+
 </html>
-```
