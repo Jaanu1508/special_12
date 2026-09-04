@@ -5,67 +5,68 @@
 }
 
 :root {
-    --pink: #ff3d81;
-    --hot-pink: #ff1765;
-    --purple: #351052;
+    --pink: #ff3d82;
+    --light-pink: #ff9abc;
+    --red: #ff174f;
     --dark: #08020d;
-    --white: #fff7fb;
 }
 
 body {
+    width: 100%;
+    height: 100vh;
 
-    min-height: 100vh;
+    overflow: hidden;
 
-    background:
-        radial-gradient(circle at top,
-        #461264,
-        #13051d 65%,
-        #050207);
+    background: #08020d;
+
+    font-family: Arial, sans-serif;
 
     color: white;
+}
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+
+/* =====================================
+   GAME
+===================================== */
+
+.game {
+    width: 100vw;
+    height: 100vh;
+
+    position: relative;
 
     overflow: hidden;
 }
 
 
-.game-wrapper {
-
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-}
+/* =====================================
+   HUD
+===================================== */
 
 .hud {
 
-    height: 90px;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 82px;
 
     display: grid;
 
-    grid-template-columns: 1fr 180px 1fr;
+    grid-template-columns: 1fr 150px 1fr;
 
     align-items: center;
 
-    padding: 12px 30px;
+    padding: 10px 25px;
 
-    background:
-        rgba(5, 1, 10, .92);
+    background: rgba(5, 0, 10, .88);
 
-    border-bottom:
-        1px solid rgba(255, 70, 130, .5);
+    border-bottom: 1px solid rgba(255, 90, 145, .5);
 
-    box-shadow:
-        0 0 30px rgba(255, 20, 100, .15);
-
-    z-index: 50;
-
+    z-index: 100;
 }
 
 
@@ -75,47 +76,43 @@ body {
 
     align-items: center;
 
-    gap: 15px;
+    gap: 12px;
 }
 
 
-.hud-heart {
+.heart-icon {
 
-    font-size: 42px;
+    font-size: 36px;
 
-    color: #ff174f;
+    color: var(--red);
 
     text-shadow:
-        0 0 15px #ff174f,
-        0 0 30px #ff174f;
+        0 0 15px red,
+        0 0 35px red;
 
-    animation:
-        pulseHeart 1.2s infinite;
+    animation: heartbeat 1s infinite;
 }
 
 
-.mission small,
-.timer-box small {
+.mission small {
 
     display: block;
 
-    font-size: 10px;
+    font-size: 9px;
 
     letter-spacing: 3px;
 
-    opacity: .7;
-
+    opacity: .6;
 }
 
 
-.mission strong {
+.mission b {
 
     display: block;
 
-    font-size: 17px;
+    font-size: 15px;
 
     letter-spacing: 2px;
-
 }
 
 
@@ -123,56 +120,61 @@ body {
 
     display: block;
 
-    margin-top: 4px;
-
-    font-size: 10px;
-
-    color: #ff79a7;
+    font-size: 9px;
 
     letter-spacing: 2px;
 
+    color: var(--light-pink);
+
+    margin-top: 3px;
 }
 
 
-.timer-box {
+.timer {
 
     text-align: center;
 
-    border:
-        1px solid rgba(255, 70, 130, .7);
-
-    border-radius: 15px;
-
     padding: 8px;
 
-    box-shadow:
-        0 0 20px rgba(255, 40, 120, .15);
+    border: 1px solid rgba(255, 80, 140, .6);
+
+    border-radius: 12px;
+
+    background: rgba(255, 20, 80, .04);
 }
 
 
-#timer {
+.timer small {
 
-    font-size: 28px;
+    display: block;
 
-    font-weight: bold;
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: .6;
+}
+
+
+.timer strong {
+
+    font-size: 23px;
 
     letter-spacing: 3px;
 }
 
 
-.score-box {
+.stats {
 
     text-align: right;
-
 }
 
 
 #score {
 
-    font-size: 15px;
+    font-size: 14px;
 
     letter-spacing: 2px;
-
 }
 
 
@@ -180,227 +182,303 @@ body {
 
     margin-top: 5px;
 
-    font-size: 20px;
+    color: #ff315f;
 
-    color: #ff285f;
+    letter-spacing: 4px;
 
     text-shadow:
         0 0 10px red;
-
 }
 
 
-/* ======================================
-   GAME AREA
-====================================== */
+/* =====================================
+   WORLD
+===================================== */
 
-.game-area {
+.game-world {
 
-    position: relative;
+    position: absolute;
 
-    flex: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
 
     overflow: hidden;
 
-    background:
-
-        linear-gradient(
-            to bottom,
-            #170625 0%,
-            #542061 43%,
-            #d84b83 63%,
-            #54284d 64%,
-            #211326 100%
-        );
-
+    perspective: 700px;
 }
 
 
-/* moon */
+/* =====================================
+   SKY
+===================================== */
+
+.sky {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #090318 0%,
+            #31104b 38%,
+            #a73569 62%,
+            #29162d 63%,
+            #0b0710 100%
+        );
+}
+
+
+/* =====================================
+   MOON
+===================================== */
 
 .moon {
 
     position: absolute;
 
-    width: 100px;
-    height: 100px;
+    top: 110px;
+    right: 18%;
 
-    right: 20%;
-
-    top: 60px;
+    width: 75px;
+    height: 75px;
 
     border-radius: 50%;
 
-    background: #ffd2e2;
+    background: #ffd6e4;
 
     box-shadow:
-        0 0 40px #ff8ab7,
-        0 0 100px rgba(255, 100, 170, .5);
-
+        0 0 30px #ff8bb4,
+        0 0 80px rgba(255, 80, 150, .5);
 }
 
 
-/* ======================================
+/* =====================================
    CITY
-====================================== */
+===================================== */
 
 .city {
 
     position: absolute;
 
-    bottom: 34%;
+    bottom: 37%;
 
     left: 0;
 
     width: 100%;
 
-    height: 180px;
+    height: 150px;
 
     display: flex;
+
+    justify-content: center;
 
     align-items: end;
 
     gap: 12px;
 
-    opacity: .65;
-
+    opacity: .55;
 }
 
 
-.building {
+.city div {
 
-    width: 100px;
+    width: 80px;
 
     background:
         linear-gradient(
             to bottom,
-            #291137,
-            #110816
+            #26132f,
+            #100914
         );
 
     position: relative;
 }
 
 
-.building::after {
+.city div::after {
 
     content: "";
 
     position: absolute;
 
-    inset: 15px;
+    inset: 10px;
 
     background:
         repeating-linear-gradient(
             to bottom,
-            #ffb0c8 0 5px,
-            transparent 5px 22px
+            #ffc1d5 0 4px,
+            transparent 4px 18px
         );
 
-    opacity: .4;
-
+    opacity: .3;
 }
 
 
-.b1 {
-    height: 130px;
+.city div:nth-child(1) {
+    height: 80px;
 }
 
-.b2 {
-    height: 190px;
+.city div:nth-child(2) {
+    height: 120px;
 }
 
-.b3 {
+.city div:nth-child(3) {
+    height: 95px;
+}
+
+.city div:nth-child(4) {
     height: 145px;
 }
 
-.b4 {
-    height: 210px;
+.city div:nth-child(5) {
+    height: 105px;
 }
 
-.b5 {
-    height: 155px;
+.city div:nth-child(6) {
+    height: 130px;
 }
 
-.b6 {
-    height: 185px;
+.city div:nth-child(7) {
+    height: 85px;
 }
 
 
-/* ======================================
-   TREES
-====================================== */
+/* =====================================
+   ROAD
+===================================== */
 
-.tree {
+.road {
 
     position: absolute;
 
-    bottom: 30%;
+    left: 50%;
 
-    z-index: 2;
+    bottom: -5%;
 
-}
+    transform:
+        translateX(-50%)
+        perspective(600px)
+        rotateX(60deg);
 
+    width: 75%;
 
-.tree-left {
-    left: 3%;
-}
-
-.tree-right {
-    right: 4%;
-}
-
-
-.tree-top {
-
-    width: 150px;
-    height: 150px;
+    height: 75%;
 
     background:
-        radial-gradient(
-            circle at 30% 30%,
-            #ff639a,
-            #7d2058 70%
+        linear-gradient(
+            90deg,
+            #17101c,
+            #342335 50%,
+            #17101c
         );
+
+    border-left:
+        4px solid rgba(255, 160, 190, .12);
+
+    border-right:
+        4px solid rgba(255, 160, 190, .12);
+
+    z-index: 3;
+}
+
+
+.lane-line {
+
+    position: absolute;
+
+    top: 0;
+
+    width: 5px;
+
+    height: 100%;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,.6) 0 60px,
+            transparent 60px 120px
+        );
+
+    animation:
+        roadMove .35s linear infinite;
+}
+
+
+.line-left {
+    left: 33.33%;
+}
+
+.line-right {
+    left: 66.66%;
+}
+
+
+@keyframes roadMove {
+
+    from {
+        background-position-y: 0;
+    }
+
+    to {
+        background-position-y: 120px;
+    }
+
+}
+
+
+/* =====================================
+   SCENERY
+===================================== */
+
+.side-tree {
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
 
     border-radius: 50%;
 
-    box-shadow:
-        0 0 30px rgba(255, 70, 130, .25);
+    background:
+        radial-gradient(
+            circle,
+            #e94c83,
+            #611c50
+        );
+
+    bottom: 38%;
+
+    z-index: 4;
 
 }
 
 
-.tree-trunk {
-
-    width: 22px;
-    height: 100px;
-
-    background: #371b20;
-
-    margin: -5px auto 0;
-
+.tree-one {
+    left: 8%;
 }
 
+.tree-two {
+    right: 8%;
+}
 
-/* ======================================
-   LAMPS
-====================================== */
 
 .lamp {
 
     position: absolute;
 
-    bottom: 31%;
+    bottom: 39%;
 
-    width: 6px;
+    width: 5px;
+    height: 120px;
 
-    height: 160px;
+    background: #111;
 
-    background: #19151d;
-
-    z-index: 3;
-
+    z-index: 4;
 }
 
 
@@ -410,142 +488,98 @@ body {
 
     position: absolute;
 
-    top: -5px;
-    left: -18px;
+    top: -10px;
+    left: -13px;
 
-    width: 42px;
-    height: 42px;
+    width: 30px;
+    height: 30px;
 
     border-radius: 50%;
 
-    background: #ffd08a;
+    background: #ffd28b;
 
     box-shadow:
-        0 0 20px #ffb25c,
-        0 0 50px rgba(255, 160, 70, .7);
-
+        0 0 20px #ffb75c;
 }
 
 
-.lamp1 {
-    left: 28%;
+.lamp-one {
+    left: 25%;
 }
 
-.lamp2 {
-    right: 26%;
-}
-
-
-/* ======================================
-   GROUND
-====================================== */
-
-.game-area::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-
-    height: 34%;
-
-    background:
-
-        repeating-linear-gradient(
-            90deg,
-            rgba(255,255,255,.04) 0 2px,
-            transparent 2px 80px
-        ),
-
-        linear-gradient(
-            to bottom,
-            #3b2435,
-            #160c18
-        );
-
-    border-top:
-        3px solid rgba(255, 180, 210, .15);
-
-    z-index: 1;
-
+.lamp-two {
+    right: 25%;
 }
 
 
-/* ======================================
+/* =====================================
    CHARACTERS
-====================================== */
+===================================== */
 
-.character {
+.dora,
+.shinchan {
 
     position: absolute;
 
-    bottom: 25%;
-
-    z-index: 20;
+    z-index: 30;
 
     transform-origin: bottom center;
 
 }
 
 
-.character-shadow {
+.dora {
 
-    position: absolute;
-
-    bottom: -8px;
+    width: 90px;
+    height: 160px;
 
     left: 50%;
 
-    transform: translateX(-50%);
+    bottom: 13%;
 
-    width: 80px;
-    height: 16px;
-
-    background: rgba(0,0,0,.4);
-
-    border-radius: 50%;
-
-    filter: blur(4px);
+    transform:
+        translateX(-50%)
+        scale(.9);
 
 }
 
 
-/* ======================================
+.shinchan {
+
+    width: 125px;
+    height: 220px;
+
+    left: 50%;
+
+    top: 28%;
+
+    transform:
+        translateX(-50%)
+        scale(.65);
+
+    z-index: 25;
+}
+
+
+/* =====================================
    DORA
-====================================== */
-
-.dora {
-
-    left: 10%;
-
-    width: 120px;
-
-    height: 190px;
-
-}
-
+===================================== */
 
 .dora-hair {
 
     position: absolute;
 
     top: 0;
-    left: 13px;
+    left: 7px;
 
-    width: 95px;
-    height: 78px;
+    width: 75px;
+    height: 58px;
 
-    background: #54271d;
+    background: #51261b;
 
-    border-radius:
-        48% 48% 42% 42%;
+    border-radius: 50% 50% 40% 40%;
 
-    z-index: 1;
-
+    z-index: 2;
 }
 
 
@@ -553,19 +587,17 @@ body {
 
     position: absolute;
 
-    top: 15px;
-    left: 25px;
+    top: 12px;
+    left: 18px;
 
-    width: 75px;
-    height: 72px;
+    width: 58px;
+    height: 62px;
 
-    background: #c98250;
+    background: #c98251;
 
-    border-radius:
-        45% 45% 48% 48%;
+    border-radius: 45%;
 
-    z-index: 2;
-
+    z-index: 4;
 }
 
 
@@ -573,17 +605,16 @@ body {
 
     position: absolute;
 
-    top: 25px;
+    top: 21px;
 
-    width: 12px;
-    height: 17px;
+    width: 11px;
+    height: 15px;
 
     background: white;
 
-    border: 3px solid #3c1d14;
+    border: 2px solid #3b1713;
 
     border-radius: 50%;
-
 }
 
 
@@ -600,36 +631,33 @@ body {
 
     border-radius: 50%;
 
-    left: 2px;
+    left: 3px;
     top: 3px;
-
 }
 
 
-.left-eye {
-    left: 20px;
+.dora .eye-one {
+    left: 15px;
 }
 
-.right-eye {
-    right: 20px;
+.dora .eye-two {
+    right: 15px;
 }
 
 
-.dora-mouth {
+.dora-smile {
 
     position: absolute;
 
-    width: 17px;
-    height: 9px;
+    width: 16px;
+    height: 8px;
 
-    border-bottom:
-        3px solid #632219;
+    left: 21px;
+    bottom: 12px;
+
+    border-bottom: 2px solid #612119;
 
     border-radius: 50%;
-
-    left: 29px;
-    top: 50px;
-
 }
 
 
@@ -637,19 +665,17 @@ body {
 
     position: absolute;
 
-    top: 78px;
-    left: 25px;
+    top: 67px;
+    left: 18px;
 
-    width: 75px;
-    height: 62px;
+    width: 58px;
+    height: 50px;
 
-    background: #f35b91;
+    background: #f2578b;
 
-    border-radius:
-        15px 15px 20px 20px;
+    border-radius: 15px;
 
-    z-index: 2;
-
+    z-index: 3;
 }
 
 
@@ -657,16 +683,15 @@ body {
 
     position: absolute;
 
-    left: -15px;
-    top: 5px;
+    left: -12px;
+    top: 4px;
 
-    width: 25px;
-    height: 52px;
+    width: 20px;
+    height: 42px;
 
-    background: #6933a1;
+    background: #7038a1;
 
-    border-radius: 10px;
-
+    border-radius: 8px;
 }
 
 
@@ -674,35 +699,25 @@ body {
 
     position: absolute;
 
-    width: 13px;
-    height: 58px;
+    top: 4px;
 
-    background: #c98250;
+    width: 10px;
+    height: 48px;
+
+    background: #c98251;
 
     border-radius: 20px;
 
-    top: 5px;
-
     transform-origin: top center;
-
 }
 
 
-.dora .arm-left {
-
-    left: -7px;
-
-    transform: rotate(55deg);
-
+.dora .arm-one {
+    left: -6px;
 }
 
-
-.dora .arm-right {
-
-    right: -7px;
-
-    transform: rotate(-55deg);
-
+.dora .arm-two {
+    right: -6px;
 }
 
 
@@ -710,26 +725,25 @@ body {
 
     position: absolute;
 
-    top: 132px;
+    top: 110px;
 
-    width: 15px;
-    height: 62px;
+    width: 11px;
+    height: 52px;
 
-    background: #d8844f;
+    background: #c98251;
 
     border-radius: 15px;
 
     transform-origin: top center;
-
 }
 
 
-.dora .leg-left {
-    left: 40px;
+.dora .leg-one {
+    left: 31px;
 }
 
-.dora .leg-right {
-    left: 70px;
+.dora .leg-two {
+    left: 52px;
 }
 
 
@@ -737,86 +751,43 @@ body {
 
     position: absolute;
 
-    bottom: -5px;
+    bottom: -3px;
 
-    width: 35px;
-    height: 16px;
+    width: 28px;
+    height: 12px;
 
     background: white;
 
-    border-radius: 50% 50% 40% 40%;
+    border-radius: 50%;
 
-    border:
-        3px solid #ff4e83;
-
+    border: 2px solid #ff4d86;
 }
 
 
-/* ======================================
+/* =====================================
    SHINCHAN
-====================================== */
-
-.shinchan {
-
-    right: 13%;
-
-    width: 155px;
-
-    height: 245px;
-
-}
-
+===================================== */
 
 .shin-hair {
 
     position: absolute;
 
     top: 0;
-    left: 18px;
+    left: 20px;
 
-    width: 120px;
-    height: 40px;
+    width: 90px;
+    height: 38px;
 
-    z-index: 4;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #111 0 22px,
+            transparent 22px 27px
+        );
 
-}
+    border-radius: 50%;
 
-
-.shin-hair i {
-
-    position: absolute;
-
-    width: 48px;
-    height: 30px;
-
-    background: #111;
-
-    border-radius:
-        50% 50% 0 0;
-
-    transform: rotate(-20deg);
-
-}
-
-
-.shin-hair i:nth-child(1) {
-    left: 0;
-    top: 5px;
-}
-
-.shin-hair i:nth-child(2) {
-    left: 30px;
-    top: 0;
-}
-
-.shin-hair i:nth-child(3) {
-    left: 60px;
-    top: 5px;
-}
-
-.shin-hair i:nth-child(4) {
-    left: 88px;
-    top: 10px;
+    z-index: 5;
 }
 
 
@@ -824,19 +795,17 @@ body {
 
     position: absolute;
 
-    top: 20px;
-    left: 25px;
+    top: 18px;
+    left: 23px;
 
-    width: 105px;
-    height: 100px;
+    width: 80px;
+    height: 85px;
 
-    background: #f1b078;
+    background: #f0af78;
 
-    border-radius:
-        45% 45% 50% 50%;
+    border-radius: 45%;
 
-    z-index: 3;
-
+    z-index: 4;
 }
 
 
@@ -844,17 +813,16 @@ body {
 
     position: absolute;
 
-    top: 38px;
+    top: 31px;
 
-    width: 22px;
-    height: 26px;
+    width: 17px;
+    height: 21px;
 
     background: white;
 
-    border: 4px solid #111;
+    border: 3px solid #111;
 
     border-radius: 50%;
-
 }
 
 
@@ -864,25 +832,24 @@ body {
 
     position: absolute;
 
-    width: 8px;
-    height: 12px;
+    width: 7px;
+    height: 10px;
 
     background: #111;
 
     border-radius: 50%;
 
-    top: 5px;
-    left: 4px;
-
+    left: 3px;
+    top: 4px;
 }
 
 
-.eye-left {
-    left: 25px;
+.shin .eye-one {
+    left: 17px;
 }
 
-.eye-right {
-    right: 25px;
+.shin .eye-two {
+    right: 17px;
 }
 
 
@@ -890,16 +857,15 @@ body {
 
     position: absolute;
 
-    width: 28px;
-    height: 18px;
+    width: 23px;
+    height: 16px;
 
-    background: #4a1718;
+    background: #4d1719;
 
     border-radius: 50%;
 
-    left: 39px;
-    bottom: 14px;
-
+    left: 29px;
+    bottom: 10px;
 }
 
 
@@ -907,19 +873,17 @@ body {
 
     position: absolute;
 
-    top: 113px;
-    left: 28px;
+    top: 97px;
+    left: 23px;
 
-    width: 100px;
-    height: 70px;
+    width: 80px;
+    height: 58px;
 
-    background: #e83737;
+    background: #e63636;
 
-    border-radius:
-        20px 20px 15px 15px;
+    border-radius: 17px;
 
-    z-index: 2;
-
+    z-index: 3;
 }
 
 
@@ -927,35 +891,25 @@ body {
 
     position: absolute;
 
-    width: 15px;
-    height: 67px;
+    top: 3px;
 
-    background: #f1b078;
+    width: 12px;
+    height: 55px;
+
+    background: #f0af78;
 
     border-radius: 20px;
 
-    top: 0;
-
     transform-origin: top center;
-
 }
 
 
-.shin .arm-left {
-
-    left: -9px;
-
-    transform: rotate(55deg);
-
+.shin .arm-one {
+    left: -7px;
 }
 
-
-.shin .arm-right {
-
-    right: -9px;
-
-    transform: rotate(-60deg);
-
+.shin .arm-two {
+    right: -7px;
 }
 
 
@@ -963,103 +917,76 @@ body {
 
     position: absolute;
 
-    top: 174px;
+    top: 148px;
 
-    width: 18px;
-    height: 73px;
+    width: 14px;
+    height: 65px;
 
-    background: #f1b078;
+    background: #f0af78;
 
     border-radius: 20px;
 
     transform-origin: top center;
-
 }
 
 
-.shinchan .leg-left {
-    left: 50px;
+.shin .leg-one {
+    left: 39px;
 }
 
-.shinchan .leg-right {
-    left: 88px;
+.shin .leg-two {
+    left: 68px;
 }
 
 
-.shin-shoe {
+.shoe {
 
     position: absolute;
 
-    bottom: -5px;
+    bottom: -3px;
 
-    width: 42px;
-    height: 18px;
+    width: 35px;
+    height: 14px;
 
     background: white;
 
     border-radius: 50%;
-
 }
 
 
-/* ======================================
+/* =====================================
    RUNNING ANIMATION
-====================================== */
+===================================== */
 
-.character.running {
-
-    animation:
-        bodyRun .22s infinite alternate ease-in-out;
-
-}
-
-
-.character.running .leg-left {
+.running .leg-one {
 
     animation:
-        legRun1 .22s infinite alternate ease-in-out;
-
+        legA .22s infinite alternate;
 }
 
 
-.character.running .leg-right {
+.running .leg-two {
 
     animation:
-        legRun2 .22s infinite alternate ease-in-out;
-
+        legB .22s infinite alternate;
 }
 
 
-.character.running .arm-left {
+.running .arm-one {
 
     animation:
-        armRun1 .22s infinite alternate ease-in-out;
-
+        armA .22s infinite alternate;
 }
 
 
-.character.running .arm-right {
+.running .arm-two {
 
     animation:
-        armRun2 .22s infinite alternate ease-in-out;
-
+        armB .22s infinite alternate;
 }
 
 
-@keyframes bodyRun {
-
-    from {
-        transform: translateY(0) rotate(-2deg);
-    }
-
-    to {
-        transform: translateY(-7px) rotate(2deg);
-    }
-
-}
-
-
-@keyframes legRun1 {
+@keyframes legA {
 
     from {
         transform: rotate(45deg);
@@ -1072,7 +999,7 @@ body {
 }
 
 
-@keyframes legRun2 {
+@keyframes legB {
 
     from {
         transform: rotate(-45deg);
@@ -1085,134 +1012,119 @@ body {
 }
 
 
-@keyframes armRun1 {
+@keyframes armA {
 
     from {
-        transform: rotate(-55deg);
+        transform: rotate(-45deg);
     }
 
     to {
-        transform: rotate(55deg);
+        transform: rotate(45deg);
     }
 
 }
 
 
-@keyframes armRun2 {
+@keyframes armB {
 
     from {
-        transform: rotate(55deg);
+        transform: rotate(45deg);
     }
 
     to {
-        transform: rotate(-55deg);
+        transform: rotate(-45deg);
     }
 
 }
 
 
-/* ======================================
+/* =====================================
    HEART
-====================================== */
+===================================== */
 
 .stolen-heart {
 
     position: absolute;
 
-    top: -55px;
-    left: 55px;
+    top: -42px;
+    left: 42px;
 
-    width: 55px;
-    height: 55px;
-
-    z-index: 10;
-
-    animation:
-        floatingHeart .7s infinite alternate;
-
-}
-
-
-.stolen-heart span {
-
-    position: absolute;
-
-    font-size: 58px;
+    font-size: 45px;
 
     color: #ff174f;
 
-    line-height: 1;
-
     text-shadow:
-        0 0 10px #ff174f,
-        0 0 30px #ff174f;
+        0 0 15px red,
+        0 0 35px red;
 
+    animation:
+        stolenHeart .5s infinite alternate;
+
+    z-index: 10;
 }
 
 
-@keyframes floatingHeart {
+@keyframes stolenHeart {
 
     to {
-        transform: translateY(-8px) scale(1.08);
+        transform:
+            translateY(-8px)
+            scale(1.12);
     }
 
 }
 
 
-/* ======================================
-   OBSTACLES
-====================================== */
+/* =====================================
+   GAME OBJECTS
+===================================== */
 
-.obstacle {
+.game-object {
 
     position: absolute;
 
-    bottom: 25%;
+    z-index: 20;
 
-    z-index: 15;
+    left: 50%;
 
+    transform:
+        translateX(-50%)
+        translateZ(0);
+
+    will-change:
+        top,
+        transform;
 }
 
 
-.rock {
+/* obstacles */
+
+.obstacle-rock {
 
     width: 48px;
-    height: 36px;
+    height: 38px;
 
     background:
         linear-gradient(
             135deg,
-            #8a6879,
-            #332633
+            #89717f,
+            #312531
         );
 
     border-radius:
-        50% 40% 30% 35%;
-
-    box-shadow:
-        inset -5px -5px 0 rgba(0,0,0,.3);
-
+        55% 40% 35% 45%;
 }
 
 
-.rock1 {
-    left: 35%;
-}
+.obstacle-cone {
 
-.rock2 {
-    left: 75%;
-}
-
-
-.cone {
-
-    width: 30px;
-    height: 55px;
+    width: 35px;
+    height: 60px;
 
     background:
         repeating-linear-gradient(
             to bottom,
-            #ff4b5f 0 12px,
+            #ff3c55 0 12px,
             white 12px 24px
         );
 
@@ -1222,191 +1134,213 @@ body {
             100% 100%,
             0 100%
         );
-
-    left: 53%;
-
 }
 
 
-.box {
+.obstacle-box {
 
-    width: 58px;
+    width: 60px;
     height: 55px;
 
     background:
         repeating-linear-gradient(
             45deg,
-            #9a5c37 0 8px,
-            #6c3828 8px 16px
+            #995934 0 10px,
+            #633628 10px 20px
         );
 
-    right: 5%;
+    border: 3px solid #3b211b;
+}
 
-    border:
-        3px solid #3d201a;
+
+/* collectible heart */
+
+.collectible {
+
+    color: #ff285f;
+
+    font-size: 42px;
+
+    text-shadow:
+        0 0 15px red,
+        0 0 30px red;
+
+    animation:
+        collectibleSpin .6s infinite alternate;
+}
+
+
+@keyframes collectibleSpin {
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.25)
+            rotate(8deg);
+    }
 
 }
 
 
-/* ======================================
-   DUST
-====================================== */
+/* =====================================
+   SPEED
+===================================== */
 
-.dust {
+.speed-lines {
 
     position: absolute;
 
-    width: 25px;
-    height: 15px;
+    inset: 0;
 
-    border-radius: 50%;
+    z-index: 8;
 
-    background: rgba(255,255,255,.3);
-
-    z-index: 18;
+    pointer-events: none;
 
     opacity: 0;
 
+    background:
+        repeating-linear-gradient(
+            100deg,
+            transparent 0 80px,
+            rgba(255,255,255,.18) 81px 83px,
+            transparent 84px 160px
+        );
 }
 
 
-.running ~ .dust {
-    animation: dustMove .5s infinite;
+.game-world.fast .speed-lines {
+
+    opacity: .5;
+
+    animation:
+        speedFlash .25s linear infinite;
 }
 
 
-@keyframes dustMove {
+@keyframes speedFlash {
 
-    0% {
-        transform: scale(.5);
-        opacity: 0;
+    from {
+        transform: translateY(-50px);
     }
 
-    50% {
-        opacity: .6;
-    }
-
-    100% {
-        transform: translateX(-80px) scale(1.5);
-        opacity: 0;
+    to {
+        transform: translateY(100px);
     }
 
 }
 
 
-/* ======================================
-   CHASE MESSAGE
-====================================== */
+/* =====================================
+   MESSAGE
+===================================== */
 
-.chase-message {
+.message {
 
     position: absolute;
 
-    top: 25px;
+    top: 100px;
 
     left: 50%;
 
     transform: translateX(-50%);
 
-    font-size: 24px;
+    z-index: 70;
 
-    font-weight: bold;
+    font-size: 24px;
 
     letter-spacing: 5px;
 
-    color: white;
+    font-weight: bold;
 
     text-shadow:
-        0 0 15px #ff286b;
+        0 0 20px #ff3475;
 
-    z-index: 40;
-
+    pointer-events: none;
 }
 
 
-/* ======================================
+/* =====================================
    CONTROLS
-====================================== */
+===================================== */
 
 .controls {
 
     position: absolute;
 
-    left: 25px;
-    top: 25px;
+    bottom: 20px;
 
-    z-index: 50;
+    left: 50%;
 
-    padding: 15px;
+    transform: translateX(-50%);
 
-    background:
-        rgba(10, 2, 15, .7);
+    z-index: 110;
 
-    border:
-        1px solid rgba(255, 120, 170, .5);
+    display: flex;
 
-    border-radius: 14px;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 15px;
+
+    background: rgba(5,0,10,.7);
+
+    border: 1px solid rgba(255,100,160,.4);
+
+    border-radius: 18px;
 
     backdrop-filter: blur(8px);
+}
+
+
+.controls button {
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #ff5a91;
+
+    background: rgba(255,255,255,.04);
+
+    color: white;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+.controls button:active {
+
+    background: #ff3d82;
 
 }
 
 
 .controls span {
 
-    display: block;
-
-    font-size: 10px;
+    font-size: 9px;
 
     letter-spacing: 2px;
 
-    margin-bottom: 10px;
+    opacity: .5;
 
 }
 
 
-.controls button {
+/* =====================================
+   SCREENS
+===================================== */
 
-    width: 40px;
-    height: 38px;
+.screen {
 
-    margin: 2px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    border:
-        1px solid #ff5b91;
-
-    color: white;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-}
-
-
-.controls button:hover {
-
-    background: #ff3d81;
-
-}
-
-
-/* ======================================
-   MISSION OVERLAY
-====================================== */
-
-.mission-overlay,
-.win-screen,
-.lose-screen {
-
-    position: fixed;
+    position: absolute;
 
     inset: 0;
+
+    z-index: 200;
 
     display: flex;
 
@@ -1415,329 +1349,273 @@ body {
     align-items: center;
 
     background:
-        rgba(4, 0, 8, .82);
+        rgba(4,0,8,.78);
 
-    backdrop-filter: blur(10px);
-
-    z-index: 100;
-
+    backdrop-filter: blur(12px);
 }
 
 
-.mission-card,
-.win-card,
-.lose-card {
+.hidden {
+    display: none !important;
+}
 
-    width: min(450px, 90%);
 
-    padding: 45px;
+.start-card,
+.result-card {
+
+    width: min(460px, 90%);
+
+    padding: 40px;
 
     text-align: center;
+
+    border:
+        1px solid rgba(255,80,140,.65);
+
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(50, 10, 65, .96),
-            rgba(12, 3, 20, .98)
+            rgba(50,8,65,.97),
+            rgba(10,2,18,.98)
         );
 
-    border:
-        1px solid rgba(255, 80, 140, .6);
-
-    border-radius: 25px;
-
     box-shadow:
-        0 0 60px rgba(255, 30, 110, .2);
-
+        0 0 80px rgba(255,20,100,.2);
 }
 
 
-.tiny-label {
+.mini-title {
 
-    color: #ff7ba7;
-
-    font-size: 11px;
+    font-size: 9px;
 
     letter-spacing: 4px;
 
+    color: #ff7ca7;
 }
 
 
-.mission-card h1 {
+.start-card h1 {
 
-    margin-top: 18px;
+    margin: 15px 0;
 
-    font-size: 30px;
+    font-size: 45px;
 
-    letter-spacing: 4px;
-
-}
-
-
-.heart-big,
-.victory-heart,
-.sad-heart {
-
-    margin: 20px;
-
-    font-size: 75px;
-
-    color: #ff245d;
-
-    text-shadow:
-        0 0 20px #ff245d,
-        0 0 50px #ff245d;
-
-    animation:
-        pulseHeart 1s infinite;
-
-}
-
-
-.mission-card p {
+    line-height: .9;
 
     letter-spacing: 5px;
+}
+
+
+.start-card h1 span {
+
+    color: #ff477f;
+
+    text-shadow:
+        0 0 20px #ff477f;
+}
+
+
+.target-display {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin: 25px 0;
+}
+
+
+.mini-dora,
+.mini-shin {
+
+    padding: 10px 14px;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255,100,160,.4);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.mini-shin {
+
+    transform: scale(1.15);
+}
+
+
+.vs {
+
+    color: #ff4c83;
+
+    font-size: 10px;
 
 }
 
 
-.target,
-.status {
+.start-card p {
 
-    margin-top: 15px;
-
-    font-size: 12px;
-
-    letter-spacing: 3px;
+    line-height: 1.7;
 
     opacity: .7;
 
 }
 
 
-.status span {
+.instructions {
 
-    color: #ff4d87;
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 25px 0;
+}
+
+
+.instructions span {
+
+    padding: 8px 10px;
+
+    border: 1px solid #ff4f88;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+}
+
+
+.instructions small {
+
+    padding-top: 9px;
+
+    font-size: 8px;
+
+    opacity: .6;
 
 }
 
 
-.mission-card button,
-.win-card button,
-.lose-card button {
-
-    margin-top: 30px;
-
-    padding: 15px 30px;
+button {
 
     border: none;
 
+    cursor: pointer;
+}
+
+
+.start-card button,
+.result-card button {
+
+    padding: 15px 28px;
+
     border-radius: 10px;
+
+    color: white;
 
     background:
         linear-gradient(
             90deg,
-            #ff185c,
-            #ff5790
+            #ff175c,
+            #ff5d96
         );
 
-    color: white;
+    letter-spacing: 3px;
 
     font-weight: bold;
 
-    letter-spacing: 3px;
-
-    cursor: pointer;
-
     box-shadow:
-        0 0 25px rgba(255, 30, 100, .3);
-
+        0 0 25px rgba(255,30,100,.3);
 }
 
 
-/* ======================================
-   WIN
-====================================== */
+.result-heart {
 
-.win-screen,
-.lose-screen {
+    font-size: 70px;
 
-    display: none;
+    color: #ff285f;
 
+    text-shadow:
+        0 0 20px red,
+        0 0 50px red;
+
+    animation:
+        heartbeat 1s infinite;
 }
 
 
-.win-small {
+.result-card > small {
 
-    color: #ff7da7;
+    color: #ff80a8;
 
     letter-spacing: 4px;
-
-    font-size: 11px;
-
 }
 
 
-.win-card h1 {
+.result-card h1 {
 
     margin: 15px 0;
 
-    font-size: 31px;
+    font-size: 30px;
 
     letter-spacing: 3px;
-
 }
 
 
-.heart-recovered {
+.recovered {
 
     display: inline-block;
 
     padding: 8px 15px;
 
-    border:
-        1px solid #ff4c83;
+    border: 1px solid #ff4b85;
 
     border-radius: 30px;
 
-    color: #ff83aa;
+    color: #ff80a8;
 
-    font-size: 11px;
+    font-size: 10px;
 
     letter-spacing: 2px;
-
 }
 
 
-.win-card p {
+.result-card p {
 
     margin-top: 20px;
 
-    opacity: .7;
-
+    opacity: .6;
 }
 
 
-.romantic {
+.result-card strong {
 
-    color: #ff8caf;
+    display: block;
+
+    margin-top: 10px;
 
     font-size: 20px;
 
     line-height: 1.5;
 
+    color: #ff9abb;
 }
 
 
-/* ======================================
-   OBJECTIVE
-====================================== */
+/* =====================================
+   HEARTBEAT
+===================================== */
 
-.objective {
-
-    height: 105px;
-
-    text-align: center;
-
-    padding: 12px;
-
-    background:
-        #0b030f;
-
-    border-top:
-        1px solid rgba(255, 70, 130, .3);
-
-    z-index: 50;
-
-}
-
-
-.objective-title {
-
-    color: #ff719e;
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-}
-
-
-.objective p {
-
-    margin-top: 5px;
-
-    font-size: 13px;
-
-    letter-spacing: 2px;
-
-}
-
-
-.progress {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-top: 12px;
-
-}
-
-
-.progress-line {
-
-    width: 120px;
-
-    height: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff3d81,
-            #ff9aba
-        );
-
-}
-
-
-.progress-character,
-.progress-target {
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    padding: 7px 12px;
-
-    border:
-        1px solid rgba(255, 100, 160, .4);
-
-    border-radius: 20px;
-
-}
-
-
-.progress-heart {
-
-    font-size: 22px;
-
-    color: #ff245d;
-
-}
-
-
-/* ======================================
-   ANIMATION
-====================================== */
-
-@keyframes pulseHeart {
-
-    0%,100% {
-        transform: scale(1);
-    }
+@keyframes heartbeat {
 
     50% {
         transform: scale(1.15);
@@ -1746,101 +1624,68 @@ body {
 }
 
 
-/* ======================================
+/* =====================================
    MOBILE
-====================================== */
+===================================== */
 
-@media(max-width:700px) {
+@media(max-width:650px) {
 
     .hud {
 
+        height: 70px;
+
+        padding: 7px;
+
         grid-template-columns:
             1fr 100px 1fr;
-
-        padding: 8px;
-
-        height: 75px;
-
     }
 
 
-    .mission strong {
+    .mission b {
 
-        font-size: 11px;
-
+        font-size: 10px;
     }
 
 
     .mission span {
 
-        font-size: 8px;
-
+        font-size: 7px;
     }
 
 
-    .hud-heart {
+    .heart-icon {
 
         font-size: 25px;
-
-    }
-
-
-    #timer {
-
-        font-size: 19px;
-
     }
 
 
     #score {
 
-        font-size: 10px;
+        font-size: 9px;
+    }
 
+
+    .lives {
+
+        font-size: 13px;
+    }
+
+
+    .message {
+
+        top: 85px;
+
+        font-size: 15px;
     }
 
 
     .controls {
 
-        left: 8px;
+        bottom: 10px;
 
-        top: 15px;
-
-        transform: scale(.8);
-
-        transform-origin: left top;
-
-    }
-
-
-    .dora {
-
-        transform: scale(.75);
-
-        transform-origin: bottom center;
-
-    }
-
-
-    .shinchan {
-
-        transform: scale(.82);
-
-        transform-origin: bottom center;
-
-    }
-
-
-    .objective {
-
-        height: 80px;
-
-    }
-
-
-    .progress-line {
-
-        width: 50px;
-
+        transform:
+            translateX(-50%)
+            scale(.85);
     }
 
 }
