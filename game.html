@@ -1,313 +1,121 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CATCH MY HEART</title>
-
+    <title>Dora & Shinchan ❤️</title>
     <link rel="stylesheet" href="game.css">
 </head>
 
 <body>
 
-<div class="game">
+<div id="game">
 
-    <!-- ================= HUD ================= -->
+    <div class="sky">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+    </div>
 
     <div class="hud">
+        <div>❤️ <span id="score">0</span></div>
+        <div>🏃 <span id="distance">0</span> m</div>
+    </div>
 
-        <div class="mission">
-            <span class="heart-icon">♥</span>
+    <!-- START -->
+    <div id="startScreen" class="screen">
 
-            <div>
-                <small>MISSION 01</small>
-                <b>CATCH MY HEART</b>
-                <span>TARGET: SHINCHAN</span>
-            </div>
+        <div class="title">DORA'S LOVE RUN ❤️</div>
+
+        <div class="introCharacters">
+            <div class="bigDora">👧🏻</div>
+            <div class="heart">❤️</div>
+            <div class="bigShin">🧒🏻</div>
         </div>
 
-        <div class="timer">
-            <small>TIME</small>
-            <strong id="timer">01:00</strong>
-        </div>
+        <p>
+            Dora is running away...<br>
+            <b>Shinchan is chasing her! 😂</b>
+        </p>
 
-        <div class="stats">
-            <div id="score">SCORE 0000</div>
+        <button id="startBtn">START RUN 💕</button>
 
-            <div class="lives">
-                ♥ ♥ ♥
-            </div>
-        </div>
+        <small>
+            ← → Change lane &nbsp; | &nbsp;
+            ↑ Jump &nbsp; | &nbsp;
+            ↓ Slide
+        </small>
 
     </div>
 
 
-    <!-- ================= GAME WORLD ================= -->
+    <!-- WORLD -->
+    <div class="world">
 
-    <div id="gameWorld" class="game-world">
+        <div class="track">
 
-        <!-- sky -->
+            <div class="laneLine leftLine"></div>
+            <div class="laneLine rightLine"></div>
 
-        <div class="sky"></div>
+            <div id="objects"></div>
 
-        <div class="moon"></div>
+            <!-- DORA -->
+            <div id="dora" class="dora character">
 
-        <!-- distant city -->
+                <div class="doraHair"></div>
 
-        <div class="city">
+                <div class="doraHead">
 
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+                    <div class="eye leftEye"></div>
+                    <div class="eye rightEye"></div>
 
-        </div>
-
-
-        <!-- road -->
-
-        <div class="road">
-
-            <div class="lane-line line-left"></div>
-            <div class="lane-line line-right"></div>
-
-        </div>
-
-
-        <!-- side scenery -->
-
-        <div class="side-tree tree-one"></div>
-        <div class="side-tree tree-two"></div>
-
-        <div class="lamp lamp-one"></div>
-        <div class="lamp lamp-two"></div>
-
-
-        <!-- ================= SHINCHAN ================= -->
-
-        <div id="shinchan" class="shinchan">
-
-            <div class="shin-shadow"></div>
-
-            <div class="shin-hair"></div>
-
-            <div class="shin-head">
-
-                <div class="shin-eye eye-one"></div>
-                <div class="shin-eye eye-two"></div>
-
-                <div class="shin-mouth"></div>
-
-            </div>
-
-            <div class="shin-body">
-
-                <div class="shin-arm arm-one"></div>
-                <div class="shin-arm arm-two"></div>
-
-            </div>
-
-            <div class="shin-leg leg-one">
-                <div class="shoe"></div>
-            </div>
-
-            <div class="shin-leg leg-two">
-                <div class="shoe"></div>
-            </div>
-
-            <!-- stolen heart -->
-
-            <div class="stolen-heart">
-                ♥
-            </div>
-
-        </div>
-
-
-        <!-- ================= DORA ================= -->
-
-        <div id="dora" class="dora">
-
-            <div class="dora-shadow"></div>
-
-            <div class="dora-hair"></div>
-
-            <div class="dora-head">
-
-                <div class="dora-eye eye-one"></div>
-                <div class="dora-eye eye-two"></div>
-
-                <div class="dora-smile"></div>
-
-            </div>
-
-            <div class="dora-body">
-
-                <div class="backpack"></div>
-
-                <div class="dora-arm arm-one"></div>
-                <div class="dora-arm arm-two"></div>
-
-            </div>
-
-            <div class="dora-leg leg-one">
-                <div class="dora-shoe"></div>
-            </div>
-
-            <div class="dora-leg leg-two">
-                <div class="dora-shoe"></div>
-            </div>
-
-        </div>
-
-
-        <!-- OBJECTS ARE CREATED BY JS -->
-
-        <div id="objects"></div>
-
-
-        <!-- speed lines -->
-
-        <div class="speed-lines"></div>
-
-
-        <!-- message -->
-
-        <div id="message" class="message">
-            CATCH HIM!
-        </div>
-
-
-        <!-- START -->
-
-        <div id="startScreen" class="screen">
-
-            <div class="start-card">
-
-                <div class="mini-title">
-                    PRIVATE ARCHIVE • MISSION 01
-                </div>
-
-                <h1>
-                    CATCH<br>
-                    <span>MY HEART</span>
-                </h1>
-
-                <div class="target-display">
-
-                    <div class="mini-dora">
-                        DORA
-                    </div>
-
-                    <div class="vs">
-                        VS
-                    </div>
-
-                    <div class="mini-shin">
-                        SHINCHAN
-                    </div>
+                    <div class="smile"></div>
 
                 </div>
 
-                <p>
-                    Shinchan stole your heart<br>
-                    and he's RUNNING AWAY.
-                </p>
-
-                <div class="instructions">
-
-                    <span>← →</span>
-                    <small>CHANGE LANE</small>
-
-                    <span>↑</span>
-                    <small>JUMP</small>
-
-                    <span>↓</span>
-                    <small>SLIDE</small>
-
+                <div class="doraBody">
+                    <div class="doraShirt"></div>
+                    <div class="doraShorts"></div>
                 </div>
 
-                <button id="startButton">
-                    START CHASE
-                </button>
+                <div class="doraLegs">
+                    <div class="doraLeg leg1"></div>
+                    <div class="doraLeg leg2"></div>
+                </div>
+
+                <div class="shoe shoe1"></div>
+                <div class="shoe shoe2"></div>
 
             </div>
 
-        </div>
 
+            <!-- SHINCHAN CHASER -->
+            <div id="shinchan" class="shinchan character">
 
-        <!-- WIN -->
+                <div class="shinHead">
 
-        <div id="winScreen" class="screen hidden">
+                    <div class="shinHair"></div>
 
-            <div class="result-card">
+                    <div class="shinEye eye1"></div>
+                    <div class="shinEye eye2"></div>
 
-                <div class="result-heart">
-                    ♥
+                    <div class="shinMouth"></div>
+
                 </div>
 
-                <small>
-                    TARGET CAPTURED
-                </small>
-
-                <h1>
-                    YOU CAUGHT<br>
-                    SHINCHAN!
-                </h1>
-
-                <div class="recovered">
-                    ♥ HEART RECOVERED ♥
+                <div class="shinBody">
+                    <div class="shinShirt"></div>
+                    <div class="shinShorts"></div>
                 </div>
 
-                <p>
-                    But honestly...
-                </p>
-
-                <strong>
-                    He already had<br>
-                    your heart.
-                </strong>
-
-                <button id="nextButton">
-                    NEXT CHAPTER →
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- LOSE -->
-
-        <div id="loseScreen" class="screen hidden">
-
-            <div class="result-card">
-
-                <div class="result-heart">
-                    💔
+                <div class="shinLegs">
+                    <div class="shinLeg shinLeg1"></div>
+                    <div class="shinLeg shinLeg2"></div>
                 </div>
 
-                <small>
-                    MISSION FAILED
-                </small>
-
-                <h1>
-                    HE GOT AWAY!
-                </h1>
-
-                <p>
-                    Shinchan escaped<br>
-                    with your heart 😭
-                </p>
-
-                <button id="retryButton">
-                    CHASE AGAIN
-                </button>
+                <div class="shinShoe shinShoe1"></div>
+                <div class="shinShoe shinShoe2"></div>
 
             </div>
 
@@ -316,31 +124,42 @@
     </div>
 
 
-    <!-- ================= CONTROLS ================= -->
+    <!-- GAME OVER -->
+    <div id="gameOver" class="screen hidden">
 
+        <div class="gameOverTitle">SHINCHAN CAUGHT DORA! 😂</div>
+
+        <div class="caught">
+            🧒🏻 ❤️ 👧🏻
+        </div>
+
+        <p>
+            He finally caught you! 😭😂
+        </p>
+
+        <div class="final">
+            Score: <span id="finalScore">0</span>
+        </div>
+
+        <button id="restartBtn">RUN AGAIN ❤️</button>
+
+    </div>
+
+
+    <!-- MOBILE CONTROLS -->
     <div class="controls">
 
-        <div class="control-group">
-            <button data-key="left">←</button>
-            <button data-key="right">→</button>
-        </div>
-
-        <div class="control-group">
-            <button data-key="jump">↑</button>
-            <button data-key="slide">↓</button>
-        </div>
-
-        <span>
-            ARROWS / WASD
-        </span>
+        <button data-action="left">←</button>
+        <button data-action="jump">↑</button>
+        <button data-action="slide">↓</button>
+        <button data-action="right">→</button>
 
     </div>
 
 </div>
 
-
 <script src="game.js"></script>
 
 </body>
-
 </html>
+```
