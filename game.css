@@ -1,7 +1,12 @@
+/* =====================================================
+   CATCH MY HEART
+   SUBWAY-SURFERS STYLE CHASE
+===================================================== */
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html,
@@ -10,27 +15,30 @@ body {
     height: 100%;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background: #090016;
+}
+
+body {
+    background: #12000b;
     color: white;
 }
 
 
-/* =========================
+/* =====================================================
    MAIN GAME
-========================= */
+===================================================== */
 
 #game {
     position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: #13001f;
+    background: #18000f;
 }
 
 
-/* =========================
+/* =====================================================
    SKY
-========================= */
+===================================================== */
 
 .sky {
     position: absolute;
@@ -38,866 +46,976 @@ body {
 
     background:
         radial-gradient(
-            circle at 50% 30%,
-            #b43a9c 0,
-            #421b68 32%,
-            #120024 68%,
-            #05000d 100%
+            circle at 50% 25%,
+            rgba(255, 70, 130, 0.35),
+            transparent 25%
+        ),
+        linear-gradient(
+            to bottom,
+            #090014 0%,
+            #25001d 42%,
+            #5c001e 72%,
+            #180008 100%
         );
-}
 
-.sky::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        radial-gradient(#ffffff 1px, transparent 1px);
-
-    background-size: 90px 90px;
-
-    opacity: 0.35;
+    z-index: 0;
 }
 
 
-/* =========================
-   HEART MOON
-========================= */
+/* =====================================================
+   MOON / HEART
+===================================================== */
 
 .moon {
     position: absolute;
 
-    z-index: 1;
+    top: 12%;
+    left: 50%;
 
-    top: 14%;
-    left: 59%;
+    transform: translateX(-50%);
 
-    font-size: 150px;
+    font-size: 90px;
 
-    color: #ff315e;
+    color: #ff315f;
+
+    opacity: 0.85;
 
     text-shadow:
-        0 0 15px #ff315e,
-        0 0 30px #ff315e,
-        0 0 60px #ff315e;
+        0 0 15px #ff174f,
+        0 0 35px #ff174f,
+        0 0 70px rgba(255, 0, 70, 0.7);
 
-    transform: rotate(-12deg);
+    z-index: 1;
 
-    animation: moonPulse 2s infinite alternate;
+    animation: moonPulse 2s ease-in-out infinite;
 }
 
 @keyframes moonPulse {
 
-    from {
-        transform: rotate(-12deg) scale(1);
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
     }
 
-    to {
-        transform: rotate(-12deg) scale(1.05);
+    50% {
+        transform: translateX(-50%) scale(1.08);
     }
-
 }
 
 
-/* =========================
+/* =====================================================
    CITY
-========================= */
+===================================================== */
 
 .city {
     position: absolute;
 
-    z-index: 2;
-
-    bottom: 42%;
-
     left: 0;
     right: 0;
+    bottom: 30%;
 
-    height: 27%;
+    height: 25%;
 
     background:
         linear-gradient(
-            90deg,
-
-            transparent 0 5%,
-
-            #17132c 5% 10%,
-
-            transparent 10% 15%,
-
-            #25153b 15% 21%,
-
-            transparent 21% 27%,
-
-            #1b1232 27% 34%,
-
-            transparent 34% 40%,
-
-            #24163b 40% 47%,
-
-            transparent 47% 53%,
-
-            #1a1230 53% 60%,
-
-            transparent 60% 66%,
-
-            #26153b 66% 73%,
-
-            transparent 73% 80%,
-
-            #17102c 80% 88%,
-
-            transparent 88%
+            to top,
+            #080009,
+            transparent
         );
 
-    filter:
-        drop-shadow(
-            0 0 15px #d52b91
-        );
+    z-index: 2;
 }
 
-
-/* =========================
-   TREES
-========================= */
-
-.trees {
-    position: absolute;
-
-    z-index: 3;
-
-    bottom: 40%;
-
-    width: 25%;
-    height: 45%;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 20%,
-            #67134c 0 25%,
-            transparent 26%
-        ),
-
-        radial-gradient(
-            ellipse at 25% 30%,
-            #52103f 0 30%,
-            transparent 31%
-        ),
-
-        radial-gradient(
-            ellipse at 75% 30%,
-            #74174e 0 32%,
-            transparent 33%
-        );
-
-    opacity: 0.8;
-}
-
-.trees.left {
-    left: -5%;
-}
-
-.trees.right {
-    right: -5%;
-    transform: scaleX(-1);
-}
-
-
-/* =========================
-   RUNNING ROAD
-========================= */
-
-.road {
+.city::before {
+    content: "";
 
     position: absolute;
-
-    z-index: 4;
 
     left: 0;
     right: 0;
     bottom: 0;
 
-    height: 48%;
+    height: 100%;
 
     background:
         linear-gradient(
-            #2d1735,
-            #180d1e 65%,
-            #0b0710
+            90deg,
+
+            #10000e 0%,
+            #10000e 8%,
+            transparent 8%,
+            transparent 12%,
+
+            #160013 12%,
+            #160013 19%,
+            transparent 19%,
+            transparent 23%,
+
+            #0e0010 23%,
+            #0e0010 31%,
+            transparent 31%,
+            transparent 36%,
+
+            #160012 36%,
+            #160012 44%,
+            transparent 44%,
+            transparent 48%,
+
+            #10000e 48%,
+            #10000e 56%,
+            transparent 56%,
+            transparent 61%,
+
+            #180012 61%,
+            #180012 69%,
+            transparent 69%,
+            transparent 74%,
+
+            #10000e 74%,
+            #10000e 82%,
+            transparent 82%,
+            transparent 87%,
+
+            #170010 87%,
+            #170010 96%,
+            transparent 96%
         );
 
-    clip-path:
-        polygon(
-            12% 0,
-            88% 0,
-            100% 100%,
-            0 100%
+    opacity: 0.9;
+}
+
+
+/* =====================================================
+   TREES
+===================================================== */
+
+.trees {
+    position: absolute;
+
+    bottom: 25%;
+
+    width: 180px;
+    height: 280px;
+
+    z-index: 3;
+
+    opacity: 0.7;
+}
+
+.trees.left {
+    left: -50px;
+}
+
+.trees.right {
+    right: -50px;
+}
+
+.trees::before,
+.trees::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: #10000e;
+
+    box-shadow:
+        60px 20px 0 20px #10000e,
+        120px 60px 0 35px #10000e;
+}
+
+.trees::before {
+    width: 90px;
+    height: 140px;
+
+    bottom: 0;
+    left: 20px;
+}
+
+.trees::after {
+    width: 70px;
+    height: 120px;
+
+    bottom: 30px;
+    left: 80px;
+}
+
+
+/* =====================================================
+   ROAD
+===================================================== */
+
+.road {
+    position: absolute;
+
+    left: 50%;
+    bottom: -8%;
+
+    transform: translateX(-50%);
+
+    width: 78%;
+    height: 82%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #08080d,
+            #17121c 18%,
+            #211824 50%,
+            #17121c 82%,
+            #08080d
         );
+
+    clip-path: polygon(
+        39% 0%,
+        61% 0%,
+        100% 100%,
+        0% 100%
+    );
+
+    perspective: 900px;
+
+    z-index: 4;
 
     overflow: hidden;
 
     box-shadow:
-        inset 0 20px 35px #ff4f99;
+        0 -10px 40px rgba(255, 0, 90, 0.25);
 }
 
 
-/* ROAD TEXTURE */
+/* =====================================================
+   ROAD GLOW
+===================================================== */
 
-.road::before {
-
-    content: "";
-
+.roadGlow {
     position: absolute;
 
     inset: 0;
 
     background:
-
-        repeating-linear-gradient(
+        linear-gradient(
             90deg,
-            transparent 0 8%,
-            rgba(255, 115, 170, 0.12)
-                8.2% 8.5%,
-            transparent 8.7% 16%
-        ),
-
-        repeating-linear-gradient(
-            0deg,
-            transparent 0 34px,
-            rgba(255, 255, 255, 0.08)
-                35px 37px
+            transparent 0%,
+            rgba(255, 0, 100, 0.08) 20%,
+            transparent 40%,
+            transparent 60%,
+            rgba(255, 0, 100, 0.08) 80%,
+            transparent 100%
         );
-
-    transform:
-        perspective(300px)
-        rotateX(8deg);
-
-    transform-origin: bottom;
-}
-
-
-/* =========================
-   LANES
-========================= */
-
-.lane {
-
-    position: absolute;
-
-    top: 0;
-    bottom: -5%;
-
-    width: 3px;
-
-    background:
-        rgba(255, 90, 160, 0.25);
-}
-
-.l1 {
-    left: 33%;
-}
-
-.l2 {
-    left: 67%;
-}
-
-
-/* =========================
-   ROAD GLOW
-========================= */
-
-.roadGlow {
-
-    position: absolute;
-
-    inset: auto 0 0;
-
-    height: 18%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            #ff2d7d33,
-            transparent 65%
-        );
-}
-
-
-/* =========================
-   HUD
-========================= */
-
-.hud {
-
-    position: absolute;
-
-    z-index: 20;
-
-    top: 22px;
-
-    left: 20px;
-    right: 20px;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 300px 1fr;
-
-    gap: 7%;
-
-    align-items: start;
-}
-
-
-/* HUD PANELS */
-
-.panel {
-
-    height: 88px;
-
-    border:
-        1px solid #ff78a7;
-
-    border-radius: 18px;
-
-    background:
-        rgba(7, 3, 13, 0.8);
-
-    box-shadow:
-
-        0 0 15px
-        rgba(255, 23, 102, 0.4),
-
-        inset 0 0 20px
-        rgba(255, 23, 102, 0.07);
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 15px 22px;
-}
-
-
-/* MISSION */
-
-.mission {
-    gap: 16px;
-}
-
-.bigHeart {
-
-    font-size: 45px;
-
-    color: #ff315e;
-
-    text-shadow:
-        0 0 15px #ff315e;
-}
-
-.panel b {
-
-    font-size: 19px;
-
-    letter-spacing: 1px;
-}
-
-.panel small {
-
-    display: block;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    margin-top: 8px;
-}
-
-
-/* TIMER */
-
-.timer {
-
-    flex-direction: column;
-
-    justify-content: center;
-}
-
-.timer strong {
-
-    font-size: 40px;
-
-    letter-spacing: 2px;
-}
-
-
-/* SCORE */
-
-.score {
-
-    justify-content: space-between;
-}
-
-.score span {
-
-    color: #ff315e;
-
-    font-size: 24px;
-
-    word-spacing: 8px;
-
-    text-shadow:
-        0 0 10px #ff315e;
-}
-
-
-/* =========================
-   DESKTOP CONTROLS
-========================= */
-
-.controls {
-
-    position: absolute;
-
-    z-index: 30;
-
-    top: 205px;
-    left: 20px;
-
-    padding: 16px 22px;
-
-    border:
-        1px solid #ff78a7;
-
-    border-radius: 18px;
-
-    background:
-        rgba(8, 2, 12, 0.8);
-
-    text-align: center;
-}
-
-.controls b {
-
-    display: block;
-
-    margin-bottom: 12px;
-}
-
-.controls div {
-
-    display: flex;
-
-    gap: 28px;
-
-    margin: 10px;
-}
-
-.controls button {
-
-    width: 50px;
-    height: 45px;
-
-    font-size: 22px;
-
-    color: white;
-
-    background:
-        rgba(22, 7, 19, 0.8);
-
-    border:
-        1px solid #ff78a7;
-
-    border-radius: 8px;
-
-    box-shadow:
-        0 0 12px
-        rgba(255, 45, 119, 0.35);
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.controls button:hover {
-
-    transform: scale(1.1);
-
-    background:
-        rgba(255, 45, 119, 0.2);
-
-    box-shadow:
-        0 0 20px
-        rgba(255, 45, 119, 0.7);
-}
-
-.controls small {
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================
-   CHARACTERS
-========================= */
-
-.runner {
-
-    position: absolute;
-
-    object-fit: contain;
 
     pointer-events: none;
 
-    filter:
-        drop-shadow(
-            0 10px 8px
-            rgba(0, 0, 0, 0.6)
+    animation: roadMove 1.2s linear infinite;
+}
+
+@keyframes roadMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(120px);
+    }
+}
+
+
+/* =====================================================
+   LANES
+===================================================== */
+
+.lane {
+    position: absolute;
+
+    top: -5%;
+    bottom: -5%;
+
+    width: 5px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.8) 0px,
+            rgba(255, 255, 255, 0.8) 45px,
+            transparent 45px,
+            transparent 90px
         );
 
-    animation:
-        runningBob 0.32s
-        infinite alternate
-        ease-in-out;
+    opacity: 0.45;
+
+    animation: laneMove 0.65s linear infinite;
+}
+
+.lane.l1 {
+    left: 40%;
+}
+
+.lane.l2 {
+    left: 60%;
+}
+
+@keyframes laneMove {
+
+    from {
+        background-position-y: 0;
+    }
+
+    to {
+        background-position-y: 90px;
+    }
 }
 
 
-/* DORA */
+/* =====================================================
+   SPEED LINES
+===================================================== */
 
-.dora {
+.speed-lines {
+    position: absolute;
 
-    z-index: 12;
+    inset: 0;
 
-    width:
-        min(23vw, 300px);
+    pointer-events: none;
 
-    left:
-        calc(50% - 230px);
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 70px,
+            rgba(255, 255, 255, 0.12) 70px,
+            rgba(255, 255, 255, 0.12) 74px,
+            transparent 74px,
+            transparent 140px
+        );
 
-    bottom: 8%;
+    transform: perspective(400px) rotateX(60deg) scale(1.5);
+
+    animation: speedMove 0.5s linear infinite;
+
+    opacity: 0.35;
+}
+
+@keyframes speedMove {
+
+    from {
+        background-position-y: 0;
+    }
+
+    to {
+        background-position-y: 140px;
+    }
 }
 
 
-/* SHINCHAN */
+/* =====================================================
+   GAME OBJECTS
+===================================================== */
+
+#objects {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+.game-object {
+    position: absolute;
+
+    transform:
+        translateX(-50%)
+        translateY(-50%);
+
+    will-change: transform;
+}
+
+
+/* =====================================================
+   CHARACTERS
+===================================================== */
+
+.runner {
+    position: absolute;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 10px 12px rgba(0, 0, 0, 0.7))
+        drop-shadow(0 0 12px rgba(255, 0, 90, 0.25));
+
+    will-change:
+        left,
+        bottom,
+        transform;
+}
+
+
+/* =====================================================
+   SHINCHAN
+   AHEAD OF DORA
+===================================================== */
 
 .shinchan {
 
-    z-index: 11;
+    width: min(34vw, 420px);
 
-    width:
-        min(32vw, 430px);
+    height: auto;
 
-    left:
-        calc(50% - 80px);
+    left: 50%;
 
-    bottom: 28%;
+    bottom: 39%;
+
+    transform: translateX(-50%);
+
+    z-index: 15;
+
+    animation:
+        shinchanRun 0.35s ease-in-out infinite alternate;
+
+    filter:
+        drop-shadow(0 8px 12px rgba(0, 0, 0, 0.8))
+        drop-shadow(0 0 20px rgba(255, 30, 90, 0.35));
 }
 
 
-/* RUNNING MOTION */
+/*
+    Shinchan running bounce
+*/
 
-@keyframes runningBob {
+@keyframes shinchanRun {
 
     from {
-
         transform:
+            translateX(-50%)
             translateY(0)
             rotate(-1deg);
     }
 
     to {
-
         transform:
+            translateX(-50%)
             translateY(-10px)
             rotate(1deg);
     }
 }
 
 
-/* =========================
-   SPEECH BUBBLES
-========================= */
+/* =====================================================
+   DORA
+   CHASING FROM BEHIND
+===================================================== */
 
-.speech {
+.dora {
 
-    position: absolute;
+    width: min(24vw, 300px);
 
-    z-index: 25;
+    height: auto;
 
-    background: white;
+    left: 50%;
 
-    color: #28101b;
+    bottom: 5%;
 
-    border-radius: 50%;
+    transform: translateX(-50%);
 
-    padding: 18px 25px;
+    z-index: 30;
 
-    font-weight: 700;
-
-    text-align: center;
-
-    line-height: 1.35;
-
-    box-shadow:
-        0 0 20px
-        rgba(255, 92, 155, 0.5);
-}
-
-.doraSpeech {
-
-    left: 23%;
-
-    bottom: 48%;
-}
-
-.shinSpeech {
-
-    right: 12%;
-
-    bottom: 60%;
-}
-
-
-/* =========================
-   OBJECTS
-========================= */
-
-.obj {
-
-    position: absolute;
-
-    z-index: 15;
-
-    transform-origin: center;
-
-    font-size: 48px;
+    animation:
+        doraRun 0.28s ease-in-out infinite alternate;
 
     filter:
-        drop-shadow(
-            0 8px 5px
-            rgba(0, 0, 0, 0.6)
-        );
-
-    user-select: none;
-
-    pointer-events: none;
-}
-
-.obj.rock {
-
-    font-size: 58px;
-}
-
-.obj.crate {
-
-    font-size: 62px;
+        drop-shadow(0 12px 15px rgba(0, 0, 0, 0.8))
+        drop-shadow(0 0 18px rgba(255, 40, 100, 0.3));
 }
 
 
-/* =========================
-   OBJECTIVE PANEL
-========================= */
+/*
+    Dora running bounce
+*/
 
-.objective {
+@keyframes doraRun {
 
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-8px)
+            rotate(1deg);
+    }
+}
+
+
+/* =====================================================
+   HUD
+===================================================== */
+
+.hud {
     position: absolute;
 
-    z-index: 25;
-
-    left: 3.5%;
-
-    bottom: 2%;
-
-    width: 63%;
-
-    height: 190px;
-
-    border:
-        1px solid #ff78a7;
-
-    border-radius: 24px;
-
-    background:
-        rgba(7, 3, 13, 0.87);
-
-    box-shadow:
-        0 0 20px
-        rgba(255, 23, 102, 0.2);
-
-    padding: 14px 35px;
-
-    text-align: center;
-}
-
-.objective h2 {
-
-    color: #ff79a8;
-
-    letter-spacing: 3px;
-}
-
-.objective p {
-
-    margin: 15px;
-
-    font-size: 19px;
-
-    font-weight: 700;
-}
-
-.path {
+    top: 20px;
+    left: 20px;
+    right: 20px;
 
     display: flex;
 
     justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    z-index: 100;
+}
+
+.panel {
+    padding: 12px 18px;
+
+    background: rgba(5, 0, 8, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =====================================================
+   MISSION PANEL
+===================================================== */
+
+.mission {
+    display: flex;
 
     align-items: center;
 
-    font-size: 45px;
+    gap: 12px;
 }
 
-.path i {
+.bigHeart {
+    font-size: 28px;
 
-    height: 4px;
+    color: #ff315f;
 
-    flex: 1;
+    text-shadow:
+        0 0 10px #ff315f,
+        0 0 25px #ff315f;
+}
 
-    border-top:
-        4px dotted #ff4e87;
+.mission b {
+    display: block;
 
-    margin: 0 10px;
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+.mission small {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.55;
 }
 
 
-/* =========================
-   MOBILE TOUCH PAD
-========================= */
+/* =====================================================
+   TIMER
+===================================================== */
 
-.touchPad {
+.timer {
+    text-align: center;
 
+    min-width: 90px;
+}
+
+.timer small {
+    display: block;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.6;
+}
+
+.timer strong {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 20px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.score {
+    text-align: right;
+}
+
+.score b {
+    display: block;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+#score {
+    color: #ff4c78;
+}
+
+#lives {
+    margin-top: 5px;
+
+    letter-spacing: 5px;
+
+    color: #ff315f;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   DESKTOP CONTROLS
+===================================================== */
+
+.controls {
     position: absolute;
 
-    z-index: 30;
+    left: 20px;
+    bottom: 30px;
 
-    right: 6%;
+    z-index: 100;
 
-    bottom: 3%;
+    padding: 15px;
 
-    width: 180px;
-    height: 180px;
+    text-align: center;
 
-    border:
-        1px solid #ff78a7;
+    background: rgba(5, 0, 8, 0.7);
 
-    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 
+    border-radius: 14px;
+
+    backdrop-filter: blur(8px);
+}
+
+.controls b {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.control-row {
     display: flex;
 
-    flex-direction: column;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin: 5px 0;
+}
+
+.controls button {
+    width: 42px;
+    height: 34px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background: rgba(255, 40, 90, 0.35);
+
+    border-color: #ff315f;
+}
+
+.controls small {
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+
+    letter-spacing: 1px;
+
+    opacity: 0.55;
+}
+
+
+/* =====================================================
+   SPEECH BUBBLES
+===================================================== */
+
+.speech {
+    position: absolute;
+
+    z-index: 90;
+
+    padding: 10px 15px;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 12px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+
+    backdrop-filter: blur(6px);
+}
+
+.doraSpeech {
+    left: 27%;
+
+    bottom: 24%;
+
+    color: #ff8fab;
+}
+
+.shinSpeech {
+    right: 25%;
+
+    top: 31%;
+
+    color: #ffdfdf;
+}
+
+
+/* =====================================================
+   OBJECTIVE
+===================================================== */
+
+.objective {
+    position: absolute;
+
+    right: 20px;
+    bottom: 30px;
+
+    z-index: 100;
+
+    width: 270px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    background: rgba(5, 0, 8, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(8px);
+}
+
+.objective h2 {
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    color: #ff6b8c;
+}
+
+.objective p {
+    margin-top: 7px;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    opacity: 0.75;
+}
+
+.path {
+    display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    background:
-        rgba(7, 3, 13, 0.6);
+    gap: 5px;
 
-    box-shadow:
-        0 0 20px
-        rgba(255, 23, 102, 0.2);
+    margin-top: 12px;
+
+    font-size: 15px;
+}
+
+.path i {
+    display: block;
+
+    width: 12px;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* =====================================================
+   MOBILE TOUCH CONTROLS
+===================================================== */
+
+.touchPad {
+    position: absolute;
+
+    left: 50%;
+    bottom: 18px;
+
+    transform: translateX(-50%);
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+
+    z-index: 120;
 }
 
 .touchPad button {
+    width: 48px;
+    height: 42px;
 
-    border: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 
-    background: transparent;
+    border-radius: 10px;
 
-    box-shadow: none;
+    background: rgba(0, 0, 0, 0.6);
 
     color: white;
 
-    font-size: 28px;
-
-    width: 50px;
-
-    height: 45px;
-
-    cursor: pointer;
+    font-size: 20px;
 }
 
 .touchPad div {
-
     display: flex;
 
-    gap: 35px;
+    gap: 5px;
 }
 
 
-/* =========================
-   OVERLAY
-========================= */
+/* =====================================================
+   OVERLAYS
+===================================================== */
 
 .overlay {
-
     position: absolute;
-
-    z-index: 100;
 
     inset: 0;
 
-    display: grid;
+    display: flex;
 
-    place-items: center;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 200;
 
     background:
-        rgba(5, 0, 10, 0.8);
+        radial-gradient(
+            circle,
+            rgba(100, 0, 40, 0.45),
+            rgba(0, 0, 0, 0.88)
+        );
 
-    backdrop-filter:
-        blur(6px);
+    backdrop-filter: blur(5px);
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 
-/* =========================
-   START / WIN / LOSE CARD
-========================= */
+/* =====================================================
+   START CARD
+===================================================== */
 
 .startCard {
+    width: min(90%, 430px);
+
+    padding: 40px;
 
     text-align: center;
 
-    padding:
-        45px 60px;
-
-    border:
-        1px solid #ff78a7;
-
-    border-radius: 28px;
-
     background:
-        rgba(9, 2, 14, 0.93);
+        linear-gradient(
+            145deg,
+            rgba(40, 0, 25, 0.95),
+            rgba(5, 0, 10, 0.97)
+        );
+
+    border: 1px solid rgba(255, 80, 120, 0.35);
+
+    border-radius: 24px;
 
     box-shadow:
-        0 0 45px
-        rgba(255, 23, 102, 0.4);
+        0 0 50px rgba(255, 0, 80, 0.18),
+        0 25px 70px rgba(0, 0, 0, 0.7);
 }
 
+
+/* =====================================================
+   HEART LOGO
+===================================================== */
+
 .heartLogo {
+    font-size: 65px;
 
-    font-size: 80px;
-
-    color: #ff315e;
+    color: #ff315f;
 
     text-shadow:
-        0 0 25px #ff315e;
+        0 0 15px #ff315f,
+        0 0 35px #ff315f;
 
-    animation:
-        heartBeat 1s infinite;
+    animation: heartBeat 1.2s ease-in-out infinite;
 }
 
 @keyframes heartBeat {
@@ -912,144 +1030,244 @@ body {
     }
 }
 
+
+/* =====================================================
+   START TEXT
+===================================================== */
+
+.system {
+    margin-top: 10px;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    opacity: 0.45;
+}
+
 .startCard h1 {
+    margin-top: 10px;
 
-    font-size: 34px;
+    font-size: 28px;
 
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 }
 
-.startCard p {
+.intro {
+    margin-top: 15px;
 
-    margin:
-        18px 0 28px;
+    font-size: 13px;
 
-    line-height: 1.7;
+    line-height: 1.8;
+
+    opacity: 0.75;
 }
 
-.startCard button {
 
-    padding:
-        14px 35px;
+/* =====================================================
+   MISSION BOX
+===================================================== */
 
-    font-size: 16px;
+.mission-box {
+    margin: 22px auto;
 
-    letter-spacing: 2px;
-
-    color: white;
-
-    background:
-        #b30055;
-
-    border:
-        1px solid #ff78a7;
+    padding: 12px;
 
     border-radius: 10px;
 
-    box-shadow:
-        0 0 15px
-        rgba(255, 45, 119, 0.5);
+    background: rgba(255, 30, 90, 0.08);
+
+    border: 1px solid rgba(255, 80, 120, 0.2);
+}
+
+.mission-box span {
+    display: block;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.5;
+}
+
+.mission-box strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+
+    color: #ff7190;
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.startCard button {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b5003e,
+            #ff315f
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    box-shadow:
+        0 0 20px rgba(255, 30, 90, 0.25);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
 }
 
 .startCard button:hover {
-
-    transform: scale(1.05);
-
-    background:
-        #e00067;
+    transform: translateY(-2px);
 
     box-shadow:
-        0 0 25px
-        rgba(255, 45, 119, 0.8);
+        0 0 30px rgba(255, 30, 90, 0.5);
 }
 
-.startCard small {
-
+.instructions {
     display: block;
 
-    margin-top: 20px;
+    margin-top: 15px;
 
-    opacity: 0.65;
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.4;
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
 
     .hud {
-
-        grid-template-columns: 1fr;
-
+        top: 10px;
         left: 10px;
         right: 10px;
+
+        gap: 5px;
     }
 
     .panel {
-
-        height: 65px;
+        padding: 8px 10px;
     }
 
-    .timer {
+    .mission b {
+        font-size: 8px;
+    }
 
+    .mission small {
+        font-size: 7px;
+    }
+
+    .bigHeart {
+        font-size: 20px;
+    }
+
+    .timer strong {
+        font-size: 15px;
+    }
+
+    .score b {
+        font-size: 8px;
+    }
+
+    #lives {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .controls {
         display: none;
     }
 
-    .controls,
-    .speech,
     .objective {
+        display: none;
+    }
 
+    .touchPad {
+        display: flex;
+    }
+
+    .speech {
         display: none;
     }
 
     .road {
-
-        height: 55%;
-    }
-
-    .dora {
-
-        width: 180px;
-
-        left: 15%;
-
-        bottom: 13%;
+        width: 115%;
+        height: 82%;
     }
 
     .shinchan {
-
-        width: 250px;
-
-        left: 45%;
-
-        bottom: 33%;
+        width: 45vw;
+        bottom: 40%;
     }
 
-    .touchPad {
-
-        right: 5%;
-
-        bottom: 4%;
-
-        width: 145px;
-
-        height: 145px;
+    .dora {
+        width: 32vw;
+        bottom: 7%;
     }
 
-    .mission b {
-
-        font-size: 13px;
+    .startCard {
+        padding: 30px 22px;
     }
 
-    .score b {
-
-        font-size: 13px;
+    .startCard h1 {
+        font-size: 21px;
     }
 
+    .heartLogo {
+        font-size: 50px;
+    }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .mission {
+        display: none;
+    }
+
+    .road {
+        width: 125%;
+    }
+
+    .shinchan {
+        width: 48vw;
+    }
+
+    .dora {
+        width: 35vw;
+    }
 }
