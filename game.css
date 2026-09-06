@@ -1,12 +1,12 @@
 /* =====================================================
    CATCH MY HEART
-   SUBWAY-SURFERS STYLE CHASE
+   ENDLESS RUNNER — GAME STYLING
 ===================================================== */
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html,
@@ -14,12 +14,12 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #08000d;
 }
 
 body {
-    background: #12000b;
-    color: white;
+    user-select: none;
 }
 
 
@@ -32,7 +32,15 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: #18000f;
+    background:
+        radial-gradient(circle at 50% 18%, #ff4f91 0%, transparent 20%),
+        linear-gradient(
+            to bottom,
+            #08000d 0%,
+            #18001e 35%,
+            #3a003e 65%,
+            #09000f 100%
+        );
 }
 
 
@@ -43,22 +51,29 @@ body {
 .sky {
     position: absolute;
     inset: 0;
+    z-index: 1;
 
     background:
         radial-gradient(
-            circle at 50% 25%,
-            rgba(255, 70, 130, 0.35),
-            transparent 25%
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.8) 0 1px,
+            transparent 2px
         ),
-        linear-gradient(
-            to bottom,
-            #090014 0%,
-            #25001d 42%,
-            #5c001e 72%,
-            #180008 100%
+        radial-gradient(
+            circle at 75% 12%,
+            rgba(255, 255, 255, 0.8) 0 1px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 60% 30%,
+            rgba(255, 255, 255, 0.6) 0 1px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 35% 40%,
+            rgba(255, 255, 255, 0.7) 0 1px,
+            transparent 2px
         );
-
-    z-index: 0;
 }
 
 
@@ -68,24 +83,21 @@ body {
 
 .moon {
     position: absolute;
-
-    top: 12%;
+    top: 11%;
     left: 50%;
 
     transform: translateX(-50%);
 
-    font-size: 90px;
+    font-size: clamp(45px, 7vw, 90px);
 
-    color: #ff315f;
-
-    opacity: 0.85;
+    color: #ff477e;
 
     text-shadow:
-        0 0 15px #ff174f,
-        0 0 35px #ff174f,
-        0 0 70px rgba(255, 0, 70, 0.7);
+        0 0 15px #ff477e,
+        0 0 35px #ff1f6d,
+        0 0 60px rgba(255, 31, 109, 0.7);
 
-    z-index: 1;
+    z-index: 2;
 
     animation: moonPulse 2s ease-in-out infinite;
 }
@@ -112,76 +124,61 @@ body {
 
     left: 0;
     right: 0;
-    bottom: 30%;
+    bottom: 39%;
 
-    height: 25%;
+    height: 20%;
+
+    z-index: 3;
 
     background:
         linear-gradient(
             to top,
-            #080009,
-            transparent
+            #07000b 0%,
+            #120014 100%
         );
 
-    z-index: 2;
-}
-
-.city::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-
-            #10000e 0%,
-            #10000e 8%,
-            transparent 8%,
-            transparent 12%,
-
-            #160013 12%,
-            #160013 19%,
-            transparent 19%,
-            transparent 23%,
-
-            #0e0010 23%,
-            #0e0010 31%,
-            transparent 31%,
-            transparent 36%,
-
-            #160012 36%,
-            #160012 44%,
-            transparent 44%,
-            transparent 48%,
-
-            #10000e 48%,
-            #10000e 56%,
-            transparent 56%,
-            transparent 61%,
-
-            #180012 61%,
-            #180012 69%,
-            transparent 69%,
-            transparent 74%,
-
-            #10000e 74%,
-            #10000e 82%,
-            transparent 82%,
-            transparent 87%,
-
-            #170010 87%,
-            #170010 96%,
-            transparent 96%
-        );
-
-    opacity: 0.9;
+    clip-path: polygon(
+        0 70%,
+        5% 65%,
+        5% 45%,
+        10% 45%,
+        10% 60%,
+        14% 60%,
+        14% 35%,
+        20% 35%,
+        20% 55%,
+        25% 55%,
+        25% 25%,
+        30% 25%,
+        30% 55%,
+        36% 55%,
+        36% 40%,
+        42% 40%,
+        42% 58%,
+        47% 58%,
+        47% 30%,
+        52% 30%,
+        52% 53%,
+        58% 53%,
+        58% 38%,
+        64% 38%,
+        64% 57%,
+        69% 57%,
+        69% 28%,
+        74% 28%,
+        74% 52%,
+        80% 52%,
+        80% 40%,
+        86% 40%,
+        86% 58%,
+        92% 58%,
+        92% 34%,
+        97% 34%,
+        97% 60%,
+        100% 60%,
+        100% 100%,
+        0 100%
+    );
 }
 
 
@@ -191,54 +188,46 @@ body {
 
 .trees {
     position: absolute;
+    bottom: 32%;
 
-    bottom: 25%;
+    width: 15%;
+    height: 25%;
 
-    width: 180px;
-    height: 280px;
+    z-index: 4;
 
-    z-index: 3;
-
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 .trees.left {
-    left: -50px;
+    left: 0;
+
+    background:
+        radial-gradient(
+            circle at 40% 20%,
+            #190020 0 35%,
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 65% 35%,
+            #220026 0 30%,
+            transparent 31%
+        );
 }
 
 .trees.right {
-    right: -50px;
-}
+    right: 0;
 
-.trees::before,
-.trees::after {
-    content: "";
-
-    position: absolute;
-
-    border-radius: 50%;
-
-    background: #10000e;
-
-    box-shadow:
-        60px 20px 0 20px #10000e,
-        120px 60px 0 35px #10000e;
-}
-
-.trees::before {
-    width: 90px;
-    height: 140px;
-
-    bottom: 0;
-    left: 20px;
-}
-
-.trees::after {
-    width: 70px;
-    height: 120px;
-
-    bottom: 30px;
-    left: 80px;
+    background:
+        radial-gradient(
+            circle at 60% 20%,
+            #190020 0 35%,
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 35% 35%,
+            #220026 0 30%,
+            transparent 31%
+        );
 }
 
 
@@ -250,38 +239,34 @@ body {
     position: absolute;
 
     left: 50%;
-    bottom: -8%;
+    bottom: 0;
 
     transform: translateX(-50%);
 
-    width: 78%;
-    height: 82%;
+    width: 72%;
+    height: 63%;
+
+    z-index: 10;
+
+    overflow: hidden;
 
     background:
         linear-gradient(
-            90deg,
-            #08080d,
-            #17121c 18%,
-            #211824 50%,
-            #17121c 82%,
-            #08080d
+            to bottom,
+            #25002d 0%,
+            #17001e 30%,
+            #09000f 100%
         );
 
     clip-path: polygon(
-        39% 0%,
-        61% 0%,
+        42% 0%,
+        58% 0%,
         100% 100%,
         0% 100%
     );
 
-    perspective: 900px;
-
-    z-index: 4;
-
-    overflow: hidden;
-
     box-shadow:
-        0 -10px 40px rgba(255, 0, 90, 0.25);
+        0 -10px 35px rgba(255, 0, 120, 0.25);
 }
 
 
@@ -296,75 +281,62 @@ body {
 
     background:
         linear-gradient(
-            90deg,
+            to bottom,
             transparent 0%,
-            rgba(255, 0, 100, 0.08) 20%,
-            transparent 40%,
-            transparent 60%,
-            rgba(255, 0, 100, 0.08) 80%,
-            transparent 100%
+            rgba(255, 0, 120, 0.08) 45%,
+            rgba(255, 0, 120, 0.2) 100%
         );
 
-    pointer-events: none;
+    z-index: 1;
 
-    animation: roadMove 1.2s linear infinite;
+    animation: roadPulse 2s ease-in-out infinite;
 }
 
-@keyframes roadMove {
+@keyframes roadPulse {
 
-    from {
-        transform: translateY(0);
+    0%,
+    100% {
+        opacity: 0.6;
     }
 
-    to {
-        transform: translateY(120px);
+    50% {
+        opacity: 1;
     }
 }
 
 
 /* =====================================================
-   LANES
+   LANE SEPARATORS
 ===================================================== */
 
 .lane {
     position: absolute;
 
-    top: -5%;
-    bottom: -5%;
+    top: 0;
+    bottom: 0;
 
-    width: 5px;
+    width: 3px;
 
     background:
-        repeating-linear-gradient(
+        linear-gradient(
             to bottom,
-            rgba(255, 255, 255, 0.8) 0px,
-            rgba(255, 255, 255, 0.8) 45px,
-            transparent 45px,
-            transparent 90px
+            transparent,
+            rgba(255, 80, 180, 0.5),
+            rgba(255, 80, 180, 0.9)
         );
 
-    opacity: 0.45;
+    box-shadow:
+        0 0 12px rgba(255, 60, 170, 0.7);
 
-    animation: laneMove 0.65s linear infinite;
+    z-index: 4;
 }
 
 .lane.l1 {
-    left: 40%;
+    left: 37%;
 }
 
 .lane.l2 {
-    left: 60%;
-}
-
-@keyframes laneMove {
-
-    from {
-        background-position-y: 0;
-    }
-
-    to {
-        background-position-y: 90px;
-    }
+    left: 63%;
 }
 
 
@@ -377,34 +349,126 @@ body {
 
     inset: 0;
 
-    pointer-events: none;
+    z-index: 2;
 
     background:
         repeating-linear-gradient(
             to bottom,
-            transparent 0px,
-            transparent 70px,
-            rgba(255, 255, 255, 0.12) 70px,
-            rgba(255, 255, 255, 0.12) 74px,
-            transparent 74px,
-            transparent 140px
+            transparent 0,
+            transparent 7%,
+            rgba(255, 255, 255, 0.1) 7.5%,
+            transparent 8%
         );
 
-    transform: perspective(400px) rotateX(60deg) scale(1.5);
-
-    animation: speedMove 0.5s linear infinite;
-
-    opacity: 0.35;
+    animation: roadMove 0.7s linear infinite;
 }
 
-@keyframes speedMove {
+@keyframes roadMove {
 
     from {
         background-position-y: 0;
     }
 
     to {
-        background-position-y: 140px;
+        background-position-y: 20%;
+    }
+}
+
+
+/* =====================================================
+   RUNNERS
+===================================================== */
+
+.runner {
+    position: absolute;
+
+    display: block;
+
+    height: auto;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(0 10px 12px rgba(0, 0, 0, 0.55));
+}
+
+
+/* =====================================================
+   SHINCHAN
+   SMALLER + AHEAD
+===================================================== */
+
+.shinchan {
+    width: min(22vw, 260px);
+
+    left: 50%;
+    bottom: 39%;
+
+    transform: translateX(-50%);
+
+    z-index: 15;
+
+    animation:
+        shinchanRun
+        0.35s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes shinchanRun {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-5px);
+    }
+}
+
+
+/* =====================================================
+   DORA
+   SMALLER + FOREGROUND
+===================================================== */
+
+.dora {
+    width: min(16vw, 190px);
+
+    left: 50%;
+    bottom: 5%;
+
+    transform: translateX(-50%);
+
+    z-index: 30;
+
+    animation:
+        doraRun
+        0.28s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes doraRun {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-6px);
     }
 }
 
@@ -426,134 +490,53 @@ body {
 .game-object {
     position: absolute;
 
-    transform:
-        translateX(-50%)
-        translateY(-50%);
+    transform-origin: center;
 
-    will-change: transform;
+    transition:
+        transform 0.05s linear;
 }
 
 
 /* =====================================================
-   CHARACTERS
+   OBSTACLES
 ===================================================== */
 
-.runner {
-    position: absolute;
-
-    user-select: none;
-
-    pointer-events: none;
-
-    object-fit: contain;
+.obstacle {
+    text-align: center;
 
     filter:
-        drop-shadow(0 10px 12px rgba(0, 0, 0, 0.7))
-        drop-shadow(0 0 12px rgba(255, 0, 90, 0.25));
-
-    will-change:
-        left,
-        bottom,
-        transform;
+        drop-shadow(
+            0 0 8px rgba(255, 80, 120, 0.7)
+        );
 }
 
 
 /* =====================================================
-   SHINCHAN
-   AHEAD OF DORA
+   COLLECTIBLE HEARTS
 ===================================================== */
 
-.shinchan {
-
-    width: min(34vw, 420px);
-
-    height: auto;
-
-    left: 50%;
-
-    bottom: 39%;
-
-    transform: translateX(-50%);
-
-    z-index: 15;
+.collectible {
+    filter:
+        drop-shadow(
+            0 0 10px #ff3f91
+        );
 
     animation:
-        shinchanRun 0.35s ease-in-out infinite alternate;
-
-    filter:
-        drop-shadow(0 8px 12px rgba(0, 0, 0, 0.8))
-        drop-shadow(0 0 20px rgba(255, 30, 90, 0.35));
+        heartFloat
+        0.7s
+        ease-in-out
+        infinite
+        alternate;
 }
 
-
-/*
-    Shinchan running bounce
-*/
-
-@keyframes shinchanRun {
+@keyframes heartFloat {
 
     from {
-        transform:
-            translateX(-50%)
-            translateY(0)
-            rotate(-1deg);
+        margin-top: 0;
     }
 
     to {
-        transform:
-            translateX(-50%)
-            translateY(-10px)
-            rotate(1deg);
-    }
-}
-
-
-/* =====================================================
-   DORA
-   CHASING FROM BEHIND
-===================================================== */
-
-.dora {
-
-    width: min(24vw, 300px);
-
-    height: auto;
-
-    left: 50%;
-
-    bottom: 5%;
-
-    transform: translateX(-50%);
-
-    z-index: 30;
-
-    animation:
-        doraRun 0.28s ease-in-out infinite alternate;
-
-    filter:
-        drop-shadow(0 12px 15px rgba(0, 0, 0, 0.8))
-        drop-shadow(0 0 18px rgba(255, 40, 100, 0.3));
-}
-
-
-/*
-    Dora running bounce
-*/
-
-@keyframes doraRun {
-
-    from {
-        transform:
-            translateX(-50%)
-            translateY(0)
-            rotate(-1deg);
-    }
-
-    to {
-        transform:
-            translateX(-50%)
-            translateY(-8px)
-            rotate(1deg);
+        margin-top: -8px;
     }
 }
 
@@ -572,31 +555,36 @@ body {
     display: flex;
 
     justify-content: space-between;
+
     align-items: flex-start;
 
-    gap: 15px;
+    gap: 12px;
 
     z-index: 100;
 }
 
 .panel {
-    padding: 12px 18px;
+    padding: 10px 16px;
 
-    background: rgba(5, 0, 8, 0.72);
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border:
+        1px solid rgba(255, 100, 180, 0.55);
 
     border-radius: 14px;
 
+    background:
+        rgba(25, 0, 35, 0.75);
+
     backdrop-filter: blur(10px);
 
+    color: white;
+
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.4);
+        0 0 20px rgba(255, 0, 130, 0.15);
 }
 
 
 /* =====================================================
-   MISSION PANEL
+   MISSION HUD
 ===================================================== */
 
 .mission {
@@ -604,37 +592,36 @@ body {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 }
 
 .bigHeart {
     font-size: 28px;
 
-    color: #ff315f;
+    color: #ff477e;
 
     text-shadow:
-        0 0 10px #ff315f,
-        0 0 25px #ff315f;
+        0 0 10px #ff477e;
 }
 
 .mission b {
     display: block;
 
-    font-size: 13px;
+    font-size: 14px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .mission small {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 3px;
 
-    font-size: 9px;
+    opacity: 0.65;
 
-    letter-spacing: 2px;
+    font-size: 10px;
 
-    opacity: 0.55;
+    letter-spacing: 1px;
 }
 
 
@@ -661,11 +648,11 @@ body {
 .timer strong {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 3px;
 
-    font-size: 20px;
+    font-size: 23px;
 
-    letter-spacing: 2px;
+    color: #ff6b9e;
 }
 
 
@@ -675,28 +662,22 @@ body {
 
 .score {
     text-align: right;
+
+    min-width: 100px;
 }
 
 .score b {
-    display: block;
-
     font-size: 13px;
-
-    letter-spacing: 1px;
-}
-
-#score {
-    color: #ff4c78;
 }
 
 #lives {
-    margin-top: 5px;
+    margin-top: 4px;
 
-    letter-spacing: 5px;
+    font-size: 15px;
 
-    color: #ff315f;
+    color: #ff477e;
 
-    font-size: 13px;
+    letter-spacing: 2px;
 }
 
 
@@ -707,22 +688,26 @@ body {
 .controls {
     position: absolute;
 
-    left: 20px;
-    bottom: 30px;
+    left: 22px;
+    bottom: 25%;
 
     z-index: 100;
 
-    padding: 15px;
+    padding: 12px;
 
-    text-align: center;
-
-    background: rgba(5, 0, 8, 0.7);
-
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border:
+        1px solid rgba(255, 100, 180, 0.45);
 
     border-radius: 14px;
 
-    backdrop-filter: blur(8px);
+    background:
+        rgba(20, 0, 30, 0.7);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    text-align: center;
 }
 
 .controls b {
@@ -730,9 +715,9 @@ body {
 
     margin-bottom: 8px;
 
-    font-size: 10px;
+    font-size: 11px;
 
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .control-row {
@@ -740,46 +725,45 @@ body {
 
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
 .controls button {
-    width: 42px;
-    height: 34px;
+    width: 36px;
+    height: 30px;
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border:
+        1px solid rgba(255, 100, 180, 0.6);
 
     border-radius: 8px;
 
-    background: rgba(255, 255, 255, 0.08);
+    background:
+        rgba(255, 255, 255, 0.08);
 
     color: white;
 
-    font-size: 17px;
+    font-weight: bold;
 
     cursor: pointer;
 }
 
 .controls button:hover {
-    background: rgba(255, 40, 90, 0.35);
-
-    border-color: #ff315f;
+    background:
+        rgba(255, 70, 150, 0.3);
 }
 
 .controls small {
     display: block;
 
-    margin-top: 10px;
+    margin-top: 7px;
 
-    font-size: 8px;
+    font-size: 9px;
 
     line-height: 1.7;
 
-    letter-spacing: 1px;
-
-    opacity: 0.55;
+    opacity: 0.7;
 }
 
 
@@ -792,39 +776,54 @@ body {
 
     z-index: 90;
 
-    padding: 10px 15px;
+    padding: 10px 14px;
 
-    background: rgba(0, 0, 0, 0.75);
+    border-radius: 14px;
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: white;
 
-    border-radius: 12px;
+    color: #26001f;
 
-    font-size: 10px;
+    font-size: 11px;
 
-    line-height: 1.5;
+    font-weight: bold;
 
-    letter-spacing: 1px;
+    line-height: 1.4;
 
     text-align: center;
 
-    backdrop-filter: blur(6px);
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.3);
+
+    animation:
+        speechFloat
+        1.8s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 .doraSpeech {
-    left: 27%;
+    left: 28%;
 
-    bottom: 24%;
-
-    color: #ff8fab;
+    bottom: 19%;
 }
 
 .shinSpeech {
-    right: 25%;
+    right: 28%;
 
-    top: 31%;
+    bottom: 53%;
+}
 
-    color: #ffdfdf;
+@keyframes speechFloat {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
 }
 
 
@@ -835,42 +834,46 @@ body {
 .objective {
     position: absolute;
 
-    right: 20px;
-    bottom: 30px;
+    left: 50%;
+    bottom: 20px;
 
-    z-index: 100;
+    transform: translateX(-50%);
 
-    width: 270px;
+    z-index: 90;
 
-    padding: 15px;
+    width: min(520px, 70vw);
+
+    padding: 10px 18px;
 
     text-align: center;
 
-    background: rgba(5, 0, 8, 0.72);
+    border:
+        1px solid rgba(255, 100, 180, 0.45);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 15px;
 
-    border-radius: 14px;
+    background:
+        rgba(15, 0, 25, 0.75);
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+
+    color: white;
 }
 
 .objective h2 {
-    font-size: 12px;
+    font-size: 13px;
 
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 
-    color: #ff6b8c;
+    color: #ff6b9e;
+
+    margin-bottom: 4px;
 }
 
 .objective p {
-    margin-top: 7px;
+    font-size: 10px;
 
-    font-size: 9px;
-
-    line-height: 1.5;
-
-    opacity: 0.75;
+    opacity: 0.8;
 }
 
 .path {
@@ -880,66 +883,19 @@ body {
 
     justify-content: center;
 
-    gap: 5px;
+    gap: 8px;
 
-    margin-top: 12px;
+    margin-top: 7px;
 
     font-size: 15px;
 }
 
 .path i {
-    display: block;
-
-    width: 12px;
-
+    width: 22px;
     height: 1px;
 
-    background: rgba(255, 255, 255, 0.3);
-}
-
-
-/* =====================================================
-   MOBILE TOUCH CONTROLS
-===================================================== */
-
-.touchPad {
-    position: absolute;
-
-    left: 50%;
-    bottom: 18px;
-
-    transform: translateX(-50%);
-
-    display: none;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 5px;
-
-    z-index: 120;
-}
-
-.touchPad button {
-    width: 48px;
-    height: 42px;
-
-    border: 1px solid rgba(255, 255, 255, 0.25);
-
-    border-radius: 10px;
-
-    background: rgba(0, 0, 0, 0.6);
-
-    color: white;
-
-    font-size: 20px;
-}
-
-.touchPad div {
-    display: flex;
-
-    gap: 5px;
+    background:
+        rgba(255, 100, 180, 0.5);
 }
 
 
@@ -952,21 +908,20 @@ body {
 
     inset: 0;
 
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
     z-index: 200;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(100, 0, 40, 0.45),
-            rgba(0, 0, 0, 0.88)
-        );
+    display: flex;
 
-    backdrop-filter: blur(5px);
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(5, 0, 10, 0.65);
+
+    backdrop-filter: blur(8px);
 }
 
 .hidden {
@@ -979,46 +934,46 @@ body {
 ===================================================== */
 
 .startCard {
-    width: min(90%, 430px);
+    width: min(440px, 90vw);
 
-    padding: 40px;
+    padding: 35px 30px;
 
-    text-align: center;
+    border:
+        1px solid rgba(255, 100, 180, 0.5);
+
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(40, 0, 25, 0.95),
-            rgba(5, 0, 10, 0.97)
+            rgba(40, 0, 50, 0.95),
+            rgba(12, 0, 20, 0.95)
         );
 
-    border: 1px solid rgba(255, 80, 120, 0.35);
+    color: white;
 
-    border-radius: 24px;
+    text-align: center;
 
     box-shadow:
-        0 0 50px rgba(255, 0, 80, 0.18),
-        0 25px 70px rgba(0, 0, 0, 0.7);
+        0 0 60px rgba(255, 0, 130, 0.25);
 }
-
-
-/* =====================================================
-   HEART LOGO
-===================================================== */
 
 .heartLogo {
-    font-size: 65px;
+    font-size: 50px;
 
-    color: #ff315f;
+    color: #ff477e;
 
     text-shadow:
-        0 0 15px #ff315f,
-        0 0 35px #ff315f;
+        0 0 20px #ff477e;
 
-    animation: heartBeat 1.2s ease-in-out infinite;
+    animation:
+        logoPulse
+        1.5s
+        ease-in-out
+        infinite;
 }
 
-@keyframes heartBeat {
+@keyframes logoPulse {
 
     0%,
     100% {
@@ -1026,41 +981,41 @@ body {
     }
 
     50% {
-        transform: scale(1.12);
+        transform: scale(1.1);
     }
 }
 
-
-/* =====================================================
-   START TEXT
-===================================================== */
-
 .system {
-    margin-top: 10px;
+    margin-top: 8px;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 
-    opacity: 0.45;
+    opacity: 0.55;
 }
 
 .startCard h1 {
-    margin-top: 10px;
+    margin-top: 8px;
 
-    font-size: 28px;
+    font-size: clamp(25px, 5vw, 38px);
 
-    letter-spacing: 4px;
+    letter-spacing: 2px;
+
+    color: #ff6b9e;
+
+    text-shadow:
+        0 0 15px rgba(255, 70, 130, 0.5);
 }
 
 .intro {
-    margin-top: 15px;
+    margin-top: 14px;
 
     font-size: 13px;
 
-    line-height: 1.8;
+    line-height: 1.7;
 
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
 
@@ -1069,25 +1024,29 @@ body {
 ===================================================== */
 
 .mission-box {
-    margin: 22px auto;
+    margin: 20px auto;
 
     padding: 12px;
 
-    border-radius: 10px;
+    width: 75%;
 
-    background: rgba(255, 30, 90, 0.08);
+    border:
+        1px solid rgba(255, 100, 180, 0.35);
 
-    border: 1px solid rgba(255, 80, 120, 0.2);
+    border-radius: 12px;
+
+    background:
+        rgba(255, 50, 130, 0.07);
 }
 
 .mission-box span {
     display: block;
 
-    font-size: 8px;
+    font-size: 9px;
 
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 
-    opacity: 0.5;
+    opacity: 0.55;
 }
 
 .mission-box strong {
@@ -1095,57 +1054,53 @@ body {
 
     margin-top: 5px;
 
-    font-size: 15px;
+    color: #ff7ba8;
 
-    letter-spacing: 2px;
-
-    color: #ff7190;
+    letter-spacing: 1px;
 }
 
 
 /* =====================================================
-   START BUTTON
+   START / END BUTTON
 ===================================================== */
 
 .startCard button {
-    width: 100%;
-
-    padding: 14px 20px;
-
     border: none;
 
-    border-radius: 10px;
+    padding: 13px 28px;
+
+    border-radius: 999px;
 
     background:
         linear-gradient(
             90deg,
-            #b5003e,
-            #ff315f
+            #ff2f78,
+            #ff5ca8
         );
 
     color: white;
 
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: bold;
 
-    letter-spacing: 3px;
+    letter-spacing: 1px;
 
     cursor: pointer;
 
     box-shadow:
-        0 0 20px rgba(255, 30, 90, 0.25);
+        0 0 20px rgba(255, 50, 130, 0.45);
 
     transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .startCard button:hover {
-    transform: translateY(-2px);
+    transform: scale(1.05);
 
     box-shadow:
-        0 0 30px rgba(255, 30, 90, 0.5);
+        0 0 30px rgba(255, 50, 130, 0.7);
 }
 
 .instructions {
@@ -1153,11 +1108,52 @@ body {
 
     margin-top: 15px;
 
-    font-size: 8px;
+    font-size: 9px;
+
+    opacity: 0.45;
 
     letter-spacing: 1px;
+}
 
-    opacity: 0.4;
+
+/* =====================================================
+   MOBILE TOUCH CONTROLS
+===================================================== */
+
+.touchPad {
+    display: none;
+
+    position: absolute;
+
+    bottom: 18px;
+    right: 18px;
+
+    z-index: 150;
+
+    text-align: center;
+}
+
+.touchPad button {
+    width: 48px;
+    height: 42px;
+
+    margin: 3px;
+
+    border:
+        1px solid rgba(255, 120, 190, 0.6);
+
+    border-radius: 10px;
+
+    background:
+        rgba(25, 0, 35, 0.8);
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
 
@@ -1166,6 +1162,30 @@ body {
 ===================================================== */
 
 @media (max-width: 700px) {
+
+    .road {
+        width: 95%;
+        height: 62%;
+    }
+
+
+    /* SMALLER SHINCHAN */
+
+    .shinchan {
+        width: 30vw;
+
+        bottom: 40%;
+    }
+
+
+    /* SMALLER DORA */
+
+    .dora {
+        width: 22vw;
+
+        bottom: 7%;
+    }
+
 
     .hud {
         top: 10px;
@@ -1176,11 +1196,13 @@ body {
     }
 
     .panel {
-        padding: 8px 10px;
+        padding: 7px 9px;
+
+        border-radius: 10px;
     }
 
     .mission b {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     .mission small {
@@ -1191,83 +1213,101 @@ body {
         font-size: 20px;
     }
 
+    .timer {
+        min-width: 65px;
+    }
+
     .timer strong {
-        font-size: 15px;
+        font-size: 17px;
+    }
+
+    .score {
+        min-width: 70px;
     }
 
     .score b {
-        font-size: 8px;
+        font-size: 9px;
     }
 
     #lives {
-        font-size: 9px;
-        letter-spacing: 2px;
+        font-size: 11px;
     }
+
+
+    /* HIDE DESKTOP CONTROLS */
 
     .controls {
         display: none;
     }
 
-    .objective {
-        display: none;
+
+    /* SPEECH */
+
+    .doraSpeech {
+        left: 10%;
+
+        bottom: 25%;
+
+        font-size: 9px;
     }
+
+    .shinSpeech {
+        right: 10%;
+
+        bottom: 55%;
+
+        font-size: 9px;
+    }
+
+
+    /* OBJECTIVE */
+
+    .objective {
+        width: 90vw;
+
+        bottom: 8px;
+
+        padding: 7px 10px;
+    }
+
+    .objective h2 {
+        font-size: 10px;
+    }
+
+    .objective p {
+        font-size: 8px;
+    }
+
+    .path {
+        font-size: 12px;
+
+        gap: 4px;
+    }
+
+    .path i {
+        width: 10px;
+    }
+
+
+    /* TOUCH CONTROLS */
 
     .touchPad {
-        display: flex;
+        display: block;
     }
 
-    .speech {
-        display: none;
-    }
 
-    .road {
-        width: 115%;
-        height: 82%;
-    }
-
-    .shinchan {
-        width: 45vw;
-        bottom: 40%;
-    }
-
-    .dora {
-        width: 32vw;
-        bottom: 7%;
-    }
+    /* START CARD */
 
     .startCard {
-        padding: 30px 22px;
+        padding: 28px 20px;
     }
 
     .startCard h1 {
-        font-size: 21px;
+        font-size: 27px;
     }
 
-    .heartLogo {
-        font-size: 50px;
-    }
-}
-
-
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media (max-width: 400px) {
-
-    .mission {
-        display: none;
+    .intro {
+        font-size: 12px;
     }
 
-    .road {
-        width: 125%;
-    }
-
-    .shinchan {
-        width: 48vw;
-    }
-
-    .dora {
-        width: 35vw;
-    }
 }
