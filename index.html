@@ -1,66 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Private Archive</title>
-
+    <title>12.10.26 — Private Archive</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Animated hearts -->
+    <!-- Floating hearts -->
     <div class="hearts"></div>
 
-    <!-- Login box -->
-    <main class="login-box">
+    <!-- LOGIN SCREEN -->
+    <main class="screen" id="loginScreen">
 
-        <div class="lock">🔒</div>
+        <div class="archive-code">12.10.26</div>
+
+        <div class="lock">🔐</div>
 
         <h1>PRIVATE ARCHIVE</h1>
 
-        <p class="subtitle">
-            IDENTITY VERIFICATION
-        </p>
+        <p class="subtitle">THIS SYSTEM IS RESTRICTED.</p>
+        <p class="small-text">IDENTITY VERIFICATION REQUIRED.</p>
 
-        <div class="line"></div>
+        <div class="login-box">
 
-        <label for="username">USERNAME</label>
+            <label>USERNAME</label>
+            <input type="text" id="username" autocomplete="off">
 
-        <input
-            type="text"
-            id="username"
-            placeholder="Enter username"
-            autocomplete="off"
-        >
+            <label>PASSWORD</label>
+            <input type="password" id="password">
 
-        <label for="password">PASSWORD</label>
+            <button onclick="login()">ACCESS ARCHIVE →</button>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-        >
+            <p id="message"></p>
 
-        <button onclick="login()">
-            LOGIN
-        </button>
+        </div>
 
-        <p id="message"></p>
+        <div class="authorized">AUTHORIZED USER ONLY</div>
 
-        <div class="line"></div>
+    </main>
 
-        <p class="date">
-            12 • 10 • 26
-        </p>
+
+    <!-- ARCHIVE INTRO -->
+    <main class="screen hidden" id="archiveScreen">
+
+        <div class="loading-content">
+
+            <p class="status" id="status1">IDENTITY VERIFIED ✓</p>
+
+            <p class="status hidden" id="status2">
+                WELCOME, KANNAYA.
+            </p>
+
+            <p class="status hidden" id="status3">
+                ACCESSING PRIVATE ARCHIVE...
+            </p>
+
+            <p class="status hidden" id="status4">
+                LOADING MEMORIES...
+            </p>
+
+            <p class="status hidden" id="status5">
+                5 FILES DETECTED.
+            </p>
+
+            <p class="status warning hidden" id="status6">
+                WARNING: THIS ARCHIVE CONTAINS 1 YEAR OF US.
+            </p>
+
+            <div class="final-intro hidden" id="finalIntro">
+
+                <h2>ONE YEAR.</h2>
+
+                <h3>COUNTLESS MEMORIES.</h3>
+
+                <h2>ONE LOVE STORY. ❤️</h2>
+
+                <button onclick="startArchive()">
+                    ARE YOU READY?
+                </button>
+
+            </div>
+
+        </div>
 
     </main>
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
