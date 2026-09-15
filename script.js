@@ -24,7 +24,7 @@ for (let i = 0; i < 100; i++) {
 // LOGIN INFORMATION
 
 const correctUsername = "12102025";
-const correctPassword = "AKNAABNA";
+const correctPassword = "38104015";
 
 
 // LOGIN FUNCTION
