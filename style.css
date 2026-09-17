@@ -6,185 +6,359 @@
 
 body {
     min-height: 100vh;
-    overflow: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #3d0000;
-
-    font-family: Arial, sans-serif;
+    background: #050505;
     color: white;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
 }
 
-/* HEART BACKGROUND */
+/* =========================
+   SCREEN
+========================= */
+
+.screen {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+}
+
+/* VERY IMPORTANT */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
 
 .hearts {
     position: fixed;
     inset: 0;
-
-    width: 100%;
-    height: 100%;
-
     overflow: hidden;
-
     pointer-events: none;
-
-    z-index: 1;
+    z-index: 0;
 }
 
 .heart {
     position: absolute;
-
-    bottom: -80px;
-
-    animation-name: floating;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-
-    user-select: none;
+    bottom: -50px;
+    opacity: 0.25;
+    animation: floatHeart linear infinite;
 }
 
-@keyframes floating {
+@keyframes floatHeart {
 
     0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
+        transform: translateY(0) rotate(0deg);
         opacity: 0;
     }
 
-    10% {
-        opacity: 1;
+    20% {
+        opacity: 0.3;
     }
 
-    50% {
-        transform: translateY(-55vh) translateX(50px) rotate(20deg);
+    80% {
+        opacity: 0.3;
     }
 
     100% {
-        transform: translateY(-120vh) translateX(-50px) rotate(-20deg);
+        transform: translateY(-110vh) rotate(360deg);
         opacity: 0;
     }
 }
 
-/* LOGIN CARD */
 
-.login-box {
-    position: relative;
+/* =========================
+   LOGIN SCREEN
+========================= */
 
-    z-index: 5;
-
-    width: 360px;
-
-    padding: 40px;
-
-    background: rgba(0, 0, 0, 0.75);
-
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    border-radius: 20px;
-
-    text-align: center;
-
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
-}
-
-.lock {
-    font-size: 38px;
-    margin-bottom: 15px;
-}
-
-h1 {
-    font-size: 24px;
-    letter-spacing: 4px;
-    margin-bottom: 8px;
-}
-
-.subtitle {
-    font-size: 11px;
-    letter-spacing: 3px;
-    opacity: 0.7;
+.archive-code {
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: #888;
     margin-bottom: 25px;
 }
 
-.line {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 20px 0;
+.lock {
+    font-size: 45px;
+    margin-bottom: 15px;
+    filter: grayscale(1);
 }
 
-label {
-    display: block;
+h1 {
+    font-size: clamp(30px, 6vw, 60px);
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
 
+.subtitle {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #aaa;
+}
+
+.small-text {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #555;
+    margin-top: 8px;
+}
+
+
+/* =========================
+   LOGIN BOX
+========================= */
+
+.login-box {
+    width: min(90%, 380px);
+    margin-top: 35px;
+    padding: 30px;
+
+    border: 1px solid #333;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    box-shadow:
+        0 0 40px rgba(255, 0, 0, 0.08);
+}
+
+.login-box label {
+    display: block;
     text-align: left;
 
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
-    margin: 15px 0 7px;
+    color: #888;
+
+    margin-bottom: 8px;
 }
 
-input {
+.login-box input {
     width: 100%;
 
-    padding: 12px;
+    padding: 13px;
 
-    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 22px;
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #080808;
 
-    border-radius: 8px;
+    border: 1px solid #333;
 
     color: white;
 
     outline: none;
+
+    font-family: inherit;
+
+    letter-spacing: 2px;
 }
 
-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+.login-box input:focus {
+    border-color: #aaa;
 }
 
-input:focus {
-    border-color: white;
 
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-}
+/* =========================
+   BUTTON
+========================= */
 
-button {
+.login-box button,
+.final-intro button {
+
     width: 100%;
 
-    padding: 12px;
+    padding: 14px;
 
-    margin-top: 25px;
+    background: white;
 
-    background: #b30000;
-
-    color: white;
+    color: black;
 
     border: none;
 
-    border-radius: 8px;
+    cursor: pointer;
 
-    font-size: 13px;
+    font-family: inherit;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s;
+}
+
+.login-box button:hover,
+.final-intro button:hover {
+
+    background: #ff1a1a;
+
+    color: white;
+
+    transform: scale(1.03);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+
+    margin-top: 18px;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   AUTHORIZED
+========================= */
+
+.authorized {
+
+    margin-top: 25px;
+
+    font-size: 9px;
+
+    color: #444;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   ARCHIVE INTRO
+========================= */
+
+.loading-content {
+
+    width: min(90%, 700px);
+}
+
+.status {
+
+    margin: 18px 0;
+
+    font-size: clamp(13px, 2vw, 18px);
 
     letter-spacing: 3px;
 
-    cursor: pointer;
+    animation: fadeIn 1s ease forwards;
 }
 
-button:hover {
-    background: #e00000;
+.warning {
 
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+    color: #ff3333;
+
+    margin-top: 35px;
 }
 
-#message {
-    margin-top: 15px;
-    font-size: 12px;
+
+/* =========================
+   FINAL INTRO
+========================= */
+
+.final-intro {
+
+    margin-top: 50px;
+
+    animation: reveal 2s ease forwards;
 }
 
-.date {
-    font-size: 12px;
-    letter-spacing: 4px;
-    opacity: 0.6;
+.final-intro h2 {
+
+    font-size: clamp(28px, 5vw, 55px);
+
+    letter-spacing: 8px;
+
+    margin: 15px 0;
+}
+
+.final-intro h3 {
+
+    font-size: clamp(14px, 2vw, 20px);
+
+    color: #888;
+
+    letter-spacing: 5px;
+
+    margin: 20px 0;
+}
+
+.final-intro button {
+
+    width: auto;
+
+    padding: 15px 35px;
+
+    margin-top: 35px;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes reveal {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    h1 {
+        letter-spacing: 4px;
+    }
+
+    .login-box {
+        padding: 25px 20px;
+    }
+
+    .status {
+        letter-spacing: 2px;
+    }
+
+    .final-intro h2 {
+        letter-spacing: 4px;
+    }
+
 }
