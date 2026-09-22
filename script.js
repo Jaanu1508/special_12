@@ -4,7 +4,7 @@
 
 const heartsContainer = document.querySelector(".hearts");
 
-const heartSymbols = ["♡", "♥", "❤️","💋"];
+const heartSymbols = ["♡", "♥", "❤️", "💋"];
 
 for (let i = 0; i < 45; i++) {
 
@@ -30,12 +30,14 @@ for (let i = 0; i < 45; i++) {
 }
 
 
+
 // ===============================
 // LOGIN DETAILS
 // ===============================
 
 const correctUsername = "12102025";
 const correctPassword = "38104015";
+
 
 
 // ===============================
@@ -96,6 +98,7 @@ function login() {
 }
 
 
+
 // ===============================
 // ARCHIVE SEQUENCE
 // ===============================
@@ -146,16 +149,24 @@ function playArchiveSequence() {
 }
 
 
+
 // ===============================
-// READY BUTTON
+// OPEN ARCHIVE
 // ===============================
 
 function startArchive() {
 
-    // TEMPORARY
-    // We will replace this with
-    // your actual next part.
+    // Hide the intro screen
 
-    alert("NEXT PART COMING ❤️");
+    document
+        .getElementById("archiveScreen")
+        .classList.add("hidden");
+
+
+    // Show the five locked folders
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
 
 }
