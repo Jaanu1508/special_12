@@ -12,6 +12,7 @@ body {
     overflow: hidden;
 }
 
+
 /* =========================
    SCREEN
 ========================= */
@@ -27,6 +28,7 @@ body {
     text-align: center;
     z-index: 2;
 }
+
 
 /* VERY IMPORTANT */
 
@@ -307,6 +309,234 @@ h1 {
 
 
 /* =========================
+   FIVE LOCKED FOLDERS
+========================= */
+
+.folders-container {
+
+    width: min(92%, 900px);
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+/* TITLE */
+
+.folders-title {
+
+    margin-bottom: 35px;
+}
+
+.folders-title p {
+
+    font-size: 10px;
+
+    color: #666;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 12px;
+}
+
+.folders-title h2 {
+
+    font-size: clamp(25px, 5vw, 42px);
+
+    letter-spacing: 6px;
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 20px rgba(255, 0, 0, 0.25);
+}
+
+.folders-title span {
+
+    font-size: 10px;
+
+    color: #555;
+
+    letter-spacing: 3px;
+}
+
+
+/* FOLDER GRID */
+
+.folders-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* INDIVIDUAL FOLDER */
+
+.archive-folder {
+
+    position: relative;
+
+    min-height: 105px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    text-align: left;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.045),
+            rgba(255,255,255,0.015)
+        );
+
+    border: 1px solid #292929;
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* FOLDER TOP TAB */
+
+.archive-folder::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -7px;
+
+    left: 15px;
+
+    width: 65px;
+
+    height: 7px;
+
+    background: #292929;
+
+    border: 1px solid #292929;
+
+    border-bottom: none;
+}
+
+
+/* LOCKED EFFECT */
+
+.archive-folder.locked {
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    filter: grayscale(0.5);
+}
+
+.archive-folder.locked:hover {
+
+    border-color: #555;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.04);
+}
+
+
+/* FOLDER ICON */
+
+.folder-symbol {
+
+    font-size: 35px;
+
+    margin-right: 18px;
+
+    filter: grayscale(1);
+
+    opacity: 0.65;
+}
+
+
+/* FOLDER DETAILS */
+
+.folder-details {
+
+    flex: 1;
+}
+
+.folder-details h3 {
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 8px;
+
+    color: #ccc;
+}
+
+.folder-details p {
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #555;
+}
+
+
+/* LOCK ICON */
+
+.folder-lock {
+
+    font-size: 18px;
+
+    opacity: 0.5;
+
+    margin-left: 10px;
+}
+
+
+/* FOOTER */
+
+.folders-footer {
+
+    margin-top: 30px;
+}
+
+.folders-footer p {
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color: #666;
+
+    margin-bottom: 8px;
+}
+
+.folders-footer span {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #444;
+}
+
+
+/* =========================
    ANIMATIONS
 ========================= */
 
@@ -359,6 +589,45 @@ h1 {
 
     .final-intro h2 {
         letter-spacing: 4px;
+    }
+
+
+    /* FOLDERS ON MOBILE */
+
+    .folders-container {
+        width: 90%;
+    }
+
+    .folders-grid {
+        grid-template-columns: 1fr;
+
+        gap: 13px;
+
+        max-height: 65vh;
+
+        overflow-y: auto;
+
+        padding: 5px;
+    }
+
+    .archive-folder {
+        min-height: 90px;
+
+        padding: 18px;
+    }
+
+    .folder-symbol {
+        font-size: 28px;
+    }
+
+    .folder-details h3 {
+        font-size: 13px;
+
+        letter-spacing: 3px;
+    }
+
+    .folders-title {
+        margin-bottom: 25px;
     }
 
 }
