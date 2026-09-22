@@ -339,10 +339,82 @@
 
     </main>
 
+<!-- =========================
+     FILE 01
+========================= -->
+
+<main class="screen hidden" id="file01Screen">
+
+    <div class="file01-container">
+
+        <div class="file01-code">
+            FILE 01 / TRACE-001
+        </div>
+
+        <h2>
+            THE FIRST TRACE
+        </h2>
+
+        <p class="file01-status">
+            STATUS: INVESTIGATION REQUIRED
+        </p>
 
 
-    <!-- JavaScript -->
+        <div class="clue-box">
 
+            <div class="clue-label">
+                CLUE 01
+            </div>
+
+            <p>
+                I was hidden in the very first chapter of us.
+                Find the date that started everything.
+            </p>
+
+        </div>
+
+
+        <div class="answer-section">
+
+            <label for="clueAnswer">
+                ENTER YOUR ANSWER
+            </label>
+
+            <input
+                type="text"
+                id="clueAnswer"
+                autocomplete="off"
+                placeholder="ENTER ANSWER..."
+            >
+
+            <button onclick="verifyClue()">
+                VERIFY →
+            </button>
+
+            <p id="clueMessage"></p>
+
+        </div>
+
+
+        <div id="file01Success" class="file01-success hidden">
+
+            <p>
+                ✓ CLUE VERIFIED
+            </p>
+
+            <h3>
+                FILE 01 COMPLETE.
+            </h3>
+
+            <span>
+                THE FIRST TRACE HAS BEEN FOUND.
+            </span>
+
+        </div>
+
+    </div>
+
+</main>
     <script src="script.js"></script>
 
 </body>
