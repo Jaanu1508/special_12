@@ -170,3 +170,61 @@ function startArchive() {
         .classList.remove("hidden");
 
 }
+// ===============================
+// FILE 01
+// ===============================
+
+function openFile01() {
+
+    document
+        .getElementById("foldersScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file01Screen")
+        .classList.remove("hidden");
+
+}
+
+
+// ===============================
+// VERIFY FILE 01 CLUE
+// ===============================
+
+function verifyClue() {
+
+    const answer =
+        document
+            .getElementById("clueAnswer")
+            .value
+            .trim()
+            .toLowerCase();
+
+    const message =
+        document.getElementById("clueMessage");
+
+    const success =
+        document.getElementById("file01Success");
+
+
+    // CHANGE THIS TO YOUR REAL ANSWER
+
+    const correctAnswer = "12/10/2025";
+
+
+    if (answer === correctAnswer.toLowerCase()) {
+
+        message.textContent = "";
+
+        success.classList.remove("hidden");
+
+    } else {
+
+        message.textContent =
+            "✕ INCORRECT — THE ARCHIVE REMEMBERS.";
+
+        message.style.color = "#ff3333";
+
+    }
+
+}
