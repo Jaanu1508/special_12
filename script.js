@@ -1,10 +1,13 @@
-// HEART ANIMATION
+// ===============================
+// FLOATING HEARTS
+// ===============================
 
 const heartsContainer = document.querySelector(".hearts");
 
-const heartSymbols = ["❤️", "💋"];
+const heartSymbols = ["♡", "♥", "❤️","💋"];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 45; i++) {
+
     const heart = document.createElement("div");
 
     heart.className = "heart";
@@ -13,40 +16,146 @@ for (let i = 0; i < 100; i++) {
         heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
 
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (12 + Math.random() * 28) + "px";
-    heart.style.animationDuration = (5 + Math.random() * 10) + "s";
-    heart.style.animationDelay = -(Math.random() * 15) + "s";
+
+    heart.style.fontSize =
+        (10 + Math.random() * 18) + "px";
+
+    heart.style.animationDuration =
+        (8 + Math.random() * 12) + "s";
+
+    heart.style.animationDelay =
+        -(Math.random() * 15) + "s";
 
     heartsContainer.appendChild(heart);
 }
 
 
-// LOGIN INFORMATION
+// ===============================
+// LOGIN DETAILS
+// ===============================
 
 const correctUsername = "12102025";
-const correctPassword = "38104015";
+const correctPassword = "AKNAABNA";
 
 
+// ===============================
 // LOGIN FUNCTION
+// ===============================
 
 function login() {
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const message = document.getElementById("message");
+    const username =
+        document.getElementById("username").value.trim();
 
-    if (username === correctUsername && password === correctPassword) {
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    // CORRECT LOGIN
+
+    if (
+        username === correctUsername &&
+        password === correctPassword
+    ) {
 
         message.textContent = "IDENTITY VERIFIED ✓";
-        message.style.color = "white";
+        message.style.color = "#ffffff";
+
+
+        // Wait before opening archive
 
         setTimeout(() => {
-            window.location.href = "game.html";
-        }, 1500);
+
+            document
+                .getElementById("loginScreen")
+                .classList.add("hidden");
+
+            document
+                .getElementById("archiveScreen")
+                .classList.remove("hidden");
+
+
+            // Start archive sequence
+
+            playArchiveSequence();
+
+        }, 1200);
+
 
     } else {
 
+        // WRONG LOGIN
+
         message.textContent = "ACCESS DENIED ✕";
-        message.style.color = "#ff4444";
+        message.style.color = "#ff3333";
+
     }
+}
+
+
+// ===============================
+// ARCHIVE SEQUENCE
+// ===============================
+
+function playArchiveSequence() {
+
+    const sequence = [
+
+        "status1",
+        "status2",
+        "status3",
+        "status4",
+        "status5",
+        "status6"
+
+    ];
+
+
+    let delay = 500;
+
+
+    sequence.forEach((id, index) => {
+
+        setTimeout(() => {
+
+            document
+                .getElementById(id)
+                .classList.remove("hidden");
+
+        }, delay);
+
+
+        delay += index === 0 ? 1000 : 1300;
+
+    });
+
+
+    // Show final message
+
+    setTimeout(() => {
+
+        document
+            .getElementById("finalIntro")
+            .classList.remove("hidden");
+
+    }, delay + 500);
+
+}
+
+
+// ===============================
+// READY BUTTON
+// ===============================
+
+function startArchive() {
+
+    // TEMPORARY
+    // We will replace this with
+    // your actual next part.
+
+    alert("NEXT PART COMING ❤️");
+
 }
