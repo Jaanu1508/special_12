@@ -35,7 +35,7 @@ for (let i = 0; i < 45; i++) {
 // ===============================
 
 const correctUsername = "12102025";
-const correctPassword = "AKNAABNA";
+const correctPassword = "38104015";
 
 
 // ===============================
