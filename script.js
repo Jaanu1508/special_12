@@ -30,14 +30,12 @@ for (let i = 0; i < 45; i++) {
 }
 
 
-
 // ===============================
 // LOGIN DETAILS
 // ===============================
 
 const correctUsername = "12102025";
 const correctPassword = "38104015";
-
 
 
 // ===============================
@@ -56,8 +54,6 @@ function login() {
         document.getElementById("message");
 
 
-    // CORRECT LOGIN
-
     if (
         username === correctUsername &&
         password === correctPassword
@@ -66,8 +62,6 @@ function login() {
         message.textContent = "IDENTITY VERIFIED ✓";
         message.style.color = "#ffffff";
 
-
-        // Wait before opening archive
 
         setTimeout(() => {
 
@@ -79,9 +73,6 @@ function login() {
                 .getElementById("archiveScreen")
                 .classList.remove("hidden");
 
-
-            // Start archive sequence
-
             playArchiveSequence();
 
         }, 1200);
@@ -89,14 +80,11 @@ function login() {
 
     } else {
 
-        // WRONG LOGIN
-
         message.textContent = "ACCESS DENIED ✕";
         message.style.color = "#ff3333";
 
     }
 }
-
 
 
 // ===============================
@@ -106,16 +94,13 @@ function login() {
 function playArchiveSequence() {
 
     const sequence = [
-
         "status1",
         "status2",
         "status3",
         "status4",
         "status5",
         "status6"
-
     ];
-
 
     let delay = 500;
 
@@ -130,13 +115,10 @@ function playArchiveSequence() {
 
         }, delay);
 
-
         delay += index === 0 ? 1000 : 1300;
 
     });
 
-
-    // Show final message
 
     setTimeout(() => {
 
@@ -149,29 +131,25 @@ function playArchiveSequence() {
 }
 
 
-
 // ===============================
 // OPEN ARCHIVE
 // ===============================
 
 function startArchive() {
 
-    // Hide the intro screen
-
     document
         .getElementById("archiveScreen")
         .classList.add("hidden");
-
-
-    // Show the five locked folders
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 }
+
+
 // ===============================
-// FILE 01
+// OPEN FILE 01
 // ===============================
 
 function openFile01() {
@@ -207,7 +185,10 @@ function verifyClue() {
         document.getElementById("file01Success");
 
 
-    // CHANGE THIS TO YOUR REAL ANSWER
+    // =========================
+    // YOUR CLUE ANSWER
+    // CHANGE THIS LATER
+    // =========================
 
     const correctAnswer = "12/10/2025";
 
