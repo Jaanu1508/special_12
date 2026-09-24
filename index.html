@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -9,12 +11,19 @@
     <title>12.10.26 — Private Archive</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- Floating Hearts -->
+
+    <!-- =========================
+         FLOATING HEARTS
+    ========================== -->
+
     <div class="hearts"></div>
+
 
 
     <!-- =========================
@@ -27,21 +36,26 @@
             12.10.26
         </div>
 
+
         <div class="lock">
             🔐
         </div>
+
 
         <h1>
             PRIVATE ARCHIVE
         </h1>
 
+
         <p class="subtitle">
             THIS SYSTEM IS RESTRICTED.
         </p>
 
+
         <p class="small-text">
             IDENTITY VERIFICATION REQUIRED.
         </p>
+
 
 
         <div class="login-box">
@@ -85,6 +99,7 @@
 
 
 
+
     <!-- =========================
          ARCHIVE INTRO SCREEN
     ========================== -->
@@ -92,6 +107,7 @@
     <main class="screen hidden" id="archiveScreen">
 
         <div class="loading-content">
+
 
             <p class="status" id="status1">
                 IDENTITY VERIFIED ✓
@@ -124,7 +140,7 @@
 
 
 
-            <!-- Final Intro -->
+            <!-- FINAL INTRO -->
 
             <div class="final-intro hidden" id="finalIntro">
 
@@ -153,13 +169,18 @@
 
 
 
+
     <!-- =========================
-         FIVE LOCKED FOLDERS
+         ARCHIVE FOLDERS
     ========================== -->
 
     <main class="screen hidden" id="foldersScreen">
 
+
         <div class="folders-container">
+
+
+            <!-- TITLE -->
 
             <div class="folders-title">
 
@@ -178,147 +199,112 @@
             </div>
 
 
+
+            <!-- =========================
+                 FIVE SEPARATE BOXES
+            ========================== -->
+
             <div class="folders-grid">
 
 
-                <!-- FOLDER 01 -->
+                <!-- FILE 01 — UNLOCKED -->
 
-                <div class="archive-folder locked" onclick="openFile01()">
+                <div
+                    class="archive-folder unlocked"
+                    onclick="openFile01()"
+                >
 
-                   
-                <div class="archive-folder available" onclick="openFile01()">
-
-    <div class="folder-symbol">
-        📁
-    </div>
-
-    <div class="folder-details">
-
-        <h3>
-            FILE 01
-        </h3>
-
-        <p>
-            ACCESS AVAILABLE
-        </p>
-
-    </div>
-
-    <div class="folder-arrow">
-        →
-    </div>
-
-</div>
-
-
-
-                <!-- FOLDER 02 -->
-
-                <div class="archive-folder locked">
-
-                    <div class="folder-symbol">
+                    <div class="folder-icon">
                         📁
                     </div>
 
-                    <div class="folder-details">
+                    <h3>
+                        FILE 01
+                    </h3>
 
-                        <h3>
-                            FILE 02
-                        </h3>
-
-                        <p>
-                            ACCESS LOCKED
-                        </p>
-
-                    </div>
-
-                    <div class="folder-lock">
-                        🔒
-                    </div>
+                    <p>
+                        ACCESS AVAILABLE
+                    </p>
 
                 </div>
 
 
 
-                <!-- FOLDER 03 -->
+                <!-- FILE 02 — LOCKED -->
 
                 <div class="archive-folder locked">
 
-                    <div class="folder-symbol">
+                    <div class="folder-icon">
                         📁
                     </div>
 
-                    <div class="folder-details">
+                    <h3>
+                        FILE 02
+                    </h3>
 
-                        <h3>
-                            FILE 03
-                        </h3>
-
-                        <p>
-                            ACCESS LOCKED
-                        </p>
-
-                    </div>
-
-                    <div class="folder-lock">
-                        🔒
-                    </div>
+                    <p>
+                        🔒 ACCESS LOCKED
+                    </p>
 
                 </div>
 
 
 
-                <!-- FOLDER 04 -->
+                <!-- FILE 03 — LOCKED -->
 
                 <div class="archive-folder locked">
 
-                    <div class="folder-symbol">
+                    <div class="folder-icon">
                         📁
                     </div>
 
-                    <div class="folder-details">
+                    <h3>
+                        FILE 03
+                    </h3>
 
-                        <h3>
-                            FILE 04
-                        </h3>
-
-                        <p>
-                            ACCESS LOCKED
-                        </p>
-
-                    </div>
-
-                    <div class="folder-lock">
-                        🔒
-                    </div>
+                    <p>
+                        🔒 ACCESS LOCKED
+                    </p>
 
                 </div>
 
 
 
-                <!-- FOLDER 05 -->
+                <!-- FILE 04 — LOCKED -->
 
                 <div class="archive-folder locked">
 
-                    <div class="folder-symbol">
+                    <div class="folder-icon">
                         📁
                     </div>
 
-                    <div class="folder-details">
+                    <h3>
+                        FILE 04
+                    </h3>
 
-                        <h3>
-                            FILE 05
-                        </h3>
+                    <p>
+                        🔒 ACCESS LOCKED
+                    </p>
 
-                        <p>
-                            ACCESS LOCKED
-                        </p>
+                </div>
 
+
+
+                <!-- FILE 05 — LOCKED -->
+
+                <div class="archive-folder locked">
+
+                    <div class="folder-icon">
+                        📁
                     </div>
 
-                    <div class="folder-lock">
-                        🔒
-                    </div>
+                    <h3>
+                        FILE 05
+                    </h3>
+
+                    <p>
+                        🔒 ACCESS LOCKED
+                    </p>
 
                 </div>
 
@@ -326,10 +312,13 @@
             </div>
 
 
+
+            <!-- FOOTER -->
+
             <div class="folders-footer">
 
                 <p>
-                    5 FILES. 5 LOCKS.
+                    5 FILES. 1 AVAILABLE.
                 </p>
 
                 <span>
@@ -338,87 +327,123 @@
 
             </div>
 
+
         </div>
 
     </main>
 
-<!-- =========================
-     FILE 01
-========================= -->
-
-<main class="screen hidden" id="file01Screen">
-
-    <div class="file01-container">
-
-        <div class="file01-code">
-            FILE 01 / TRACE-001
-        </div>
-
-        <h2>
-            THE FIRST TRACE
-        </h2>
-
-        <p class="file01-status">
-            STATUS: INVESTIGATION REQUIRED
-        </p>
 
 
-        <div class="clue-box">
 
-            <div class="clue-label">
-                CLUE 01
+    <!-- =========================
+         FILE 01
+    ========================== -->
+
+    <main class="screen hidden" id="file01Screen">
+
+
+        <div class="file01-container">
+
+
+            <div class="file01-code">
+                FILE 01 / TRACE-001
             </div>
 
-            <p>
-                I was hidden in the very first chapter of us.
-                Find the date that started everything.
+
+            <h2>
+                THE FIRST TRACE
+            </h2>
+
+
+            <p class="file01-status">
+                STATUS: INVESTIGATION REQUIRED
             </p>
 
-        </div>
 
 
-        <div class="answer-section">
+            <!-- CLUE -->
 
-            <label for="clueAnswer">
-                ENTER YOUR ANSWER
-            </label>
+            <div class="clue-box">
 
-            <input
-                type="text"
-                id="clueAnswer"
-                autocomplete="off"
-                placeholder="ENTER ANSWER..."
+                <div class="clue-label">
+                    CLUE 01
+                </div>
+
+                <p>
+                    I was hidden in the very first chapter of us.
+                    Find the date that started everything.
+                </p>
+
+            </div>
+
+
+
+            <!-- ANSWER -->
+
+            <div class="answer-section">
+
+                <label for="clueAnswer">
+                    ENTER YOUR ANSWER
+                </label>
+
+
+                <input
+                    type="text"
+                    id="clueAnswer"
+                    autocomplete="off"
+                    placeholder="ENTER ANSWER..."
+                >
+
+
+                <button onclick="verifyClue()">
+                    VERIFY →
+                </button>
+
+
+                <p id="clueMessage"></p>
+
+            </div>
+
+
+
+            <!-- SUCCESS -->
+
+            <div
+                id="file01Success"
+                class="file01-success hidden"
             >
 
-            <button onclick="verifyClue()">
-                VERIFY →
-            </button>
-
-            <p id="clueMessage"></p>
-
-        </div>
+                <p>
+                    ✓ CLUE VERIFIED
+                </p>
 
 
-        <div id="file01Success" class="file01-success hidden">
+                <h3>
+                    FILE 01 COMPLETE.
+                </h3>
 
-            <p>
-                ✓ CLUE VERIFIED
-            </p>
 
-            <h3>
-                FILE 01 COMPLETE.
-            </h3>
+                <span>
+                    THE FIRST TRACE HAS BEEN FOUND.
+                </span>
 
-            <span>
-                THE FIRST TRACE HAS BEEN FOUND.
-            </span>
+            </div>
+
 
         </div>
 
-    </div>
+    </main>
 
-</main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
