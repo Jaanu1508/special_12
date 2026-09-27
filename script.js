@@ -166,17 +166,13 @@ function openFile01() {
 
 
 // ===============================
-// VERIFY FILE 01 CLUE
-// ===============================
-
 function verifyClue() {
 
     const answer =
-        document
-            .getElementById("clueAnswer")
-            .value
-            .trim()
-            .toLowerCase();
+        document.getElementById("clueAnswer")
+        .value
+        .trim()
+        .toLowerCase();
 
     const message =
         document.getElementById("clueMessage");
@@ -184,18 +180,27 @@ function verifyClue() {
     const success =
         document.getElementById("file01Success");
 
-
-    // =========================
-    // YOUR CLUE ANSWER
-    // CHANGE THIS LATER
-    // =========================
-
-    const correctAnswer = "12/10/2025";
+    const traceStatus =
+        document.getElementById("traceStatus");
 
 
-    if (answer === correctAnswer.toLowerCase()) {
+    const correctAnswer = "12.10.25";
+
+
+    if (
+        answer === correctAnswer ||
+        answer === "12/10/25" ||
+        answer === "12/10/2025" ||
+        answer === "12.10.2025"
+    ) {
 
         message.textContent = "";
+
+        traceStatus.textContent =
+            "VERIFIED ✓";
+
+        traceStatus.style.color =
+            "#ff5c9c";
 
         success.classList.remove("hidden");
 
@@ -204,8 +209,11 @@ function verifyClue() {
         message.textContent =
             "✕ INCORRECT — THE ARCHIVE REMEMBERS.";
 
-        message.style.color = "#ff3333";
+        message.style.color =
+            "#ff3333";
 
     }
+
+}
 
 }
