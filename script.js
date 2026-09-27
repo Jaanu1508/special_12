@@ -15,8 +15,7 @@ for (let i = 0; i < 45; i++) {
     heart.textContent =
         heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+    heart.style.left = Math.random() * 100 + "vw";
 
     heart.style.fontSize =
         (10 + Math.random() * 18) + "px";
@@ -31,12 +30,14 @@ for (let i = 0; i < 45; i++) {
 }
 
 
+
 // ===============================
 // LOGIN DETAILS
 // ===============================
 
 const correctUsername = "12102025";
 const correctPassword = "38104015";
+
 
 
 // ===============================
@@ -60,11 +61,8 @@ function login() {
         password === correctPassword
     ) {
 
-        message.textContent =
-            "IDENTITY VERIFIED ✓";
-
-        message.style.color =
-            "#ffffff";
+        message.textContent = "IDENTITY VERIFIED ✓";
+        message.style.color = "#ffffff";
 
 
         setTimeout(() => {
@@ -84,14 +82,12 @@ function login() {
 
     } else {
 
-        message.textContent =
-            "ACCESS DENIED ✕";
-
-        message.style.color =
-            "#ff3333";
+        message.textContent = "ACCESS DENIED ✕";
+        message.style.color = "#ff3333";
 
     }
 }
+
 
 
 // ===============================
@@ -122,9 +118,7 @@ function playArchiveSequence() {
 
         }, delay);
 
-        delay += index === 0
-            ? 1000
-            : 1300;
+        delay += index === 0 ? 1000 : 1300;
 
     });
 
@@ -138,6 +132,7 @@ function playArchiveSequence() {
     }, delay + 500);
 
 }
+
 
 
 // ===============================
@@ -157,6 +152,7 @@ function startArchive() {
 }
 
 
+
 // ===============================
 // OPEN FILE 01
 // ===============================
@@ -174,8 +170,9 @@ function openFile01() {
 }
 
 
+
 // ===============================
-// FILE 01 → QUESTION
+// FILE 01 — OKAY BUTTON
 // ===============================
 
 function showFile01Question() {
@@ -191,8 +188,9 @@ function showFile01Question() {
 }
 
 
+
 // ===============================
-// VERIFY FILE 01
+// FILE 01 — VERIFY ANSWER
 // ===============================
 
 function verifyClue() {
@@ -204,15 +202,23 @@ function verifyClue() {
             .trim()
             .toLowerCase();
 
+
     const message =
         document.getElementById("clueMessage");
 
+
+    /*
+       Accepting multiple formats
+       so he can type the date naturally.
+    */
 
     const correctAnswers = [
         "12.10.25",
         "12/10/25",
         "12/10/2025",
-        "12.10.2025"
+        "12.10.2025",
+        "12-10-25",
+        "12-10-2025"
     ];
 
 
@@ -221,10 +227,14 @@ function verifyClue() {
         message.textContent = "";
 
 
+        // Hide question
+
         document
             .getElementById("file01Question")
             .classList.add("hidden");
 
+
+        // Show success page
 
         document
             .getElementById("file01SuccessScreen")
@@ -244,8 +254,9 @@ function verifyClue() {
 }
 
 
+
 // ===============================
-// COMPLETE FILE 01
+// FILE 01 — CONTINUE
 // ===============================
 
 function completeFile01() {
