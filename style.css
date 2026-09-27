@@ -884,18 +884,26 @@ h1 {
 ========================================================= */
 
 .question-box {
-
     max-width: 620px;
 
-    margin: 0 auto 45px;
+    margin: 0 auto 60px;   /* more gap below the question */
 
     padding: 35px 25px;
 
-    border-top:
-        1px solid rgba(255, 92, 156, 0.3);
+    border-top: 1px solid rgba(255, 92, 156, 0.3);
+    border-bottom: 1px solid rgba(255, 92, 156, 0.3);
+}
 
-    border-bottom:
-        1px solid rgba(255, 92, 156, 0.3);
+.question-box p {
+    font-size: clamp(16px, 2.5vw, 20px);
+
+    line-height: 2;
+
+    letter-spacing: 2px;
+
+    color: #eee;
+
+    margin: 0;
 }
 
 
