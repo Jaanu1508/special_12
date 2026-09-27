@@ -333,209 +333,138 @@
     </main>
 
 <!-- =========================
-     FILE 01
+     FILE 01 — ANNIVERSARY MESSAGE
 ========================= -->
 
-<main class="screen hidden" id="file01Screen">
+<main class="screen hidden" id="file01Welcome">
 
-    <div class="file01-container">
+    <div class="file01-welcome">
 
         <div class="file01-code">
             FILE 01 / TRACE — 001
         </div>
 
-
         <h2>
-            THE FIRST TRACE
+            HAPPY ANNIVERSARY,
+            <span>KANNAYA. ❤️</span>
         </h2>
 
+        <div class="welcome-line"></div>
 
-        <div class="file01-story">
+        <p>
+            One whole year.
+        </p>
 
-            <p>
-                Some stories begin with a moment.
-            </p>
+        <p>
+            One year of memories,
+            little moments,
+            stupid conversations,
+            and everything that somehow became ours.
+        </p>
 
-            <p>
-                Some begin with a conversation.
-            </p>
+        <p>
+            And before you continue...
+        </p>
 
-            <p>
-                And some...
-            </p>
+        <p class="pink-text">
+            I have a small question for you.
+        </p>
 
-            <p>
-                just quietly become something
-                neither person expected.
-            </p>
+        <button onclick="showFile01Question()">
+            OKAY →
+        </button>
 
-            <p>
-                Before all the memories,
-                before the pictures,
-                before the little things
-                that became "ours"...
-            </p>
+    </div>
 
-            <p>
-                there was a beginning.
-            </p>
+</main>
 
-            <p>
-                And you should remember it.
+
+
+<!-- =========================
+     FILE 01 — QUESTION
+========================= -->
+
+<main class="screen hidden" id="file01Question">
+
+    <div class="file01-question">
+
+        <div class="file01-code">
+            FILE 01 / QUESTION 01
+        </div>
+
+        <h2>
+            QUESTION 01
+        </h2>
+
+        <div class="question-box">
+
+            <p id="questionText">
+                WHAT WAS THE DATE THAT STARTED EVERYTHING?
             </p>
 
         </div>
-
-
-        <div class="file01-divider">
-            ────────────────────────────
-        </div>
-
-
-        <!-- CLUE -->
-
-        <div class="clue-box">
-
-            <div class="clue-label">
-                CLUE 01
-            </div>
-
-
-            <p>
-                I won't tell you where to look.
-            </p>
-
-            <p>
-                I'll only remind you
-                of what you already know.
-            </p>
-
-            <p>
-                A date.
-            </p>
-
-            <p>
-                Eight numbers.
-            </p>
-
-            <p>
-                One beginning.
-            </p>
-
-            <p>
-                The day our story
-                stopped being just a story.
-            </p>
-
-        </div>
-
-
-        <div class="file01-divider">
-            ────────────────────────────
-        </div>
-
-
-        <!-- ANSWER -->
 
         <div class="answer-section">
-
-            <div class="answer-title">
-                YOUR ANSWER
-            </div>
-
 
             <input
                 type="text"
                 id="clueAnswer"
                 autocomplete="off"
-                placeholder="ENTER HERE..."
+                placeholder="WRITE YOUR ANSWER..."
             >
-
 
             <button onclick="verifyClue()">
                 VERIFY →
             </button>
 
-
             <p id="clueMessage"></p>
 
         </div>
 
+    </div>
 
-        <div class="file01-divider">
-            ────────────────────────────
+</main>
+
+
+
+<!-- =========================
+     FILE 01 — CORRECT ANSWER
+========================= -->
+
+<main class="screen hidden" id="file01SuccessScreen">
+
+    <div class="file01-success-page">
+
+        <div class="success-symbol">
+            ✓
         </div>
 
-
-        <!-- STATUS -->
-
-        <div class="trace-status">
-
-            <span>
-                TRACE STATUS
-            </span>
-
-            <strong id="traceStatus">
-                NOT YET VERIFIED
-            </strong>
-
+        <div class="file01-code">
+            TRACE VERIFIED
         </div>
 
+        <h2>
+            CORRECT. ❤️
+        </h2>
 
-        <!-- SUCCESS -->
+        <p>
+            I KNEW YOU'D REMEMBER.
+        </p>
 
-        <div
-            id="file01Success"
-            class="file01-success hidden"
-        >
+        <p>
+            You really do remember
+            the little things.
+        </p>
 
-            <div class="success-symbol">
-                ✓
-            </div>
+        <div class="success-line"></div>
 
+        <h3>
+            FILE 01 COMPLETE.
+        </h3>
 
-            <h3>
-                TRACE FOUND
-            </h3>
-
-
-            <p>
-                You remembered.
-            </p>
-
-
-            <p>
-                The first piece of our story
-                has been recovered.
-            </p>
-
-
-            <div class="recovered-date">
-                12.10.25
-            </div>
-
-
-            <p>
-                The beginning.
-            </p>
-
-
-            <p>
-                But you already know...
-            </p>
-
-
-            <p>
-                a beginning is never
-                the whole story.
-            </p>
-
-
-            <button onclick="completeFile01()">
-                CONTINUE →
-            </button>
-
-        </div>
+        <button onclick="completeFile01()">
+            CONTINUE →
+        </button>
 
     </div>
 
