@@ -15,7 +15,8 @@ for (let i = 0; i < 45; i++) {
     heart.textContent =
         heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.left =
+        Math.random() * 100 + "vw";
 
     heart.style.fontSize =
         (10 + Math.random() * 18) + "px";
@@ -39,7 +40,7 @@ const correctPassword = "38104015";
 
 
 // ===============================
-// LOGIN FUNCTION
+// LOGIN
 // ===============================
 
 function login() {
@@ -59,8 +60,11 @@ function login() {
         password === correctPassword
     ) {
 
-        message.textContent = "IDENTITY VERIFIED ✓";
-        message.style.color = "#ffffff";
+        message.textContent =
+            "IDENTITY VERIFIED ✓";
+
+        message.style.color =
+            "#ffffff";
 
 
         setTimeout(() => {
@@ -80,8 +84,11 @@ function login() {
 
     } else {
 
-        message.textContent = "ACCESS DENIED ✕";
-        message.style.color = "#ff3333";
+        message.textContent =
+            "ACCESS DENIED ✕";
+
+        message.style.color =
+            "#ff3333";
 
     }
 }
@@ -115,7 +122,9 @@ function playArchiveSequence() {
 
         }, delay);
 
-        delay += index === 0 ? 1000 : 1300;
+        delay += index === 0
+            ? 1000
+            : 1300;
 
     });
 
@@ -159,55 +168,73 @@ function openFile01() {
         .classList.add("hidden");
 
     document
-        .getElementById("file01Screen")
+        .getElementById("file01Welcome")
         .classList.remove("hidden");
 
 }
 
 
 // ===============================
+// FILE 01 → QUESTION
+// ===============================
+
+function showFile01Question() {
+
+    document
+        .getElementById("file01Welcome")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file01Question")
+        .classList.remove("hidden");
+
+}
+
+
+// ===============================
+// VERIFY FILE 01
+// ===============================
+
 function verifyClue() {
 
     const answer =
-        document.getElementById("clueAnswer")
-        .value
-        .trim()
-        .toLowerCase();
+        document
+            .getElementById("clueAnswer")
+            .value
+            .trim()
+            .toLowerCase();
 
     const message =
         document.getElementById("clueMessage");
 
-    const success =
-        document.getElementById("file01Success");
 
-    const traceStatus =
-        document.getElementById("traceStatus");
+    const correctAnswers = [
+        "12.10.25",
+        "12/10/25",
+        "12/10/2025",
+        "12.10.2025"
+    ];
 
 
-    const correctAnswer = "12.10.25";
-
-
-    if (
-        answer === correctAnswer ||
-        answer === "12/10/25" ||
-        answer === "12/10/2025" ||
-        answer === "12.10.2025"
-    ) {
+    if (correctAnswers.includes(answer)) {
 
         message.textContent = "";
 
-        traceStatus.textContent =
-            "VERIFIED ✓";
 
-        traceStatus.style.color =
-            "#ff5c9c";
+        document
+            .getElementById("file01Question")
+            .classList.add("hidden");
 
-        success.classList.remove("hidden");
+
+        document
+            .getElementById("file01SuccessScreen")
+            .classList.remove("hidden");
+
 
     } else {
 
         message.textContent =
-            "✕ INCORRECT — THE ARCHIVE REMEMBERS.";
+            "✕ INCORRECT — TRY AGAIN.";
 
         message.style.color =
             "#ff3333";
@@ -217,3 +244,19 @@ function verifyClue() {
 }
 
 
+// ===============================
+// COMPLETE FILE 01
+// ===============================
+
+function completeFile01() {
+
+    document
+        .getElementById("file01SuccessScreen")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
+
+}
