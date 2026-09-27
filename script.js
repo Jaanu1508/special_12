@@ -269,5 +269,36 @@ function completeFile01() {
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
+// ===============================
+// OPEN FILE 02
+// ===============================
 
+function openFile02() {
+
+    document
+        .getElementById("foldersScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file02Screen")
+        .classList.remove("hidden");
+
+}
+
+
+// ===============================
+// COMPLETE FILE 02
+// ===============================
+
+function completeFile02() {
+
+    document
+        .getElementById("file02Screen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
+
+}
 }
