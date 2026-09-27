@@ -57,7 +57,6 @@
         </p>
 
 
-
         <div class="login-box">
 
             <label for="username">
@@ -107,7 +106,6 @@
     <main class="screen hidden" id="archiveScreen">
 
         <div class="loading-content">
-
 
             <p class="status" id="status1">
                 IDENTITY VERIFIED ✓
@@ -176,7 +174,6 @@
 
     <main class="screen hidden" id="foldersScreen">
 
-
         <div class="folders-container">
 
 
@@ -201,16 +198,19 @@
 
 
             <!-- =========================
-                 FIVE SEPARATE BOXES
+                 FIVE FILES
             ========================== -->
 
             <div class="folders-grid">
 
 
-                <!-- FILE 01 — UNLOCKED -->
+                <!-- =========================
+                     FILE 01
+                ========================== -->
 
                 <div
                     class="archive-folder unlocked"
+                    id="file01Folder"
                     onclick="openFile01()"
                 >
 
@@ -230,9 +230,15 @@
 
 
 
-                <!-- FILE 02 — LOCKED -->
+                <!-- =========================
+                     FILE 02
+                ========================== -->
 
-                <div class="archive-folder locked">
+                <div
+                    class="archive-folder locked"
+                    id="file02Folder"
+                    onclick="openFile02()"
+                >
 
                     <div class="folder-icon">
                         📁
@@ -242,7 +248,7 @@
                         FILE 02
                     </h3>
 
-                    <p>
+                    <p id="file02Status">
                         🔒 ACCESS LOCKED
                     </p>
 
@@ -250,9 +256,14 @@
 
 
 
-                <!-- FILE 03 — LOCKED -->
+                <!-- =========================
+                     FILE 03
+                ========================== -->
 
-                <div class="archive-folder locked">
+                <div
+                    class="archive-folder locked"
+                    id="file03Folder"
+                >
 
                     <div class="folder-icon">
                         📁
@@ -270,9 +281,14 @@
 
 
 
-                <!-- FILE 04 — LOCKED -->
+                <!-- =========================
+                     FILE 04
+                ========================== -->
 
-                <div class="archive-folder locked">
+                <div
+                    class="archive-folder locked"
+                    id="file04Folder"
+                >
 
                     <div class="folder-icon">
                         📁
@@ -290,9 +306,14 @@
 
 
 
-                <!-- FILE 05 — LOCKED -->
+                <!-- =========================
+                     FILE 05
+                ========================== -->
 
-                <div class="archive-folder locked">
+                <div
+                    class="archive-folder locked"
+                    id="file05Folder"
+                >
 
                     <div class="folder-icon">
                         📁
@@ -331,249 +352,358 @@
         </div>
 
     </main>
-<!-- =========================
-     FILE 01 — ANNIVERSARY MESSAGE
-========================= -->
-
-<main class="screen hidden" id="file01Welcome">
-
-    <div class="file01-welcome">
-
-        <div class="file01-code">
-            FILE 01 / TRACE — 001
-        </div>
-
-        <h2>
-            HAPPY ANNIVERSARY,
-            <span>KANNAYA. ❤️</span>
-        </h2>
-
-        <div class="welcome-line"></div>
-
-
-        <div class="file01-message">
-
-            <p>
-                One whole year...bangarammmmmm
-            </p>
-
-            <p>
-                One year of memories....
-            </p>
-
-            <p>
-                Little moments.....stupiddd conversations
-            </p>
-
-            <p>
-                Random laughs....and somehowww....
-            </p>
-
-            <p>
-                everything became
-                <strong>ours.</strong>
-            </p>
-
-
-            <div class="message-gap"></div>
-
-
-            <p>
-                A whole year has passed...
-            </p>
-
-            <p>
-                And there are stil so many things
-                I want to tell you...avi entha chpina avatledhu entoooo
-            </p>
-
-
-            <div class="message-gap"></div>
-
-
-            <p>
-                But before we continue...
-            </p>
-
-            <p class="pink-text">
-                I have a small question for you. ❤️
-            </p>
-
-        </div>
-
-
-        <button
-            class="file01-button"
-            onclick="showFile01Question()"
-        >
-            OKAY →
-        </button>
-
-    </div>
-
-</main>
 
 
 
-<!-- =========================
-     FILE 01 — QUESTION
-========================= -->
 
-<main class="screen hidden" id="file01Question">
+    <!-- ==================================================
+         FILE 01 — ANNIVERSARY WELCOME
+    =================================================== -->
 
-    <div class="file01-question">
+    <main
+        class="screen hidden"
+        id="file01Welcome"
+    >
 
-        <div class="file01-code">
-            FILE 01 / QUESTION 01
-        </div>
-
-
-        <h2>
-            A LITTLE QUESTION BUJJIII    ...
-        </h2>
+        <div class="file01-welcome">
 
 
-        <div class="question-space">
+            <div class="file01-code">
+                FILE 01 / TRACE — 001
+            </div>
 
-            <p>
-                What was the date that everything had started...??!!!
-            </p>
 
-            <p>
+            <h2>
 
-            </p>p
-        </div>
+                HAPPY ANNIVERSARY,
 
-        <div class="answer-section">
+                <span>
+                    KANNAYA. ❤️
+                </span>
 
-            <input
-                type="text"
-                id="clueAnswer"
-                autocomplete="off"
-                placeholder="WRITE YOUR ANSWER..."
-            >
+            </h2>
+
+
+            <div class="welcome-line"></div>
+
+
+
+            <!-- =========================
+                 YOUR MESSAGE
+            ========================== -->
+
+            <div class="file01-message">
+
+
+                <p>
+                    One whole year...bangarammmmmm
+                </p>
+
+
+                <p>
+                    One year of memories....
+                </p>
+
+
+                <p>
+                    Little moments.....stupiddd conversations
+                </p>
+
+
+                <p>
+                    Random laughs....and somehowww....
+                </p>
+
+
+                <p>
+                    everything became
+                    <strong>ours.</strong>
+                </p>
+
+
+
+                <div class="message-gap"></div>
+
+
+
+                <p>
+                    A whole year has passed...
+                </p>
+
+
+                <p>
+                    And there are stil so many things
+                    I want to tell you...avi entha chpina
+                    avatledhu entoooo
+                </p>
+
+
+
+                <div class="message-gap"></div>
+
+
+
+                <p>
+                    But before we continue...
+                </p>
+
+
+                <p class="pink-text">
+                    I have a small question for you. ❤️
+                </p>
+
+            </div>
+
+
+
+            <!-- OKAY BUTTON -->
 
             <button
                 class="file01-button"
-                onclick="verifyClue()"
+                onclick="showFile01Question()"
             >
-                VERIFY →
+                OKAY →
             </button>
 
-            <p id="clueMessage"></p>
 
         </div>
 
-    </div>
-
-</main>
+    </main>
 
 
 
-<!-- =========================
-     FILE 01 — CORRECT ANSWER
-========================= -->
 
-<main class="screen hidden" id="file01SuccessScreen">
+    <!-- ==================================================
+         FILE 01 — QUESTION
+    =================================================== -->
 
-    <div class="file01-success-page">
+    <main
+        class="screen hidden"
+        id="file01Question"
+    >
 
-        <div class="success-symbol">
-            ✓
+        <div class="file01-question">
+
+
+            <div class="file01-code">
+                FILE 01 / QUESTION 01
+            </div>
+
+
+            <h2>
+                A LITTLE QUESTION BUJJIII...
+            </h2>
+
+
+
+            <!-- =========================
+                 QUESTION
+            ========================== -->
+
+            <div class="question-space">
+
+                <p>
+                    What was the date that
+                    everything had started...??!!!
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 ANSWER
+            ========================== -->
+
+            <div class="answer-section">
+
+
+                <input
+                    type="text"
+                    id="clueAnswer"
+                    autocomplete="off"
+                    placeholder="WRITE YOUR ANSWER..."
+                >
+
+
+                <button
+                    class="file01-button"
+                    onclick="verifyClue()"
+                >
+                    VERIFY →
+                </button>
+
+
+                <p id="clueMessage"></p>
+
+
+            </div>
+
+
         </div>
 
+    </main>
 
-        <div class="file01-code">
-            TRACE VERIFIED
+
+
+
+    <!-- ==================================================
+         FILE 01 — SUCCESS
+    =================================================== -->
+
+    <main
+        class="screen hidden"
+        id="file01SuccessScreen"
+    >
+
+        <div class="file01-success-page">
+
+
+            <div class="success-symbol">
+                ✓
+            </div>
+
+
+            <div class="file01-code">
+                TRACE VERIFIED
+            </div>
+
+
+            <h2>
+                YOU REMEMBERED. ❤️
+            </h2>
+
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <div class="success-message">
+
+
+                <p>
+                    CORRECT.
+                </p>
+
+
+                <p>
+                    I knew you would remember.
+                </p>
+
+
+
+                <div class="message-gap"></div>
+
+
+
+                <p>
+                    Maybe that's one of
+                    my favourite things about you.
+                </p>
+
+
+                <p>
+                    You remember
+                    the little things.
+                </p>
+
+
+
+                <div class="message-gap"></div>
+
+
+
+                <p class="pink-text">
+                    And this little date...
+                </p>
+
+
+                <p class="pink-text">
+                    means everything to us.
+                </p>
+
+
+            </div>
+
+
+
+            <div class="success-line"></div>
+
+
+            <h3>
+                FILE 01 COMPLETE.
+            </h3>
+
+
+
+            <!-- CONTINUE TO ARCHIVE -->
+
+            <button
+                class="file01-button"
+                onclick="completeFile01()"
+            >
+                CONTINUE →
+            </button>
+
+
         </div>
 
-
-        <h2>
-            YOU REMEMBERED. ❤️
-        </h2>
+    </main>
 
 
-        <div class="success-message">
-
-            <p>
-                CORRECT.
-            </p>
-
-            <p>
-                I knew you would remember.
-            </p>
 
 
-            <div class="message-gap"></div>
+    <!-- ==================================================
+         FILE 02 — CORE MEMORY
+    =================================================== -->
+
+    <main
+        class="screen hidden"
+        id="file02Screen"
+    >
+
+        <div class="file02-container">
 
 
-            <p>
-                Maybe that's one of
-                my favourite things about you.
-            </p>
+            <!-- FILE CODE -->
 
-            <p>
-                You remember
-                the little things.
-            </p>
+            <div class="file02-code">
+                FILE 02 / CORE MEMORY — 002
+            </div>
 
 
-            <div class="message-gap"></div>
+
+            <!-- TITLE -->
+
+            <h2>
+                OUR FIRST MEET. ❤️
+            </h2>
 
 
-            <p class="pink-text">
-                And this little date...
-            </p>
 
-            <p class="pink-text">
-                means everything to us.
-            </p>
-
-        </div>
+            <div class="file02-line"></div>
 
 
-        <div class="success-line"></div>
+
+            <!-- ==================================================
+                 YOUR PERSONAL MESSAGE
+                 
+                 WRITE EVERYTHING YOU WANT HERE.
+                 YOU CAN ADD AS MANY <p> PARAGRAPHS AS YOU WANT.
+            =================================================== -->
+
+            <div class="file02-story">
 
 
-        <h3>
-            FILE 01 COMPLETE.
-        </h3>
+                <p>
+                    Inka em chpali ra mana gurinchi..last eh motham chpesa anukunta ga.
+                </p>
 
 
-        <button
-            class="file01-button"
-            onclick="completeFile01()"
-        >
-            CONTINUE →
-        </button>
+                <p>
+                    Mana 1st meet entha chpina saripodhu..andi dhani gurinchi.
+                </p>
 
-    </div>
-
-</main>
-
-<!-- =========================
-     FILE 02 — CORE MEMORY
-========================= -->
-
-<main class="screen hidden" id="file02Screen">
-
-    <div class="file02-container">
-
-        <div class="file02-code">
-            FILE 02 / CORE MEMORY — 002
-        </div>
-
-        <h2>
-            OUR FIRST MEET. ❤️
-        </h2>
-
-        <div class="file02-line"></div>
-
-        <!-- WRITE YOUR MEMORY HERE -->
-
-        <div class="file02-story">
-
-            <p>
+                <p>
                 Inka em chpali ra mana gurinchi last eh motham chpesa anukunta ga
             </p>
 
@@ -592,29 +722,47 @@
                 asalu dina ni gurinchi endhuku aalochisthunavu nuvu..adhi 9th lo jarigindhi tht too infactuation...naku ipudu vadi medha emi ledhu...ma madhya physical ga em jaragale kuda apudu..okasari ethukunadu nanu anthe tht too kalla degara patukoni anthe..asalu vadi kosam nenu eh roju efforts petale..ma mummy valu vadhiley anagane vadhilesa vadni..
                 tharvatha nuvu vachavu ante haa avunu vachavu..but ne tharvatha malli evaru raru..ochina naku odhu..nuve ra naku anniii..just matalu ani anukoku..nijam idhi..i loveeeeeeee youuuuuuuu a lottttttttttt💋😘
             </p>
+                
+                </div>
 
-            <p class="file02-love">
-                AND THEN WRITE EVERYTHING YOU WANT HIM TO KNOW
-                ABOUT HOW MUCH YOU LOVE HIM. ❤️
+
+            </div>
+
+
+
+            <div class="file02-line"></div>
+
+
+
+            <!-- ENDING -->
+
+            <p class="file02-ending">
+
+                SOME MEMORIES AREN'T JUST MEMORIES.
+
+                <br>
+
+                THEY BECOME A PART OF US.
+
             </p>
+
+
+
+            <!-- CONTINUE -->
+
+            <button
+                class="file02-button"
+                onclick="completeFile02()"
+            >
+                CONTINUE →
+            </button>
+
 
         </div>
 
-        <div class="file02-line"></div>
+    </main>
 
-        <p class="file02-ending">
-            SOME MEMORIES AREN'T JUST MEMORIES.
-            <br>
-            THEY BECOME A PART OF US.
-        </p>
 
-        <button onclick="completeFile02()">
-            CONTINUE →
-        </button>
-
-    </div>
-
-</main>
 
 
     <!-- =========================
