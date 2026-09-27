@@ -18,205 +18,189 @@
 <body>
 
 
-    <!-- =========================
-         FLOATING HEARTS
-    ========================== -->
+<!-- =========================
+     FLOATING HEARTS
+========================= -->
 
-    <div class="hearts"></div>
-
-
-
-    <!-- =========================
-         LOGIN SCREEN
-    ========================== -->
-
-    <main class="screen" id="loginScreen">
-
-        <div class="archive-code">
-            12.10.26
-        </div>
+<div class="hearts"></div>
 
 
-        <div class="lock">
-            🔐
-        </div>
+
+<!-- =========================
+     LOGIN SCREEN
+========================= -->
+
+<main class="screen" id="loginScreen">
+
+    <div class="archive-code">
+        12.10.26
+    </div>
+
+    <div class="lock">
+        🔐
+    </div>
+
+    <h1>
+        PRIVATE ARCHIVE
+    </h1>
+
+    <p class="subtitle">
+        THIS SYSTEM IS RESTRICTED.
+    </p>
+
+    <p class="small-text">
+        IDENTITY VERIFICATION REQUIRED.
+    </p>
 
 
-        <h1>
-            PRIVATE ARCHIVE
-        </h1>
+    <div class="login-box">
+
+        <label for="username">
+            USERNAME
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            autocomplete="off"
+        >
 
 
-        <p class="subtitle">
-            THIS SYSTEM IS RESTRICTED.
+        <label for="password">
+            PASSWORD
+        </label>
+
+        <input
+            type="password"
+            id="password"
+        >
+
+
+        <button onclick="login()">
+            ACCESS ARCHIVE →
+        </button>
+
+
+        <p id="message"></p>
+
+    </div>
+
+
+    <div class="authorized">
+        AUTHORIZED USER ONLY
+    </div>
+
+</main>
+
+
+
+
+<!-- =========================
+     ARCHIVE INTRO SCREEN
+========================= -->
+
+<main class="screen hidden" id="archiveScreen">
+
+    <div class="loading-content">
+
+        <p class="status" id="status1">
+            IDENTITY VERIFIED ✓
+        </p>
+
+        <p class="status hidden" id="status2">
+            WELCOME, KANNAYA.
+        </p>
+
+        <p class="status hidden" id="status3">
+            ACCESSING PRIVATE ARCHIVE...
+        </p>
+
+        <p class="status hidden" id="status4">
+            LOADING MEMORIES...
+        </p>
+
+        <p class="status hidden" id="status5">
+            5 FILES DETECTED.
+        </p>
+
+        <p class="status warning hidden" id="status6">
+            WARNING: THIS ARCHIVE CONTAINS 1 YEAR OF US.
         </p>
 
 
-        <p class="small-text">
-            IDENTITY VERIFICATION REQUIRED.
-        </p>
+        <div class="final-intro hidden" id="finalIntro">
 
+            <h2>
+                ONE YEAR.
+            </h2>
 
-        <div class="login-box">
+            <h3>
+                COUNTLESS MEMORIES.
+            </h3>
 
-            <label for="username">
-                USERNAME
-            </label>
+            <h2>
+                ONE LOVE STORY. ❤️
+            </h2>
 
-            <input
-                type="text"
-                id="username"
-                autocomplete="off"
-            >
-
-
-            <label for="password">
-                PASSWORD
-            </label>
-
-            <input
-                type="password"
-                id="password"
-            >
-
-
-            <button onclick="login()">
-                ACCESS ARCHIVE →
+            <button onclick="startArchive()">
+                ARE YOU READY?
             </button>
 
+        </div>
 
-            <p id="message"></p>
+    </div>
+
+</main>
+
+
+
+
+<!-- =========================
+     ARCHIVE FOLDERS
+========================= -->
+
+<main class="screen hidden" id="foldersScreen">
+
+    <div class="folders-container">
+
+
+        <!-- TITLE -->
+
+        <div class="folders-title">
+
+            <p>
+                PRIVATE ARCHIVE
+            </p>
+
+            <h2>
+                ARCHIVE CONTENTS
+            </h2>
+
+            <span>
+                5 FILES • ACCESS RESTRICTED
+            </span>
 
         </div>
 
 
-        <div class="authorized">
-            AUTHORIZED USER ONLY
-        </div>
 
-    </main>
-
-
-
-
-    <!-- =========================
-         ARCHIVE INTRO SCREEN
-    ========================== -->
-
-    <main class="screen hidden" id="archiveScreen">
-
-        <div class="loading-content">
-
-            <p class="status" id="status1">
-                IDENTITY VERIFIED ✓
-            </p>
-
-
-            <p class="status hidden" id="status2">
-                WELCOME, KANNAYA.
-            </p>
-
-
-            <p class="status hidden" id="status3">
-                ACCESSING PRIVATE ARCHIVE...
-            </p>
-
-
-            <p class="status hidden" id="status4">
-                LOADING MEMORIES...
-            </p>
-
-
-            <p class="status hidden" id="status5">
-                5 FILES DETECTED.
-            </p>
-
-
-            <p class="status warning hidden" id="status6">
-                WARNING: THIS ARCHIVE CONTAINS 1 YEAR OF US.
-            </p>
-
-
-
-            <!-- FINAL INTRO -->
-
-            <div class="final-intro hidden" id="finalIntro">
-
-                <h2>
-                    ONE YEAR.
-                </h2>
-
-                <h3>
-                    COUNTLESS MEMORIES.
-                </h3>
-
-                <h2>
-                    ONE LOVE STORY. ❤️
-                </h2>
-
-
-                <button onclick="startArchive()">
-                    ARE YOU READY?
-                </button>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-
-
-    <!-- =========================
-         ARCHIVE FOLDERS
-    ========================== -->
-
-    <main class="screen hidden" id="foldersScreen">
-
-        <div class="folders-container">
-
-
-            <!-- TITLE -->
-
-            <div class="folders-title">
-
-                <p>
-                    PRIVATE ARCHIVE
-                </p>
-
-                <h2>
-                    ARCHIVE CONTENTS
-                </h2>
-
-                <span>
-                    5 FILES • ACCESS RESTRICTED
-                </span>
-
-            </div>
-
+        <div class="folders-grid">
 
 
             <!-- =========================
-                 FIVE FILES
+                 FILE 01
             ========================== -->
 
-            <div class="folders-grid">
+            <div
+                class="archive-folder unlocked"
+                onclick="openFile01()"
+            >
 
+                <div class="folder-icon">
+                    📁
+                </div>
 
-                <!-- =========================
-                     FILE 01
-                ========================== -->
-
-                <div
-                    class="archive-folder unlocked"
-                    id="file01Folder"
-                    onclick="openFile01()"
-                >
-
-                    <div class="folder-icon">
-                        📁
-                    </div>
+                <div class="folder-details">
 
                     <h3>
                         FILE 01
@@ -228,21 +212,26 @@
 
                 </div>
 
+            </div>
 
 
-                <!-- =========================
-                     FILE 02
-                ========================== -->
 
-                <div
-                    class="archive-folder locked"
-                    id="file02Folder"
-                    onclick="openFile02()"
-                >
+            <!-- =========================
+                 FILE 02
+                 LOCKED INITIALLY
+            ========================== -->
 
-                    <div class="folder-icon">
-                        📁
-                    </div>
+            <div
+                class="archive-folder locked"
+                id="file02Folder"
+                onclick="openFile02()"
+            >
+
+                <div class="folder-icon">
+                    📁
+                </div>
+
+                <div class="folder-details">
 
                     <h3>
                         FILE 02
@@ -254,20 +243,21 @@
 
                 </div>
 
+            </div>
 
 
-                <!-- =========================
-                     FILE 03
-                ========================== -->
 
-                <div
-                    class="archive-folder locked"
-                    id="file03Folder"
-                >
+            <!-- =========================
+                 FILE 03
+            ========================== -->
 
-                    <div class="folder-icon">
-                        📁
-                    </div>
+            <div class="archive-folder locked">
+
+                <div class="folder-icon">
+                    📁
+                </div>
+
+                <div class="folder-details">
 
                     <h3>
                         FILE 03
@@ -279,20 +269,21 @@
 
                 </div>
 
+            </div>
 
 
-                <!-- =========================
-                     FILE 04
-                ========================== -->
 
-                <div
-                    class="archive-folder locked"
-                    id="file04Folder"
-                >
+            <!-- =========================
+                 FILE 04
+            ========================== -->
 
-                    <div class="folder-icon">
-                        📁
-                    </div>
+            <div class="archive-folder locked">
+
+                <div class="folder-icon">
+                    📁
+                </div>
+
+                <div class="folder-details">
 
                     <h3>
                         FILE 04
@@ -304,20 +295,21 @@
 
                 </div>
 
+            </div>
 
 
-                <!-- =========================
-                     FILE 05
-                ========================== -->
 
-                <div
-                    class="archive-folder locked"
-                    id="file05Folder"
-                >
+            <!-- =========================
+                 FILE 05
+            ========================== -->
 
-                    <div class="folder-icon">
-                        📁
-                    </div>
+            <div class="archive-folder locked">
+
+                <div class="folder-icon">
+                    📁
+                </div>
+
+                <div class="folder-details">
 
                     <h3>
                         FILE 05
@@ -329,447 +321,614 @@
 
                 </div>
 
-
-            </div>
-
-
-
-            <!-- FOOTER -->
-
-            <div class="folders-footer">
-
-                <p>
-                    5 FILES. 1 AVAILABLE.
-                </p>
-
-                <span>
-                    COMPLETE THE ARCHIVE TO UNLOCK.
-                </span>
-
             </div>
 
 
         </div>
 
-    </main>
+
+
+        <!-- FOOTER -->
+
+        <div class="folders-footer">
+
+            <p id="folderFooter">
+                5 FILES. 1 AVAILABLE.
+            </p>
+
+            <span>
+                COMPLETE THE ARCHIVE TO UNLOCK.
+            </span>
+
+        </div>
+
+
+    </div>
+
+</main>
 
 
 
 
-    <!-- ==================================================
-         FILE 01 — ANNIVERSARY WELCOME
-    =================================================== -->
+<!-- ==================================================
+     FILE 01 — ANNIVERSARY WELCOME
+================================================== -->
 
-    <main
-        class="screen hidden"
-        id="file01Welcome"
-    >
+<main class="screen hidden" id="file01Welcome">
 
-        <div class="file01-welcome">
+    <div class="file01-welcome">
 
-
-            <div class="file01-code">
-                FILE 01 / TRACE — 001
-            </div>
+        <div class="file01-code">
+            FILE 01 / TRACE — 001
+        </div>
 
 
-            <h2>
+        <h2>
 
-                HAPPY ANNIVERSARY,
+            HAPPY ANNIVERSARY,
 
-                <span>
-                    KANNAYA. ❤️
-                </span>
+            <span>
+                KANNAYA. ❤️
+            </span>
 
-            </h2>
-
-
-            <div class="welcome-line"></div>
+        </h2>
 
 
-
-            <!-- =========================
-                 YOUR MESSAGE
-            ========================== -->
-
-            <div class="file01-message">
+        <div class="welcome-line"></div>
 
 
-                <p>
-                    One whole year...bangarammmmmm
-                </p>
+        <div class="file01-message">
+
+            <p>
+                One whole year...bangarammmmmm
+            </p>
+
+            <p>
+                One year of memories....
+            </p>
+
+            <p>
+                Little moments.....stupiddd conversations
+            </p>
+
+            <p>
+                Random laughs....and somehowww....
+            </p>
+
+            <p>
+                everything became
+                <strong>ours.</strong>
+            </p>
 
 
-                <p>
-                    One year of memories....
-                </p>
+            <div class="message-gap"></div>
 
 
-                <p>
-                    Little moments.....stupiddd conversations
-                </p>
+            <p>
+                A whole year has passed...
+            </p>
+
+            <p>
+                And there are still so many things
+                I want to tell you...
+                avi entha chpina avatledhu entoooo
+            </p>
 
 
-                <p>
-                    Random laughs....and somehowww....
-                </p>
+            <div class="message-gap"></div>
 
 
-                <p>
-                    everything became
-                    <strong>ours.</strong>
-                </p>
+            <p>
+                But before we continue...
+            </p>
+
+            <p class="pink-text">
+                I have a small question for you. ❤️
+            </p>
+
+        </div>
 
 
+        <button
+            class="file01-button"
+            onclick="showFile01Question()"
+        >
+            OKAY →
+        </button>
 
-                <div class="message-gap"></div>
+    </div>
 
-
-
-                <p>
-                    A whole year has passed...
-                </p>
-
-
-                <p>
-                    And there are stil so many things
-                    I want to tell you...avi entha chpina
-                    avatledhu entoooo
-                </p>
-
-
-
-                <div class="message-gap"></div>
-
-
-
-                <p>
-                    But before we continue...
-                </p>
-
-
-                <p class="pink-text">
-                    I have a small question for you. ❤️
-                </p>
-
-            </div>
+</main>
 
 
 
-            <!-- OKAY BUTTON -->
+
+<!-- ==================================================
+     FILE 01 — QUESTION
+================================================== -->
+
+<main class="screen hidden" id="file01Question">
+
+    <div class="file01-question">
+
+        <div class="file01-code">
+            FILE 01 / QUESTION 01
+        </div>
+
+
+        <h2>
+            A LITTLE QUESTION
+            BUJJIII...
+        </h2>
+
+
+        <div class="question-space">
+
+            <p>
+                What was the date that everything
+                had started...??!!!
+            </p>
+
+        </div>
+
+
+        <div class="answer-section">
+
+            <input
+                type="text"
+                id="clueAnswer"
+                autocomplete="off"
+                placeholder="WRITE YOUR ANSWER..."
+            >
+
 
             <button
                 class="file01-button"
-                onclick="showFile01Question()"
+                onclick="verifyClue()"
             >
-                OKAY →
+                VERIFY →
             </button>
 
 
-        </div>
-
-    </main>
-
-
-
-
-    <!-- ==================================================
-         FILE 01 — QUESTION
-    =================================================== -->
-
-    <main
-        class="screen hidden"
-        id="file01Question"
-    >
-
-        <div class="file01-question">
-
-
-            <div class="file01-code">
-                FILE 01 / QUESTION 01
-            </div>
-
-
-            <h2>
-                A LITTLE QUESTION BUJJIII...
-            </h2>
-
-
-
-            <!-- =========================
-                 QUESTION
-            ========================== -->
-
-            <div class="question-space">
-
-                <p>
-                    What was the date that
-                    everything had started...??!!!
-                </p>
-
-            </div>
-
-
-
-            <!-- =========================
-                 ANSWER
-            ========================== -->
-
-            <div class="answer-section">
-
-
-                <input
-                    type="text"
-                    id="clueAnswer"
-                    autocomplete="off"
-                    placeholder="WRITE YOUR ANSWER..."
-                >
-
-
-                <button
-                    class="file01-button"
-                    onclick="verifyClue()"
-                >
-                    VERIFY →
-                </button>
-
-
-                <p id="clueMessage"></p>
-
-
-            </div>
-
+            <p id="clueMessage"></p>
 
         </div>
 
-    </main>
+    </div>
+
+</main>
 
 
 
 
-    <!-- ==================================================
-         FILE 01 — SUCCESS
-    =================================================== -->
+<!-- ==================================================
+     FILE 01 — SUCCESS
+================================================== -->
 
-    <main
-        class="screen hidden"
-        id="file01SuccessScreen"
-    >
+<main class="screen hidden" id="file01SuccessScreen">
 
-        <div class="file01-success-page">
+    <div class="file01-success-page">
 
-
-            <div class="success-symbol">
-                ✓
-            </div>
-
-
-            <div class="file01-code">
-                TRACE VERIFIED
-            </div>
-
-
-            <h2>
-                YOU REMEMBERED. ❤️
-            </h2>
-
-
-
-            <!-- SUCCESS MESSAGE -->
-
-            <div class="success-message">
-
-
-                <p>
-                    CORRECT.
-                </p>
-
-
-                <p>
-                    I knew you would remember.
-                </p>
-
-
-
-                <div class="message-gap"></div>
-
-
-
-                <p>
-                    Maybe that's one of
-                    my favourite things about you.
-                </p>
-
-
-                <p>
-                    You remember
-                    the little things.
-                </p>
-
-
-
-                <div class="message-gap"></div>
-
-
-
-                <p class="pink-text">
-                    And this little date...
-                </p>
-
-
-                <p class="pink-text">
-                    means everything to us.
-                </p>
-
-
-            </div>
-
-
-
-            <div class="success-line"></div>
-
-
-            <h3>
-                FILE 01 COMPLETE.
-            </h3>
-
-
-
-            <!-- CONTINUE TO ARCHIVE -->
-
-            <button
-                class="file01-button"
-                onclick="completeFile01()"
-            >
-                CONTINUE →
-            </button>
-
-
+        <div class="success-symbol">
+            ✓
         </div>
 
-    </main>
+
+        <div class="file01-code">
+            TRACE VERIFIED
+        </div>
 
 
+        <h2>
+            YOU REMEMBERED. ❤️
+        </h2>
 
 
-    <!-- ==================================================
-         FILE 02 — CORE MEMORY
-    =================================================== -->
+        <div class="success-message">
 
-    <main
-        class="screen hidden"
-        id="file02Screen"
-    >
-
-        <div class="file02-container">
-
-
-            <!-- FILE CODE -->
-
-            <div class="file02-code">
-                FILE 02 / CORE MEMORY — 002
-            </div>
-
-
-
-            <!-- TITLE -->
-
-            <h2>
-                OUR FIRST MEET. ❤️
-            </h2>
-
-
-
-            <div class="file02-line"></div>
-
-
-
-            <!-- ==================================================
-                 YOUR PERSONAL MESSAGE
-                 
-                 WRITE EVERYTHING YOU WANT HERE.
-                 YOU CAN ADD AS MANY <p> PARAGRAPHS AS YOU WANT.
-            =================================================== -->
-
-            <div class="file02-story">
-
-
-                <p>
-                    Inka em chpali ra mana gurinchi..last eh motham chpesa anukunta ga.
-                </p>
-
-
-                <p>
-                    Mana 1st meet entha chpina saripodhu..andi dhani gurinchi.
-                </p>
-
-                <p>
-                Inka em chpali ra mana gurinchi last eh motham chpesa anukunta ga
+            <p>
+                CORRECT.
             </p>
 
             <p>
-                Mana 1st meet entha chpina saripodhu andi dhani gurinchi 
+                I knew you would remember.
+            </p>
+
+
+            <div class="message-gap"></div>
+
+
+            <p>
+                Maybe that's one of
+                my favourite things about you.
             </p>
 
             <p>
-                nuvu na jeevitham ra...aa oka roju ninu tesku veladam vala na lyf ipudu intha colourful ga untadhi ani anukole nana
+                You remember
+                the little things.
             </p>
+
+
+            <div class="message-gap"></div>
+
+
+            <p class="pink-text">
+                And this little date...
+            </p>
+
+            <p class="pink-text">
+                means everything to us.
+            </p>
+
+        </div>
+
+
+        <div class="success-line"></div>
+
+
+        <h3>
+            FILE 01 COMPLETE.
+        </h3>
+
+
+        <button
+            class="file01-button"
+            onclick="completeFile01()"
+        >
+            CONTINUE →
+        </button>
+
+    </div>
+
+</main>
+
+
+
+
+<!-- ==================================================
+     FILE 02 — CORE MEMORY
+================================================== -->
+
+<main class="screen hidden" id="file02Screen">
+
+    <div class="file02-container">
+
+
+        <div class="file02-code">
+            FILE 02 / CORE MEMORY — 002
+        </div>
+
+
+        <h2>
+            OUR FIRST MEET. ❤️
+        </h2>
+
+
+        <div class="file02-line"></div>
+
+
+        <!-- ==========================================
+             YOUR PERSONAL MESSAGE
+             WRITE WHATEVER YOU WANT HERE
+        =========================================== -->
+
+        <div class="file02-story">
+
 
             <p>
-                eni godavalu vachy mana madhya...madhu gadi vishyam lo..pedha godava..vadhilestha anavu..adhi dhati..bhargavi vishyam lo antha pedha godava...vadhiledham anukunavu....adhi dhati..bhagi vishyam lo godava..ala eni godavalu pada end of the day...idharam idharini kavali anukuntamu
-                starting lo serious teskole anavu ga ra..serious teskokunda ne na lyf intha bagundhi ne vala..inka nanu ne responsibility ani anukunte inka na lyf entha baguntadhooo nana..godavalu vasthunay em untadhi odhu antavu ga..anni godavalu jarigina ipudu manam ela unamo chudu
-                aa roju nuvu nanu kiss endhuku adigavo..asalu em aalochinchakunda nenu endhuku ichano..manam ala endhuku ayamo...apudu odhu anukoni kuda edhaina mana manchike ani flow lo vachesa...look now nuve na jeevitham ayipoyavu
-                asalu dina ni gurinchi endhuku aalochisthunavu nuvu..adhi 9th lo jarigindhi tht too infactuation...naku ipudu vadi medha emi ledhu...ma madhya physical ga em jaragale kuda apudu..okasari ethukunadu nanu anthe tht too kalla degara patukoni anthe..asalu vadi kosam nenu eh roju efforts petale..ma mummy valu vadhiley anagane vadhilesa vadni..
-                tharvatha nuvu vachavu ante haa avunu vachavu..but ne tharvatha malli evaru raru..ochina naku odhu..nuve ra naku anniii..just matalu ani anukoku..nijam idhi..i loveeeeeeee youuuuuuuu a lottttttttttt💋😘
-            </p>
-                
-                </div>
-
-
-            </div>
-
-
-
-            <div class="file02-line"></div>
-
-
-
-            <!-- ENDING -->
-
-            <p class="file02-ending">
-
-                SOME MEMORIES AREN'T JUST MEMORIES.
-
-                <br>
-
-                THEY BECOME A PART OF US.
-
+                Inka em chpali ra mana gurinchi
+                last eh motham chpesa anukunta ga
             </p>
 
 
+            <p>
+                Mana 1st meet entha chpina saripodhu
+                andi dhani gurinchi
+            </p>
 
-            <!-- CONTINUE -->
 
-            <button
-                class="file02-button"
-                onclick="completeFile02()"
-            >
-                CONTINUE →
-            </button>
+            <p>
+                nuvu na jeevitham ra...
+                aa oka roju ninu tesku veladam vala
+                na lyf ipudu intha colourful ga untadhi
+                ani anukole nana
+            </p>
+
+
+            <p>
+                eni godavalu vachy mana madhya...
+                madhu gadi vishyam lo..
+                pedha godava..
+                vadhilestha anavu..
+                adhi dhati..
+                bhargavi vishyam lo antha pedha godava...
+                vadhiledham anukunavu....
+            </p>
+
+
+            <p>
+                adhi dhati..
+                bhagi vishyam lo godava..
+                ala eni godavalu pada
+                end of the day...
+                idharam idharini kavali anukuntamu
+            </p>
+
+
+            <p>
+                starting lo serious teskole anavu ga ra..
+                serious teskokunda ne
+                na lyf intha bagundhi ne vala..
+                inka nanu ne responsibility ani anukunte
+                inka na lyf entha baguntadhooo nana..
+            </p>
+
+
+            <p>
+                godavalu vasthunay em untadhi
+                odhu antavu ga..
+                anni godavalu jarigina
+                ipudu manam ela unamo chudu
+            </p>
+
+
+            <p>
+                aa roju nuvu nanu kiss endhuku adigavo..
+                asalu em aalochinchakunda
+                nenu endhuku ichano..
+                manam ala endhuku ayamo...
+            </p>
+
+
+            <p>
+                apudu odhu anukoni kuda
+                edhaina mana manchike ani
+                flow lo vachesa...
+                look now nuve na jeevitham ayipoyavu
+            </p>
+
+
+            <p>
+                asalu dina ni gurinchi endhuku
+                aalochisthunavu nuvu..
+                adhi 9th lo jarigindhi
+                tht too infactuation...
+                naku ipudu vadi medha emi ledhu...
+            </p>
+
+
+            <p>
+                ma madhya physical ga em jaragale kuda apudu..
+                okasari ethukunadu nanu anthe
+                tht too kalla degara patukoni anthe..
+                asalu vadi kosam nenu eh roju efforts petale..
+                ma mummy valu vadhiley anagane
+                vadhilesa vadni..
+            </p>
+
+
+            <p>
+                tharvatha nuvu vachavu ante
+                haa avunu vachavu..
+                but ne tharvatha malli evaru raru..
+                ochina naku odhu..
+                nuve ra naku anniii..
+            </p>
+
+
+            <p>
+                just matalu ani anukoku..
+                nijam idhi..
+                i loveeeeeeee youuuuuuuu
+                a lottttttttttt ❤️
+            </p>
+
+
+            <div class="message-gap"></div>
+
+
+            <!-- ======================================
+                 WRITE MORE OF YOUR OWN MESSAGE HERE
+            ======================================= -->
+
+            <p class="file02-love">
+
+                THIS IS WHERE I WANT TO TELL YOU
+                EVERYTHING I FEEL ABOUT YOU...
+
+            </p>
+
+
+            <p class="file02-love">
+
+                WRITE YOUR OWN WORDS HERE...
+
+            </p>
+
+
+            <p class="file02-love">
+
+                WRITE AS MUCH AS YOU WANT.
+                THIS PAGE WILL SCROLL IF THE MESSAGE
+                BECOMES LONG.
+
+            </p>
 
 
         </div>
 
-    </main>
+
+        <div class="file02-line"></div>
+
+
+        <p class="file02-ending">
+
+            SOME MEMORIES AREN'T JUST MEMORIES.
+
+            <br><br>
+
+            THEY BECOME A PART OF US.
+
+        </p>
+
+
+        <button onclick="completeFile02()">
+            CONTINUE →
+        </button>
+
+
+    </div>
+
+</main>
 
 
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
+
+
+<!-- ==================================================
+     FILE UNLOCK SYSTEM
+================================================== -->
+
+<script>
+
+    /*
+       FILE 02 UNLOCK STATUS
+    */
+
+    let file02Unlocked =
+        localStorage.getItem("file02Unlocked") === "true";
+
+
+    /*
+       UPDATE FILE 02 APPEARANCE
+    */
+
+    function updateFile02Lock() {
+
+        const file02 =
+            document.getElementById("file02Folder");
+
+        const status =
+            document.getElementById("file02Status");
+
+        const footer =
+            document.getElementById("folderFooter");
+
+
+        if (file02Unlocked) {
+
+            file02.classList.remove("locked");
+
+            file02.classList.add("unlocked");
+
+            status.innerHTML =
+                "ACCESS AVAILABLE";
+
+            footer.innerHTML =
+                "5 FILES. 2 AVAILABLE.";
+
+        }
+
+    }
+
+
+    /*
+       RUN WHEN PAGE LOADS
+    */
+
+    updateFile02Lock();
+
+
+
+    /*
+       AFTER FILE 01 IS COMPLETED
+       RETURN TO FILES PAGE
+       AND UNLOCK FILE 02
+    */
+
+    function completeFile01() {
+
+        file02Unlocked = true;
+
+        localStorage.setItem(
+            "file02Unlocked",
+            "true"
+        );
+
+
+        document
+            .getElementById("file01SuccessScreen")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("foldersScreen")
+            .classList.remove("hidden");
+
+
+        updateFile02Lock();
+
+    }
+
+
+
+    /*
+       OPEN FILE 02
+    */
+
+    function openFile02() {
+
+        if (!file02Unlocked) {
+
+            return;
+
+        }
+
+
+        document
+            .getElementById("foldersScreen")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("file02Screen")
+            .classList.remove("hidden");
+
+
+        window.scrollTo(0, 0);
+
+    }
+
+
+
+    /*
+       FILE 02 CONTINUE
+       FOR NOW IT RETURNS TO FILES PAGE
+    */
+
+    function completeFile02() {
+
+        document
+            .getElementById("file02Screen")
+            .classList.add("hidden");
+
+
+        document
+            .getElementById("foldersScreen")
+            .classList.remove("hidden");
+
+
+        window.scrollTo(0, 0);
+
+    }
+
+</script>
 
 
 </body>
