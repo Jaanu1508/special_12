@@ -629,27 +629,62 @@ h1 {
     .folders-title {
         margin-bottom: 25px;
     }
-/* =========================
-/* =========================
-   FILE 01 — THE FIRST TRACE
-========================= */
+/* ===============================
+   FILE 01 — ARCHIVE STYLE
+================================ */
 
-.file01-container {
-    width: min(90%, 720px);
-    text-align: center;
+#file01Screen {
+    min-height: 100vh;
     padding: 40px 20px;
-    max-height: 90vh;
     overflow-y: auto;
 }
 
+.file01-container {
+    width: min(92%, 760px);
+    margin: auto;
+    padding: 45px 55px;
 
-/* FILE CODE */
+    background: rgba(5, 5, 5, 0.88);
+
+    border: 1px solid rgba(255, 92, 156, 0.55);
+
+    box-shadow:
+        0 0 35px rgba(255, 0, 100, 0.08),
+        inset 0 0 30px rgba(255, 0, 100, 0.02);
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+/* TOP LINE */
+
+.file01-container::before {
+    content: "";
+
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    height: 1px;
+
+    background: rgba(255, 92, 156, 0.25);
+}
+
+
+/* FILE NUMBER */
 
 .file01-code {
     font-size: 10px;
+
     letter-spacing: 5px;
-    color: #666;
-    margin-bottom: 35px;
+
+    color: #777;
+
+    margin-bottom: 25px;
 }
 
 
@@ -657,67 +692,81 @@ h1 {
 
 .file01-container h2 {
     font-size: clamp(28px, 5vw, 48px);
+
     letter-spacing: 7px;
-    margin-bottom: 40px;
+
+    color: white;
+
+    margin-bottom: 35px;
 
     text-shadow:
-        0 0 25px rgba(255, 0, 100, 0.25);
+        0 0 20px rgba(255, 92, 156, 0.25);
 }
 
 
-/* STORY */
+/* STORY TEXT */
 
 .file01-story {
-    max-width: 560px;
+    max-width: 600px;
+
     margin: auto;
+
+    padding: 10px 0;
 }
+
 
 .file01-story p {
     font-size: 14px;
-    line-height: 2;
+
+    line-height: 2.2;
 
     letter-spacing: 1px;
 
     color: #cfcfcf;
 
-    margin: 0 0 28px;
+    margin-bottom: 28px;
 }
 
-.file01-story p:nth-last-child(-n+2) {
+
+/* PINK EMPHASIS */
+
+.file01-story p:last-child {
     color: #ff7eaa;
+
+    margin-bottom: 0;
 }
 
 
 /* DIVIDER */
 
 .file01-divider {
-    color: #333;
+    width: 70%;
 
-    font-size: 10px;
+    height: 1px;
 
-    letter-spacing: 2px;
+    background: rgba(255, 92, 156, 0.25);
 
-    margin: 35px 0;
+    margin: 40px auto;
 }
 
 
-/* =========================
-   CLUE
-========================= */
+/* ===============================
+   CLUE BOX
+================================ */
 
 .clue-box {
-    max-width: 560px;
+    max-width: 600px;
 
-    margin: auto;
+    margin: 0 auto 35px;
 
-    padding: 35px 25px;
-
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 32px 30px;
 
     background: rgba(255, 255, 255, 0.025);
 
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
     box-shadow:
-        0 0 30px rgba(255, 0, 100, 0.04);
+        inset 0 0 25px rgba(255, 0, 100, 0.025);
 }
 
 
@@ -728,53 +777,56 @@ h1 {
 
     color: #ff5c9c;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 
 .clue-box p {
     font-size: 14px;
 
-    line-height: 2;
+    line-height: 2.1;
+
+    letter-spacing: 1px;
 
     color: #ccc;
 
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
-.clue-box p:last-child {
-    color: #ff7eaa;
 
+.clue-box p:last-child {
     margin-bottom: 0;
 }
 
 
-/* =========================
-   ANSWER
-========================= */
+/* ===============================
+   ANSWER SECTION
+================================ */
 
 .answer-section {
-    max-width: 400px;
+    width: min(100%, 430px);
 
-    margin: auto;
+    margin: 0 auto;
 }
 
 
-.answer-title {
+.answer-section label {
+    display: block;
+
     font-size: 10px;
 
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 
     color: #777;
 
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 
 .answer-section input {
     width: 100%;
 
-    padding: 15px;
+    padding: 14px 16px;
 
     background: #080808;
 
@@ -790,7 +842,7 @@ h1 {
 
     letter-spacing: 3px;
 
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 
@@ -798,7 +850,7 @@ h1 {
     border-color: #ff5c9c;
 
     box-shadow:
-        0 0 15px rgba(255, 20, 100, 0.15);
+        0 0 15px rgba(255, 92, 156, 0.15);
 }
 
 
@@ -813,13 +865,13 @@ h1 {
 
     border: none;
 
+    cursor: pointer;
+
     font-family: inherit;
 
     font-weight: bold;
 
     letter-spacing: 3px;
-
-    cursor: pointer;
 
     transition: 0.3s;
 }
@@ -829,13 +881,13 @@ h1 {
     background: #ff5c9c;
 
     color: white;
-
-    transform: translateY(-2px);
 }
 
 
+/* MESSAGE */
+
 #clueMessage {
-    margin-top: 15px;
+    margin-top: 18px;
 
     font-size: 11px;
 
@@ -843,65 +895,47 @@ h1 {
 }
 
 
-/* =========================
+/* ===============================
    TRACE STATUS
-========================= */
+================================ */
 
-.trace-status {
-    display: flex;
+#traceStatus {
+    margin-top: 30px;
 
-    flex-direction: column;
-
-    gap: 10px;
-
-    margin: 30px 0 10px;
-}
-
-
-.trace-status span {
-    font-size: 9px;
+    font-size: 10px;
 
     letter-spacing: 4px;
 
-    color: #444;
+    color: #555;
 }
 
 
-.trace-status strong {
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
-    color: #666;
-
-    font-weight: normal;
-}
-
-
-/* =========================
+/* ===============================
    SUCCESS
-========================= */
+================================ */
 
 .file01-success {
-    margin-top: 45px;
+    margin-top: 35px;
 
-    padding: 40px 25px;
+    padding: 30px;
 
     border: 1px solid #ff5c9c;
 
-    background: rgba(255, 20, 100, 0.05);
+    background: rgba(255, 92, 156, 0.04);
 
     box-shadow:
-        0 0 35px rgba(255, 20, 100, 0.12);
+        0 0 30px rgba(255, 92, 156, 0.12);
 
-    animation: reveal 1s ease forwards;
+    animation: reveal 0.8s ease forwards;
 }
 
 
-.success-symbol {
-    font-size: 30px;
-
+.file01-success p {
     color: #ff5c9c;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
 
     margin-bottom: 20px;
 }
@@ -912,81 +946,42 @@ h1 {
 
     letter-spacing: 4px;
 
-    color: #ff5c9c;
-
-    margin-bottom: 25px;
-}
-
-
-.file01-success p {
-    color: #bbb;
-
-    font-size: 13px;
-
-    line-height: 2;
-
-    margin-bottom: 18px;
-}
-
-
-.recovered-date {
-    font-size: 28px;
-
-    letter-spacing: 6px;
-
     color: white;
 
-    margin: 25px 0;
+    margin-bottom: 15px;
 }
 
 
-.file01-success button {
-    margin-top: 20px;
+.file01-success span {
+    font-size: 12px;
 
-    padding: 14px 35px;
+    letter-spacing: 2px;
 
-    background: white;
-
-    color: black;
-
-    border: none;
-
-    font-family: inherit;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
+    color: #999;
 }
 
 
-.file01-success button:hover {
-    background: #ff5c9c;
-
-    color: white;
-}
-
-
-/* =========================
+/* ===============================
    MOBILE
-========================= */
+================================ */
 
 @media (max-width: 600px) {
 
+    #file01Screen {
+        padding: 25px 12px;
+    }
+
     .file01-container {
-        padding: 25px 10px;
+        padding: 35px 20px;
     }
 
     .file01-container h2 {
         letter-spacing: 4px;
     }
 
-    .file01-story p,
-    .clue-box p {
+    .file01-story p {
         font-size: 13px;
+        line-height: 2;
     }
 
     .clue-box {
