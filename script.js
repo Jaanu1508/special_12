@@ -30,14 +30,12 @@ for (let i = 0; i < 45; i++) {
 }
 
 
-
 // ===============================
 // LOGIN DETAILS
 // ===============================
 
 const correctUsername = "12102025";
 const correctPassword = "38104015";
-
 
 
 // ===============================
@@ -89,7 +87,6 @@ function login() {
 }
 
 
-
 // ===============================
 // ARCHIVE SEQUENCE
 // ===============================
@@ -134,7 +131,6 @@ function playArchiveSequence() {
 }
 
 
-
 // ===============================
 // OPEN ARCHIVE
 // ===============================
@@ -152,7 +148,6 @@ function startArchive() {
 }
 
 
-
 // ===============================
 // OPEN FILE 01
 // ===============================
@@ -164,29 +159,12 @@ function openFile01() {
         .classList.add("hidden");
 
     document
-        .getElementById("file01Welcome")
-        .classList.remove("hidden");
-
-}
-
-
-
-// ===============================
-// FILE 01 — OKAY BUTTON
-// ===============================
-
-function showFile01Question() {
-
-    document
-        .getElementById("file01Welcome")
-        .classList.add("hidden");
-
-    document
         .getElementById("file01Question")
         .classList.remove("hidden");
 
-}
+    window.scrollTo(0, 0);
 
+}
 
 
 // ===============================
@@ -202,15 +180,9 @@ function verifyClue() {
             .trim()
             .toLowerCase();
 
-
     const message =
         document.getElementById("clueMessage");
 
-
-    /*
-       Accepting multiple formats
-       so he can type the date naturally.
-    */
 
     const correctAnswers = [
         "12.10.25",
@@ -226,20 +198,15 @@ function verifyClue() {
 
         message.textContent = "";
 
-
-        // Hide question
-
         document
             .getElementById("file01Question")
             .classList.add("hidden");
 
-
-        // Show success page
-
         document
-            .getElementById("file01SuccessScreen")
+            .getElementById("giftIntroScreen")
             .classList.remove("hidden");
 
+        window.scrollTo(0, 0);
 
     } else {
 
@@ -254,34 +221,335 @@ function verifyClue() {
 }
 
 
+// ===============================
+// FILE 01 — START GIFT
+// ===============================
+
+function startGift() {
+
+    document
+        .getElementById("giftIntroScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("giftScreen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+
+}
+
 
 // ===============================
-// FILE 01 — CONTINUE
+// GIFT VARIABLES
+// ===============================
+
+let giftTaps = 0;
+
+
+// ===============================
+// GIFT — TAP
+// ===============================
+
+function tapGift() {
+
+    if (giftTaps >= 7) {
+        return;
+    }
+
+    giftTaps++;
+
+    const box =
+        document.getElementById("giftBox");
+
+    const counter =
+        document.getElementById("tapCounter");
+
+    const hint =
+        document.getElementById("giftHint");
+
+
+    counter.textContent =
+        "TAP " + giftTaps + " / 7";
+
+
+    box.classList.remove("shake");
+
+    void box.offsetWidth;
+
+    box.classList.add("shake");
+
+
+    if (giftTaps < 7) {
+
+        hint.textContent =
+            "Keep going... 👀";
+
+    } else {
+
+        hint.textContent =
+            "THE GIFT IS OPENING... ❤️";
+
+        setTimeout(() => {
+            openGift();
+        }, 500);
+
+    }
+
+}
+
+
+// ===============================
+// OPEN GIFT
+// ===============================
+
+function openGift() {
+
+    const box =
+        document.getElementById("giftBox");
+
+    box.classList.remove("shake");
+
+    box.classList.add("open");
+
+
+    createFireworks();
+    createConfetti();
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("pandaReveal")
+            .classList.add("show");
+
+    }, 800);
+
+}
+
+
+// ===============================
+// FIREWORKS
+// ===============================
+
+function createFireworks() {
+
+    const celebration =
+        document.getElementById("celebration");
+
+
+    for (let i = 0; i < 8; i++) {
+
+        const centerX =
+            10 + Math.random() * 80;
+
+        const centerY =
+            15 + Math.random() * 45;
+
+
+        for (let j = 0; j < 18; j++) {
+
+            const particle =
+                document.createElement("div");
+
+            particle.className =
+                "firework";
+
+
+            const angle =
+                (Math.PI * 2 * j) / 18;
+
+            const distance =
+                50 + Math.random() * 100;
+
+
+            particle.style.left =
+                centerX + "vw";
+
+            particle.style.top =
+                centerY + "vh";
+
+            particle.style.setProperty(
+                "--x",
+                Math.cos(angle) * distance + "px"
+            );
+
+            particle.style.setProperty(
+                "--y",
+                Math.sin(angle) * distance + "px"
+            );
+
+
+            celebration.appendChild(particle);
+
+
+            setTimeout(() => {
+
+                particle.remove();
+
+            }, 1100);
+
+        }
+
+    }
+
+}
+
+
+// ===============================
+// CONFETTI
+// ===============================
+
+function createConfetti() {
+
+    const celebration =
+        document.getElementById("celebration");
+
+
+    for (let i = 0; i < 90; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+
+        piece.style.transform =
+            "rotate(" +
+            Math.random() * 360 +
+            "deg)";
+
+
+        const colors = [
+            "#ff4fa3",
+            "#ff72b6",
+            "#ffffff",
+            "#ffd1e6",
+            "#ff9ac5"
+        ];
+
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        celebration.appendChild(piece);
+
+
+        setTimeout(() => {
+
+            piece.remove();
+
+        }, 4500);
+
+    }
+
+}
+
+
+// ===============================
+// FILE 01 — COMPLETE
 // ===============================
 
 function completeFile01() {
 
+    let file02Unlocked = true;
+
+    localStorage.setItem(
+        "file02Unlocked",
+        "true"
+    );
+
+
     document
-        .getElementById("file01SuccessScreen")
+        .getElementById("giftScreen")
         .classList.add("hidden");
 
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
+
+
+    const file02 =
+        document.getElementById("file02Folder");
+
+    const status =
+        document.getElementById("file02Status");
+
+    const footer =
+        document.getElementById("folderFooter");
+
+
+    if (file02) {
+
+        file02.classList.remove("locked");
+
+        file02.classList.add("unlocked");
+
+    }
+
+
+    if (status) {
+
+        status.innerHTML =
+            "ACCESS AVAILABLE";
+
+    }
+
+
+    if (footer) {
+
+        footer.innerHTML =
+            "5 FILES. 2 AVAILABLE.";
+
+    }
+
+
+    window.scrollTo(0, 0);
+
+}
+
+
 // ===============================
 // OPEN FILE 02
 // ===============================
 
 function openFile02() {
 
+    const unlocked =
+        localStorage.getItem("file02Unlocked") === "true";
+
+
+    if (!unlocked) {
+        return;
+    }
+
+
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
+
     document
         .getElementById("file02Screen")
         .classList.remove("hidden");
+
+
+    window.scrollTo(0, 0);
 
 }
 
@@ -296,9 +564,12 @@ function completeFile02() {
         .getElementById("file02Screen")
         .classList.add("hidden");
 
+
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
-}
+
+    window.scrollTo(0, 0);
+
 }
