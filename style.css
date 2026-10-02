@@ -1352,6 +1352,7 @@ button:active {
 
 /* =========================================================
    PANDA REVEAL
+   NEW IMAGE VERSION
 ========================================================= */
 
 .panda-reveal {
@@ -1395,35 +1396,111 @@ button:active {
     }
 }
 
+
+/* =========================================================
+   PANDA IMAGE
+========================================================= */
+
 .panda {
-    font-size: 130px;
+    display: flex;
 
-    margin-bottom: 10px;
+    justify-content: center;
 
-    animation:
-        pandaBounce
-        1.5s
-        ease-in-out
-        infinite;
+    align-items: center;
+
+    min-height: 180px;
+
+    margin:
+        25px auto 10px;
+}
+
+.panda img {
+    display: block;
+
+    width: 230px;
+
+    max-width: 75vw;
+
+    height: auto;
+
+    object-fit: contain;
 
     filter:
         drop-shadow(
             0 0 15px
             rgba(255, 100, 180, 0.5)
         );
+
+    animation:
+        pandaPop
+        1s
+        ease-out
+        both,
+
+        pandaFloat
+        3s
+        ease-in-out
+        1s
+        infinite;
 }
 
-@keyframes pandaBounce {
+
+/* =========================================================
+   PANDA POP
+========================================================= */
+
+@keyframes pandaPop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(0.35)
+            translateY(40px);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            scale(1.12)
+            translateY(-8px);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   PANDA FLOAT
+========================================================= */
+
+@keyframes pandaFloat {
 
     0%,
     100% {
-        transform: translateY(0);
+        transform:
+            translateY(0)
+            rotate(0deg);
     }
 
     50% {
-        transform: translateY(-12px);
+        transform:
+            translateY(-7px)
+            rotate(-1deg);
     }
 }
+
+
+/* =========================================================
+   PANDA MESSAGE
+========================================================= */
 
 .panda-message {
     padding: 25px;
@@ -1830,8 +1907,17 @@ button:active {
         transform: scale(0.9);
     }
 
+
+    /* PANDA */
+
     .panda {
-        font-size: 100px;
+        min-height: 150px;
+    }
+
+    .panda img {
+        width: 200px;
+
+        max-width: 75vw;
     }
 
     .panda-message {
@@ -1840,6 +1926,10 @@ button:active {
 
     .panda-message p {
         font-size: 16px;
+    }
+
+    .big-love {
+        font-size: 21px !important;
     }
 
 
