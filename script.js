@@ -316,18 +316,29 @@ function openGift() {
     createFireworks();
     createConfetti();
 
-
     setTimeout(() => {
 
-        document
-            .getElementById("pandaReveal")
-            .classList.add("show");
+    const panda = document.getElementById("pandaImage");
 
-    }, 800);
+    document
+        .getElementById("pandaReveal")
+        .classList.add("show");
 
+    // Panda pops out happily
+    panda.src = "panda_happy.png";
+
+    // Change expression after a moment
+    setTimeout(() => {
+        panda.src = "panda_wink.png";
+    }, 2200);
+
+    // Final cute expression
+    setTimeout(() => {
+        panda.src = "panda_hug_heart.png";
+    }, 4400);
+
+}, 800);
 }
-
-
 // ===============================
 // FIREWORKS
 // ===============================
