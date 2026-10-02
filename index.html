@@ -346,103 +346,6 @@
     </div>
 
 </main>
-
-
-
-
-<!-- ==================================================
-     FILE 01 — ANNIVERSARY WELCOME
-================================================== -->
-
-<main class="screen hidden" id="file01Welcome">
-
-    <div class="file01-welcome">
-
-        <div class="file01-code">
-            FILE 01 / TRACE — 001
-        </div>
-
-
-        <h2>
-
-            HAPPY ANNIVERSARY,
-
-            <span>
-                KANNAYA. ❤️
-            </span>
-
-        </h2>
-
-
-        <div class="welcome-line"></div>
-
-
-        <div class="file01-message">
-
-            <p>
-                One whole year...bangarammmmmm
-            </p>
-
-            <p>
-                One year of memories....
-            </p>
-
-            <p>
-                Little moments.....stupiddd conversations
-            </p>
-
-            <p>
-                Random laughs....and somehowww....
-            </p>
-
-            <p>
-                everything became
-                <strong>ours.</strong>
-            </p>
-
-
-            <div class="message-gap"></div>
-
-
-            <p>
-                A whole year has passed...
-            </p>
-
-            <p>
-                And there are still so many things
-                I want to tell you...
-                avi entha chpina avatledhu entoooo
-            </p>
-
-
-            <div class="message-gap"></div>
-
-
-            <p>
-                But before we continue...
-            </p>
-
-            <p class="pink-text">
-                I have a small question for you. ❤️
-            </p>
-
-        </div>
-
-
-        <button
-            class="file01-button"
-            onclick="showFile01Question()"
-        >
-            OKAY →
-        </button>
-
-    </div>
-
-</main>
-
-
-
-
 <!-- ==================================================
      FILE 01 — QUESTION
 ================================================== -->
@@ -498,84 +401,45 @@
 
 </main>
 
-
-
-
 <!-- ==================================================
-     FILE 01 — SUCCESS
+     FILE 01 — SURPRISE INTRO
 ================================================== -->
 
-<main class="screen hidden" id="file01SuccessScreen">
+<main class="screen hidden" id="giftIntroScreen">
 
-    <div class="file01-success-page">
-
-        <div class="success-symbol">
-            ✓
-        </div>
-
+    <div class="gift-intro">
 
         <div class="file01-code">
-            TRACE VERIFIED
+            TRACE VERIFIED ✓
         </div>
-
 
         <h2>
             YOU REMEMBERED. ❤️
         </h2>
 
+        <p>
+            But wait...
+        </p>
 
-        <div class="success-message">
+        <p class="pink-text">
+            I have a little surprise for you. 👀
+        </p>
 
-            <p>
-                CORRECT.
-            </p>
+        <div class="gift-intro-line"></div>
 
-            <p>
-                I knew you would remember.
-            </p>
+        <p>
+            Something is waiting for you...
+        </p>
 
-
-            <div class="message-gap"></div>
-
-
-            <p>
-                Maybe that's one of
-                my favourite things about you.
-            </p>
-
-            <p>
-                You remember
-                the little things.
-            </p>
-
-
-            <div class="message-gap"></div>
-
-
-            <p class="pink-text">
-                And this little date...
-            </p>
-
-            <p class="pink-text">
-                means everything to us.
-            </p>
-
-        </div>
-
-
-        <div class="success-line"></div>
-
-
-        <h3>
-            FILE 01 COMPLETE.
-        </h3>
-
+        <p class="gift-instruction">
+            🎁 Click the gift box <strong>7 times.</strong>
+        </p>
 
         <button
             class="file01-button"
-            onclick="completeFile01()"
+            onclick="startGift()"
         >
-            CONTINUE →
+            OPEN THE SURPRISE →
         </button>
 
     </div>
@@ -583,8 +447,133 @@
 </main>
 
 
+<!-- ==================================================
+     FILE 01 — GIFT SURPRISE
+================================================== -->
+
+<main class="screen hidden" id="giftScreen">
+
+    <div class="gift-container">
+
+        <div class="file01-code">
+            FILE 01 / SURPRISE — 001
+        </div>
+
+        <div class="tap-counter" id="tapCounter">
+            TAP 0 / 7
+        </div>
+
+        <p class="gift-hint" id="giftHint">
+            Click the gift box 7 times...
+        </p>
 
 
+        <!-- GIFT BOX -->
+
+        <div
+            class="gift-box"
+            id="giftBox"
+            onclick="tapGift()"
+        >
+
+            <div class="gift-lid">
+
+                <div class="gift-bow-left"></div>
+                <div class="gift-bow-right"></div>
+
+            </div>
+
+            <div class="gift-body">
+
+                <div class="gift-ribbon-vertical"></div>
+                <div class="gift-ribbon-horizontal"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CELEBRATION -->
+
+        <div
+            class="celebration"
+            id="celebration"
+        ></div>
+
+
+        <!-- PANDA -->
+
+        <div
+            class="panda-reveal"
+            id="pandaReveal"
+        >
+
+            <div class="panda">
+                🐼
+            </div>
+
+            <div class="panda-message">
+
+                <h2>
+                    HAPPY ANNIVERSARY,
+                    <span>KANNAYA. ❤️</span>
+                </h2>
+
+                <p class="anniversary-date">
+                    12.10.2026
+                </p>
+
+                <div class="panda-line"></div>
+
+                <p>
+                    ONE WHOLE YEAR OF US.
+                </p>
+
+                <p>
+                    One year of memories.
+                </p>
+
+                <p>
+                    One year of stupid conversations.
+                </p>
+
+                <p>
+                    One year of random laughs.
+                </p>
+
+                <p>
+                    One year of little fights
+                    and making up.
+                </p>
+
+                <p>
+                    And somehow...
+                </p>
+
+                <p class="pink-text">
+                    everything became OURS. ❤️
+                </p>
+
+                <p class="big-love">
+                    I LOVE YOUUUU SO MUCH,
+                    KANNAYA. ❤️
+                </p>
+
+            </div>
+
+            <button
+                class="file01-button final-continue"
+                onclick="completeFile01()"
+            >
+                CONTINUE →
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+    
 <!-- ==================================================
      FILE 02 — CORE MEMORY
 ================================================== -->
