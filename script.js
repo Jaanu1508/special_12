@@ -1,6 +1,6 @@
-// ===============================
+// ==================================================
 // FLOATING HEARTS
-// ===============================
+// ==================================================
 
 const heartsContainer = document.querySelector(".hearts");
 
@@ -13,9 +13,12 @@ for (let i = 0; i < 45; i++) {
     heart.className = "heart";
 
     heart.textContent =
-        heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heartSymbols[
+            Math.floor(Math.random() * heartSymbols.length)
+        ];
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.left =
+        Math.random() * 100 + "vw";
 
     heart.style.fontSize =
         (10 + Math.random() * 18) + "px";
@@ -30,25 +33,30 @@ for (let i = 0; i < 45; i++) {
 }
 
 
-// ===============================
+// ==================================================
 // LOGIN DETAILS
-// ===============================
+// ==================================================
 
 const correctUsername = "12102025";
 const correctPassword = "38104015";
 
 
-// ===============================
+// ==================================================
 // LOGIN
-// ===============================
+// ==================================================
 
 function login() {
 
     const username =
-        document.getElementById("username").value.trim();
+        document
+            .getElementById("username")
+            .value
+            .trim();
 
     const password =
-        document.getElementById("password").value;
+        document
+            .getElementById("password")
+            .value;
 
     const message =
         document.getElementById("message");
@@ -59,8 +67,11 @@ function login() {
         password === correctPassword
     ) {
 
-        message.textContent = "IDENTITY VERIFIED ✓";
-        message.style.color = "#ffffff";
+        message.textContent =
+            "IDENTITY VERIFIED ✓";
+
+        message.style.color =
+            "#ffffff";
 
 
         setTimeout(() => {
@@ -80,16 +91,19 @@ function login() {
 
     } else {
 
-        message.textContent = "ACCESS DENIED ✕";
-        message.style.color = "#ff3333";
+        message.textContent =
+            "ACCESS DENIED ✕";
+
+        message.style.color =
+            "#ff3333";
 
     }
 }
 
 
-// ===============================
-// ARCHIVE SEQUENCE
-// ===============================
+// ==================================================
+// ARCHIVE INTRO SEQUENCE
+// ==================================================
 
 function playArchiveSequence() {
 
@@ -115,7 +129,11 @@ function playArchiveSequence() {
 
         }, delay);
 
-        delay += index === 0 ? 1000 : 1300;
+
+        delay +=
+            index === 0
+                ? 1000
+                : 1300;
 
     });
 
@@ -127,13 +145,12 @@ function playArchiveSequence() {
             .classList.remove("hidden");
 
     }, delay + 500);
-
 }
 
 
-// ===============================
+// ==================================================
 // OPEN ARCHIVE
-// ===============================
+// ==================================================
 
 function startArchive() {
 
@@ -145,12 +162,15 @@ function startArchive() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+    updateFile02Lock();
+
+    window.scrollTo(0, 0);
 }
 
 
-// ===============================
+// ==================================================
 // OPEN FILE 01
-// ===============================
+// ==================================================
 
 function openFile01() {
 
@@ -163,13 +183,12 @@ function openFile01() {
         .classList.remove("hidden");
 
     window.scrollTo(0, 0);
-
 }
 
 
-// ===============================
+// ==================================================
 // FILE 01 — VERIFY ANSWER
-// ===============================
+// ==================================================
 
 function verifyClue() {
 
@@ -215,15 +234,13 @@ function verifyClue() {
 
         message.style.color =
             "#ff3333";
-
     }
-
 }
 
 
-// ===============================
+// ==================================================
 // FILE 01 — START GIFT
-// ===============================
+// ==================================================
 
 function startGift() {
 
@@ -236,20 +253,19 @@ function startGift() {
         .classList.remove("hidden");
 
     window.scrollTo(0, 0);
-
 }
 
 
-// ===============================
+// ==================================================
 // GIFT VARIABLES
-// ===============================
+// ==================================================
 
 let giftTaps = 0;
 
 
-// ===============================
+// ==================================================
 // GIFT — TAP
-// ===============================
+// ==================================================
 
 function tapGift() {
 
@@ -257,7 +273,9 @@ function tapGift() {
         return;
     }
 
+
     giftTaps++;
+
 
     const box =
         document.getElementById("giftBox");
@@ -272,6 +290,8 @@ function tapGift() {
     counter.textContent =
         "TAP " + giftTaps + " / 7";
 
+
+    // Restart shake animation
 
     box.classList.remove("shake");
 
@@ -290,58 +310,91 @@ function tapGift() {
         hint.textContent =
             "THE GIFT IS OPENING... ❤️";
 
+
         setTimeout(() => {
+
             openGift();
+
         }, 500);
-
     }
-
 }
 
 
-// ===============================
+// ==================================================
 // OPEN GIFT
-// ===============================
+// ==================================================
 
 function openGift() {
 
     const box =
         document.getElementById("giftBox");
 
+
     box.classList.remove("shake");
 
     box.classList.add("open");
 
 
+    // Celebration
+
     createFireworks();
+
     createConfetti();
 
+
+    // Panda reveal
+
     setTimeout(() => {
 
-    const panda = document.getElementById("pandaImage");
+        const panda =
+            document.getElementById("pandaImage");
 
-    document
-        .getElementById("pandaReveal")
-        .classList.add("show");
+        const pandaReveal =
+            document.getElementById("pandaReveal");
 
-    // Panda pops out happily
-    panda.src = "panda_happy.png";
 
-    // Change expression after a moment
-    setTimeout(() => {
-        panda.src = "panda_wink.png";
-    }, 2200);
+        pandaReveal.classList.add("show");
 
-    // Final cute expression
-    setTimeout(() => {
-        panda.src = "panda_hug_heart.png";
-    }, 4400);
 
-}, 800);
+        // ------------------------------------------
+        // EXPRESSION 1 — HAPPY
+        // ------------------------------------------
+
+        panda.src =
+            "panda_happy.png";
+
+
+        // ------------------------------------------
+        // EXPRESSION 2 — WINK
+        // ------------------------------------------
+
+        setTimeout(() => {
+
+            panda.src =
+                "panda_wink.png";
+
+        }, 2200);
+
+
+        // ------------------------------------------
+        // EXPRESSION 3 — HUG HEART
+        // ------------------------------------------
+
+        setTimeout(() => {
+
+            panda.src =
+                "panda_hug_heart.png";
+
+        }, 4400);
+
+
+    }, 800);
 }
-// ===============================
+
+
+// ==================================================
 // FIREWORKS
-// ===============================
+// ==================================================
 
 function createFireworks() {
 
@@ -363,12 +416,14 @@ function createFireworks() {
             const particle =
                 document.createElement("div");
 
+
             particle.className =
                 "firework";
 
 
             const angle =
                 (Math.PI * 2 * j) / 18;
+
 
             const distance =
                 50 + Math.random() * 100;
@@ -377,21 +432,30 @@ function createFireworks() {
             particle.style.left =
                 centerX + "vw";
 
+
             particle.style.top =
                 centerY + "vh";
 
+
             particle.style.setProperty(
                 "--x",
-                Math.cos(angle) * distance + "px"
+                Math.cos(angle) *
+                    distance +
+                    "px"
             );
+
 
             particle.style.setProperty(
                 "--y",
-                Math.sin(angle) * distance + "px"
+                Math.sin(angle) *
+                    distance +
+                    "px"
             );
 
 
-            celebration.appendChild(particle);
+            celebration.appendChild(
+                particle
+            );
 
 
             setTimeout(() => {
@@ -399,17 +463,14 @@ function createFireworks() {
                 particle.remove();
 
             }, 1100);
-
         }
-
     }
-
 }
 
 
-// ===============================
+// ==================================================
 // CONFETTI
-// ===============================
+// ==================================================
 
 function createConfetti() {
 
@@ -421,6 +482,7 @@ function createConfetti() {
 
         const piece =
             document.createElement("div");
+
 
         piece.className =
             "confetti";
@@ -452,12 +514,15 @@ function createConfetti() {
         piece.style.background =
             colors[
                 Math.floor(
-                    Math.random() * colors.length
+                    Math.random() *
+                    colors.length
                 )
             ];
 
 
-        celebration.appendChild(piece);
+        celebration.appendChild(
+            piece
+        );
 
 
         setTimeout(() => {
@@ -465,19 +530,17 @@ function createConfetti() {
             piece.remove();
 
         }, 4500);
-
     }
-
 }
 
 
-// ===============================
+// ==================================================
 // FILE 01 — COMPLETE
-// ===============================
+// ==================================================
 
 function completeFile01() {
 
-    let file02Unlocked = true;
+    // Unlock File 02
 
     localStorage.setItem(
         "file02Unlocked",
@@ -485,75 +548,143 @@ function completeFile01() {
     );
 
 
+    // Hide Gift Screen
+
     document
         .getElementById("giftScreen")
         .classList.add("hidden");
 
+
+    // Return to Archive Contents
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    const file02 =
-        document.getElementById("file02Folder");
+    // Update File 02
 
-    const status =
-        document.getElementById("file02Status");
-
-    const footer =
-        document.getElementById("folderFooter");
+    updateFile02Lock();
 
 
-    if (file02) {
-
-        file02.classList.remove("locked");
-
-        file02.classList.add("unlocked");
-
-    }
-
-
-    if (status) {
-
-        status.innerHTML =
-            "ACCESS AVAILABLE";
-
-    }
-
-
-    if (footer) {
-
-        footer.innerHTML =
-            "5 FILES. 2 AVAILABLE.";
-
-    }
-
+    // Go to top
 
     window.scrollTo(0, 0);
-
 }
 
 
-// ===============================
+// ==================================================
+// UPDATE FILE 02 LOCK
+// ==================================================
+
+function updateFile02Lock() {
+
+    const file02 =
+        document.getElementById(
+            "file02Folder"
+        );
+
+    const status =
+        document.getElementById(
+            "file02Status"
+        );
+
+    const footer =
+        document.getElementById(
+            "folderFooter"
+        );
+
+
+    if (!file02) {
+        return;
+    }
+
+
+    const unlocked =
+        localStorage.getItem(
+            "file02Unlocked"
+        ) === "true";
+
+
+    if (unlocked) {
+
+        file02.classList.remove(
+            "locked"
+        );
+
+        file02.classList.add(
+            "unlocked"
+        );
+
+
+        if (status) {
+
+            status.textContent =
+                "ACCESS AVAILABLE";
+        }
+
+
+        if (footer) {
+
+            footer.textContent =
+                "5 FILES. 2 AVAILABLE.";
+        }
+
+
+    } else {
+
+        file02.classList.remove(
+            "unlocked"
+        );
+
+        file02.classList.add(
+            "locked"
+        );
+
+
+        if (status) {
+
+            status.textContent =
+                "🔒 ACCESS LOCKED";
+        }
+
+
+        if (footer) {
+
+            footer.textContent =
+                "5 FILES. 1 AVAILABLE.";
+        }
+    }
+}
+
+
+// ==================================================
 // OPEN FILE 02
-// ===============================
+// ==================================================
 
 function openFile02() {
 
     const unlocked =
-        localStorage.getItem("file02Unlocked") === "true";
+        localStorage.getItem(
+            "file02Unlocked"
+        ) === "true";
 
+
+    // Don't open if locked
 
     if (!unlocked) {
         return;
     }
 
 
+    // Hide folders
+
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
+
+    // Show File 02
 
     document
         .getElementById("file02Screen")
@@ -561,20 +692,23 @@ function openFile02() {
 
 
     window.scrollTo(0, 0);
-
 }
 
 
-// ===============================
+// ==================================================
 // COMPLETE FILE 02
-// ===============================
+// ==================================================
 
 function completeFile02() {
 
+    // Hide File 02
+
     document
         .getElementById("file02Screen")
         .classList.add("hidden");
 
+
+    // Return to folders
 
     document
         .getElementById("foldersScreen")
@@ -582,5 +716,18 @@ function completeFile02() {
 
 
     window.scrollTo(0, 0);
-
 }
+
+
+// ==================================================
+// CHECK FILE 02 WHEN PAGE LOADS
+// ==================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        updateFile02Lock();
+
+    }
+);
