@@ -31,12 +31,16 @@ body {
     position: relative;
     min-height: 100vh;
     width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     text-align: center;
+
     z-index: 2;
+
     overflow-x: hidden;
 }
 
@@ -57,22 +61,31 @@ body {
 .hearts {
     position: fixed;
     inset: 0;
+
     overflow: hidden;
+
     pointer-events: none;
+
     z-index: 0;
 }
 
 .heart {
     position: absolute;
+
     bottom: -50px;
+
     opacity: 0.25;
+
     animation: floatHeart linear infinite;
 }
 
 @keyframes floatHeart {
 
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity: 0;
     }
 
@@ -85,7 +98,10 @@ body {
     }
 
     100% {
-        transform: translateY(-110vh) rotate(360deg);
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
         opacity: 0;
     }
 }
@@ -105,12 +121,15 @@ body {
 .lock {
     font-size: 45px;
     margin-bottom: 15px;
+
     filter: grayscale(1);
 }
 
 h1 {
     font-size: clamp(30px, 6vw, 60px);
+
     letter-spacing: 8px;
+
     margin-bottom: 15px;
 
     text-shadow:
@@ -137,9 +156,13 @@ h1 {
 
 .login-box {
     width: min(90%, 380px);
+
     margin-top: 35px;
+
     padding: 30px;
+
     border: 1px solid #333;
+
     background: rgba(255, 255, 255, 0.02);
 
     box-shadow:
@@ -148,59 +171,149 @@ h1 {
 
 .login-box label {
     display: block;
+
     text-align: left;
+
     font-size: 11px;
+
     letter-spacing: 3px;
+
     color: #888;
+
     margin-bottom: 8px;
 }
 
 .login-box input {
     width: 100%;
+
     padding: 13px;
+
     margin-bottom: 22px;
 
     background: #080808;
+
     border: 1px solid #333;
+
     color: white;
+
     outline: none;
 
     font-family: inherit;
+
     letter-spacing: 2px;
 }
 
 .login-box input:focus {
-    border-color: #aaa;
+    border-color: #ff5c9c;
+
+    box-shadow:
+        0 0 12px rgba(255, 92, 156, 0.15);
 }
 
 
 /* =========================================================
-   GENERAL BUTTONS
+   ROMANTIC BUTTONS — ALL WEBSITE
 ========================================================= */
 
-.login-box button,
-.final-intro button {
-    width: 100%;
-    padding: 14px;
+button {
+    position: relative;
 
-    background: white;
-    color: black;
+    padding: 14px 30px;
 
-    border: none;
-    cursor: pointer;
+    background:
+        linear-gradient(
+            135deg,
+            #ff5c9c,
+            #ff3f91
+        );
+
+    color: white;
+
+    border: 1px solid rgba(255, 190, 220, 0.7);
+
+    border-radius: 30px;
 
     font-family: inherit;
+
     font-weight: bold;
+
+    font-size: 12px;
+
     letter-spacing: 2px;
 
-    transition: 0.3s;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 12px rgba(255, 92, 156, 0.35),
+        0 0 28px rgba(255, 92, 156, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
 }
 
-.login-box button:hover,
-.final-intro button:hover {
-    background: #ff5c9c;
-    color: white;
-    transform: scale(1.03);
+
+/* LITTLE HEART */
+
+button::before {
+    content: "♡";
+
+    margin-right: 8px;
+
+    font-size: 15px;
+
+    transition: 0.3s ease;
+}
+
+
+/* HOVER */
+
+button:hover {
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff72b6,
+            #ff4fa3
+        );
+
+    box-shadow:
+        0 0 18px rgba(255, 92, 156, 0.55),
+        0 0 40px rgba(255, 92, 156, 0.22);
+}
+
+
+/* HEART FILLS */
+
+button:hover::before {
+    content: "♥";
+}
+
+
+/* CLICK */
+
+button:active {
+    transform: scale(0.96);
+}
+
+
+/* LOGIN BUTTON */
+
+.login-box button {
+    width: 100%;
+}
+
+
+/* FINAL INTRO BUTTON */
+
+.final-intro button {
+    width: auto;
+
+    margin-top: 35px;
 }
 
 
@@ -210,19 +323,19 @@ h1 {
 
 #message {
     margin-top: 18px;
+
     font-size: 12px;
+
     letter-spacing: 2px;
 }
 
-
-/* =========================================================
-   AUTHORIZED
-========================================================= */
-
 .authorized {
     margin-top: 25px;
+
     font-size: 9px;
+
     color: #444;
+
     letter-spacing: 3px;
 }
 
@@ -237,13 +350,18 @@ h1 {
 
 .status {
     margin: 18px 0;
+
     font-size: clamp(13px, 2vw, 18px);
+
     letter-spacing: 3px;
-    animation: fadeIn 1s ease forwards;
+
+    animation:
+        fadeIn 1s ease forwards;
 }
 
 .warning {
     color: #ff3333;
+
     margin-top: 35px;
 }
 
@@ -254,26 +372,27 @@ h1 {
 
 .final-intro {
     margin-top: 50px;
-    animation: reveal 2s ease forwards;
+
+    animation:
+        reveal 2s ease forwards;
 }
 
 .final-intro h2 {
     font-size: clamp(28px, 5vw, 55px);
+
     letter-spacing: 8px;
+
     margin: 15px 0;
 }
 
 .final-intro h3 {
     font-size: clamp(14px, 2vw, 20px);
-    color: #888;
-    letter-spacing: 5px;
-    margin: 20px 0;
-}
 
-.final-intro button {
-    width: auto;
-    padding: 15px 35px;
-    margin-top: 35px;
+    color: #888;
+
+    letter-spacing: 5px;
+
+    margin: 20px 0;
 }
 
 
@@ -283,14 +402,11 @@ h1 {
 
 .folders-container {
     width: min(92%, 900px);
+
     position: relative;
+
     z-index: 3;
 }
-
-
-/* =========================================================
-   FOLDER TITLE
-========================================================= */
 
 .folders-title {
     margin-bottom: 35px;
@@ -298,14 +414,19 @@ h1 {
 
 .folders-title p {
     font-size: 10px;
+
     color: #666;
+
     letter-spacing: 5px;
+
     margin-bottom: 12px;
 }
 
 .folders-title h2 {
     font-size: clamp(25px, 5vw, 42px);
+
     letter-spacing: 6px;
+
     margin-bottom: 12px;
 
     text-shadow:
@@ -314,7 +435,9 @@ h1 {
 
 .folders-title span {
     font-size: 10px;
+
     color: #555;
+
     letter-spacing: 3px;
 }
 
@@ -325,8 +448,12 @@ h1 {
 
 .folders-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 16px;
+
     width: 100%;
 }
 
@@ -339,11 +466,15 @@ h1 {
     position: relative;
 
     min-height: 115px;
+
     padding: 22px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -364,9 +495,7 @@ h1 {
 }
 
 
-/* =========================================================
-   FOLDER TOP TAB
-========================================================= */
+/* FOLDER TAB */
 
 .archive-folder::before {
     content: "";
@@ -374,14 +503,17 @@ h1 {
     position: absolute;
 
     top: -7px;
+
     left: 15px;
 
     width: 65px;
+
     height: 7px;
 
     background: #292929;
 
     border: 1px solid #292929;
+
     border-bottom: none;
 }
 
@@ -391,7 +523,9 @@ h1 {
 ========================================================= */
 
 .archive-folder.unlocked {
-    border-color: rgba(255, 92, 156, 0.65);
+    border-color:
+        rgba(255, 92, 156, 0.65);
+
     cursor: pointer;
 
     box-shadow:
@@ -400,11 +534,13 @@ h1 {
 
 .archive-folder.unlocked::before {
     background: #ff5c9c;
+
     border-color: #ff5c9c;
 }
 
 .archive-folder.unlocked:hover {
     transform: translateY(-5px);
+
     border-color: #ff5c9c;
 
     box-shadow:
@@ -418,17 +554,21 @@ h1 {
 
 .archive-folder.locked {
     border-color: #292929;
+
     cursor: not-allowed;
+
     opacity: 0.7;
 }
 
 .archive-folder.locked::before {
     background: #292929;
+
     border-color: #292929;
 }
 
 .archive-folder.locked:hover {
     border-color: #444;
+
     transform: translateY(-2px);
 }
 
@@ -439,13 +579,17 @@ h1 {
 
 .folder-icon {
     font-size: 34px;
+
     margin-bottom: 12px;
+
     filter: grayscale(1);
+
     opacity: 0.8;
 }
 
 .archive-folder.unlocked .folder-icon {
     filter: none;
+
     opacity: 1;
 }
 
@@ -456,8 +600,11 @@ h1 {
 
 .archive-folder h3 {
     font-size: 15px;
+
     letter-spacing: 4px;
+
     margin-bottom: 8px;
+
     color: #ddd;
 }
 
@@ -472,7 +619,9 @@ h1 {
 
 .archive-folder p {
     font-size: 9px;
+
     letter-spacing: 3px;
+
     color: #555;
 }
 
@@ -491,90 +640,107 @@ h1 {
 
 .folders-footer p {
     font-size: 10px;
+
     letter-spacing: 4px;
+
     color: #666;
+
     margin-bottom: 8px;
 }
 
 .folders-footer span {
     font-size: 9px;
+
     letter-spacing: 2px;
+
     color: #444;
 }
 
 
 /* =========================================================
-   FILE 01 — WELCOME PAGE
+   FILE 01 — OLD WELCOME
 ========================================================= */
 
 #file01Welcome {
     min-height: 100vh;
+
     padding: 60px 20px;
 
     overflow-x: hidden;
+
     overflow-y: auto;
 
     align-items: center;
+
     justify-content: center;
 }
 
 .file01-welcome {
     width: min(90%, 700px);
+
     text-align: center;
+
     padding: 50px 35px;
 }
 
 .file01-code {
     font-size: 10px;
+
     letter-spacing: 5px;
+
     color: #777;
+
     margin-bottom: 35px;
 }
 
 .file01-welcome h2 {
     font-size: clamp(26px, 5vw, 45px);
+
     letter-spacing: 5px;
+
     line-height: 1.5;
+
     margin-bottom: 40px;
 }
 
 .file01-welcome h2 span {
     color: #ff5c9c;
+
     display: block;
+
     margin-top: 8px;
 }
 
 .welcome-line {
     width: 120px;
+
     height: 1px;
-    background: rgba(255, 92, 156, 0.5);
+
+    background:
+        rgba(255, 92, 156, 0.5);
+
     margin: 0 auto 45px;
 }
 
-
-/* =========================================================
-   FILE 01 WELCOME PARAGRAPHS
-========================================================= */
-
 .file01-welcome p {
     max-width: 560px;
-    margin: 0 auto 30px;
+
+    margin:
+        0 auto 30px;
 
     font-size: 14px;
+
     line-height: 2.3;
+
     letter-spacing: 1px;
 
     color: #ccc;
 }
 
-.file01-welcome p:last-of-type {
-    margin-bottom: 0;
-}
-
 .file01-welcome .pink-text {
     color: #ff5c9c;
+
     margin-top: 45px;
-    margin-bottom: 15px;
 }
 
 
@@ -582,57 +748,32 @@ h1 {
    FILE 01 BUTTON
 ========================================================= */
 
-.file01-welcome button,
-.file01-question button,
-.file01-success-page button {
-
+.file01-button {
     margin-top: 25px;
-
-    padding: 14px 35px;
-
-    background: white;
-    color: black;
-
-    border: none;
-
-    font-family: inherit;
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.file01-welcome button:hover,
-.file01-question button:hover,
-.file01-success-page button:hover {
-
-    background: #ff5c9c;
-    color: white;
-
-    transform: scale(1.03);
 }
 
 
 /* =========================================================
-   FILE 01 — QUESTION PAGE
+   FILE 01 — QUESTION
 ========================================================= */
 
 #file01Question {
     min-height: 100vh;
+
     padding: 60px 20px;
 
     overflow-x: hidden;
+
     overflow-y: auto;
 
     align-items: center;
+
     justify-content: center;
 }
 
 .file01-question {
     width: min(90%, 700px);
+
     text-align: center;
 }
 
@@ -642,7 +783,9 @@ h1 {
 
 .file01-question h2 {
     font-size: clamp(25px, 5vw, 42px);
+
     letter-spacing: 6px;
+
     margin-bottom: 50px;
 
     text-shadow:
@@ -650,33 +793,36 @@ h1 {
 }
 
 
-/* ===============================
-   QUESTION
-================================ */
+/* QUESTION SPACE */
 
-.question-box {
+.question-box,
+.question-space {
     max-width: 620px;
-    margin: 0 auto 45px;
-    padding: 0;
+
+    margin:
+        0 auto 45px;
 }
 
-.question-box p {
-    font-size: clamp(16px, 2.5vw, 20px);
+.question-box p,
+.question-space p {
+    font-size:
+        clamp(16px, 2.5vw, 20px);
+
     line-height: 2;
+
     letter-spacing: 2px;
+
     color: #eee;
 
-    margin: 0 0 45px 0;
-    padding: 0;
+    margin: 0 0 45px;
 }
 
 
-/* =========================================================
-   QUESTION ANSWER
-========================================================= */
+/* ANSWER */
 
 .file01-question .answer-section {
     width: min(100%, 450px);
+
     margin: 0 auto;
 }
 
@@ -700,6 +846,8 @@ h1 {
     letter-spacing: 2px;
 
     margin-bottom: 15px;
+
+    border-radius: 8px;
 }
 
 .file01-question input:focus {
@@ -715,41 +863,50 @@ h1 {
 
 #clueMessage {
     margin-top: 18px;
+
     font-size: 11px;
+
     letter-spacing: 2px;
 }
 
 
 /* =========================================================
-   OLD FILE 01 SUCCESS CSS
-   KEPT FOR NOW
+   OLD FILE 01 SUCCESS
 ========================================================= */
 
 #file01SuccessScreen {
     min-height: 100vh;
+
     padding: 60px 20px;
 
     overflow-x: hidden;
+
     overflow-y: auto;
 
     align-items: center;
+
     justify-content: center;
 }
 
 .file01-success-page {
     width: min(90%, 650px);
+
     text-align: center;
+
     padding: 45px 30px;
 }
 
 .success-symbol {
     width: 55px;
+
     height: 55px;
 
     margin: 0 auto 30px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border: 1px solid #ff5c9c;
@@ -764,53 +921,64 @@ h1 {
 
 .file01-success-page .file01-code {
     color: #ff5c9c;
+
     margin-bottom: 25px;
 }
 
 .file01-success-page h2 {
     font-size: clamp(28px, 5vw, 45px);
+
     letter-spacing: 6px;
+
     margin-bottom: 35px;
+
     color: #ff5c9c;
 }
 
 .file01-success-page > p {
     font-size: 14px;
+
     line-height: 2.3;
+
     letter-spacing: 1px;
+
     color: #ccc;
+
     margin-bottom: 28px;
 }
 
 .success-line {
     width: 120px;
+
     height: 1px;
 
-    background: rgba(255, 92, 156, 0.5);
+    background:
+        rgba(255, 92, 156, 0.5);
 
     margin: 45px auto;
 }
 
 .file01-success-page h3 {
     font-size: 18px;
-    letter-spacing: 4px;
-    color: #ff5c9c;
-    margin-bottom: 15px;
-}
 
-.file01-success-page button {
-    margin-top: 30px;
+    letter-spacing: 4px;
+
+    color: #ff5c9c;
+
+    margin-bottom: 15px;
 }
 
 
 /* =========================================================
-   FILE 01 — GIFT SURPRISE
+   FILE 01 — GIFT SURPRISE INTRO
 ========================================================= */
 
 .gift-intro,
 .gift-container {
     width: min(900px, 92%);
+
     text-align: center;
+
     margin: auto;
 }
 
@@ -820,16 +988,19 @@ h1 {
 
 .gift-intro h2 {
     font-size: clamp(28px, 5vw, 48px);
+
     margin: 20px 0;
 }
 
 .gift-intro p {
     font-size: 18px;
+
     line-height: 1.8;
 }
 
 .gift-intro-line {
     width: 100px;
+
     height: 2px;
 
     margin: 25px auto;
@@ -842,25 +1013,38 @@ h1 {
 
 .gift-instruction {
     margin-top: 35px;
+
     font-size: 20px !important;
 }
 
+
+/* =========================================================
+   GIFT CONTAINER
+========================================================= */
+
 .gift-container {
     min-height: 100vh;
+
     padding: 30px 20px 70px;
+
     position: relative;
 }
 
 .tap-counter {
     margin-top: 20px;
+
     color: #ff72b6;
+
     font-size: 15px;
+
     letter-spacing: 3px;
 }
 
 .gift-hint {
     margin-top: 15px;
+
     color: #ddd;
+
     font-size: 17px;
 }
 
@@ -871,6 +1055,7 @@ h1 {
 
 .gift-box {
     width: 180px;
+
     height: 160px;
 
     position: relative;
@@ -879,7 +1064,8 @@ h1 {
 
     cursor: pointer;
 
-    transition: transform 0.25s ease;
+    transition:
+        transform 0.25s ease;
 
     filter:
         drop-shadow(
@@ -893,7 +1079,8 @@ h1 {
 }
 
 .gift-box.shake {
-    animation: giftShake 0.45s ease;
+    animation:
+        giftShake 0.45s ease;
 }
 
 @keyframes giftShake {
@@ -924,17 +1111,17 @@ h1 {
 }
 
 
-/* =========================================================
-   GIFT BODY
-========================================================= */
+/* GIFT BODY */
 
 .gift-body {
     position: absolute;
 
     left: 10px;
+
     bottom: 0;
 
     width: 160px;
+
     height: 115px;
 
     background:
@@ -957,6 +1144,7 @@ h1 {
     position: absolute;
 
     width: 28px;
+
     height: 100%;
 
     left: 66px;
@@ -971,6 +1159,7 @@ h1 {
     position: absolute;
 
     width: 100%;
+
     height: 25px;
 
     top: 40px;
@@ -979,9 +1168,7 @@ h1 {
 }
 
 
-/* =========================================================
-   GIFT LID
-========================================================= */
+/* GIFT LID */
 
 .gift-lid {
     position: absolute;
@@ -989,9 +1176,11 @@ h1 {
     z-index: 3;
 
     left: 0;
+
     top: 20px;
 
     width: 180px;
+
     height: 40px;
 
     background: #1b0d1d;
@@ -1009,6 +1198,7 @@ h1 {
     position: absolute;
 
     width: 45px;
+
     height: 30px;
 
     border: 6px solid #ff4fa3;
@@ -1020,21 +1210,24 @@ h1 {
 
 .gift-bow-left {
     left: 43px;
-    transform: rotate(25deg);
+
+    transform:
+        rotate(25deg);
 }
 
 .gift-bow-right {
     right: 43px;
-    transform: rotate(-25deg);
+
+    transform:
+        rotate(-25deg);
 }
 
 
-/* =========================================================
-   GIFT OPEN ANIMATION
-========================================================= */
+/* GIFT OPEN */
 
 .gift-box.open {
-    animation: boxOpen 0.8s ease forwards;
+    animation:
+        boxOpen 0.8s ease forwards;
 }
 
 @keyframes boxOpen {
@@ -1044,7 +1237,9 @@ h1 {
     }
 
     40% {
-        transform: scale(1.15) rotate(-5deg);
+        transform:
+            scale(1.15)
+            rotate(-5deg);
     }
 
     100% {
@@ -1077,6 +1272,7 @@ h1 {
     position: absolute;
 
     width: 6px;
+
     height: 6px;
 
     border-radius: 50%;
@@ -1088,7 +1284,10 @@ h1 {
         0 0 18px #ff4fa3;
 
     animation:
-        fireworkBurst 1s ease-out forwards;
+        fireworkBurst
+        1s
+        ease-out
+        forwards;
 }
 
 @keyframes fireworkBurst {
@@ -1119,12 +1318,16 @@ h1 {
     position: absolute;
 
     width: 9px;
+
     height: 15px;
 
     top: -20px;
 
     animation:
-        confettiFall 3s linear forwards;
+        confettiFall
+        3s
+        linear
+        forwards;
 }
 
 @keyframes confettiFall {
@@ -1163,7 +1366,10 @@ h1 {
     margin: -80px auto 0;
 
     animation:
-        pandaAppear 1s ease forwards;
+        pandaAppear
+        1s
+        ease
+        forwards;
 }
 
 .panda-reveal.show {
@@ -1195,7 +1401,10 @@ h1 {
     margin-bottom: 10px;
 
     animation:
-        pandaBounce 1.5s ease-in-out infinite;
+        pandaBounce
+        1.5s
+        ease-in-out
+        infinite;
 
     filter:
         drop-shadow(
@@ -1222,7 +1431,9 @@ h1 {
 
 .panda-message h2 {
     font-size: clamp(28px, 5vw, 48px);
+
     line-height: 1.25;
+
     margin-bottom: 15px;
 }
 
@@ -1232,18 +1443,23 @@ h1 {
 
 .panda-message p {
     font-size: 18px;
+
     line-height: 1.8;
+
     margin: 8px 0;
 }
 
 .anniversary-date {
     color: #ff72b6;
+
     letter-spacing: 4px;
+
     font-size: 15px !important;
 }
 
 .panda-line {
     width: 100px;
+
     height: 2px;
 
     background: #ff4fa3;
@@ -1268,42 +1484,12 @@ h1 {
 
 
 /* =========================================================
-   ANIMATIONS
-========================================================= */
-
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes reveal {
-
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-
-/* =========================================================
    FILE 02 — CORE MEMORY
 ========================================================= */
 
 #file02Screen {
     min-height: 100vh;
+
     padding: 40px 20px;
 
     overflow-y: auto;
@@ -1321,18 +1507,15 @@ h1 {
     padding: 45px 35px;
 }
 
-
-/* FILE NUMBER */
-
 .file02-code {
     font-size: 10px;
+
     letter-spacing: 5px;
+
     color: #777;
+
     margin-bottom: 30px;
 }
-
-
-/* TITLE */
 
 .file02-container h2 {
     font-size: clamp(27px, 5vw, 45px);
@@ -1347,20 +1530,16 @@ h1 {
         0 0 20px rgba(255, 92, 156, 0.25);
 }
 
-
-/* DIVIDER */
-
 .file02-line {
     width: 120px;
+
     height: 1px;
 
-    background: rgba(255, 92, 156, 0.5);
+    background:
+        rgba(255, 92, 156, 0.5);
 
     margin: 0 auto 45px;
 }
-
-
-/* YOUR STORY */
 
 .file02-story {
     width: min(100%, 620px);
@@ -1382,16 +1561,11 @@ h1 {
     margin-bottom: 32px;
 }
 
-
-/* LOVE PARAGRAPH */
-
 .file02-story .file02-love {
     color: #ff5c9c;
+
     margin-top: 45px;
 }
-
-
-/* ENDING */
 
 .file02-ending {
     font-size: 12px;
@@ -1405,37 +1579,47 @@ h1 {
     margin: 35px auto;
 }
 
-
-/* BUTTON */
-
 .file02-container button {
     margin-top: 25px;
-
-    padding: 14px 35px;
-
-    background: white;
-
-    color: black;
-
-    border: none;
-
-    font-family: inherit;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
 }
 
-.file02-container button:hover {
-    background: #ff5c9c;
 
-    color: white;
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
-    transform: scale(1.03);
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes reveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
 }
 
 
@@ -1447,13 +1631,18 @@ h1 {
 
     body {
         overflow-x: hidden;
+
         overflow-y: auto;
     }
 
     .screen {
         min-height: 100vh;
+
         padding: 30px 15px;
     }
+
+
+    /* LOGIN */
 
     h1 {
         letter-spacing: 4px;
@@ -1472,9 +1661,18 @@ h1 {
     }
 
 
-    /* -------------------------
-       FOLDERS
-    ------------------------- */
+    /* BUTTONS */
+
+    button {
+        padding: 13px 24px;
+
+        font-size: 11px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    /* FOLDERS */
 
     .folders-container {
         width: 92%;
@@ -1482,12 +1680,15 @@ h1 {
 
     .folders-grid {
         grid-template-columns: 1fr;
+
         gap: 14px;
+
         width: 100%;
     }
 
     .archive-folder {
         min-height: 105px;
+
         padding: 20px;
     }
 
@@ -1497,6 +1698,7 @@ h1 {
 
     .archive-folder h3 {
         font-size: 13px;
+
         letter-spacing: 3px;
     }
 
@@ -1505,9 +1707,7 @@ h1 {
     }
 
 
-    /* -------------------------
-       FILE 01 WELCOME
-    ------------------------- */
+    /* FILE 01 WELCOME */
 
     #file01Welcome {
         padding: 40px 15px;
@@ -1519,30 +1719,30 @@ h1 {
 
     .file01-welcome {
         width: 94%;
+
         padding: 35px 10px;
     }
 
     .file01-welcome h2 {
         font-size: 27px;
+
         letter-spacing: 3px;
+
         line-height: 1.6;
+
         margin-bottom: 35px;
     }
 
     .file01-welcome p {
         font-size: 13px;
+
         line-height: 2.2;
+
         margin-bottom: 27px;
     }
 
-    .file01-welcome .pink-text {
-        margin-top: 40px;
-    }
 
-
-    /* -------------------------
-       FILE 01 QUESTION
-    ------------------------- */
+    /* FILE 01 QUESTION */
 
     #file01Question {
         padding: 40px 15px;
@@ -1558,25 +1758,28 @@ h1 {
 
     .file01-question h2 {
         font-size: 27px;
+
         letter-spacing: 4px;
+
         margin-bottom: 40px;
     }
 
-    .question-box {
-        padding: 30px 18px;
+    .question-box,
+    .question-space {
         margin-bottom: 40px;
     }
 
-    .question-box p {
+    .question-box p,
+    .question-space p {
         font-size: 15px;
+
         line-height: 2;
+
         letter-spacing: 1.5px;
     }
 
 
-    /* -------------------------
-       OLD FILE 01 SUCCESS
-    ------------------------- */
+    /* OLD SUCCESS */
 
     #file01SuccessScreen {
         padding: 40px 15px;
@@ -1588,17 +1791,21 @@ h1 {
 
     .file01-success-page {
         width: 94%;
+
         padding: 35px 10px;
     }
 
     .file01-success-page h2 {
         font-size: 30px;
+
         letter-spacing: 4px;
     }
 
     .file01-success-page > p {
         font-size: 13px;
+
         line-height: 2.2;
+
         margin-bottom: 25px;
     }
 
@@ -1607,12 +1814,15 @@ h1 {
     }
 
 
-    /* -------------------------
-       GIFT SURPRISE
-    ------------------------- */
+    /* GIFT */
+
+    .gift-intro p {
+        font-size: 16px;
+    }
 
     .gift-box {
         transform: scale(0.85);
+
         margin-top: 65px;
     }
 
@@ -1632,14 +1842,8 @@ h1 {
         font-size: 16px;
     }
 
-    .gift-intro p {
-        font-size: 16px;
-    }
 
-
-    /* -------------------------
-       FILE 02
-    ------------------------- */
+    /* FILE 02 */
 
     #file02Screen {
         padding: 25px 15px;
@@ -1647,6 +1851,7 @@ h1 {
 
     .file02-container {
         width: 95%;
+
         padding: 30px 10px;
     }
 
@@ -1656,7 +1861,9 @@ h1 {
 
     .file02-story p {
         font-size: 13px;
+
         line-height: 2.15;
+
         margin-bottom: 28px;
     }
 
