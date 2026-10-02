@@ -164,8 +164,6 @@
     <div class="folders-container">
 
 
-        <!-- TITLE -->
-
         <div class="folders-title">
 
             <p>
@@ -187,9 +185,7 @@
         <div class="folders-grid">
 
 
-            <!-- =========================
-                 FILE 01
-            ========================== -->
+            <!-- FILE 01 -->
 
             <div
                 class="archive-folder unlocked"
@@ -216,10 +212,7 @@
 
 
 
-            <!-- =========================
-                 FILE 02
-                 LOCKED INITIALLY
-            ========================== -->
+            <!-- FILE 02 -->
 
             <div
                 class="archive-folder locked"
@@ -247,9 +240,7 @@
 
 
 
-            <!-- =========================
-                 FILE 03
-            ========================== -->
+            <!-- FILE 03 -->
 
             <div class="archive-folder locked">
 
@@ -273,9 +264,7 @@
 
 
 
-            <!-- =========================
-                 FILE 04
-            ========================== -->
+            <!-- FILE 04 -->
 
             <div class="archive-folder locked">
 
@@ -299,9 +288,7 @@
 
 
 
-            <!-- =========================
-                 FILE 05
-            ========================== -->
+            <!-- FILE 05 -->
 
             <div class="archive-folder locked">
 
@@ -328,8 +315,6 @@
 
 
 
-        <!-- FOOTER -->
-
         <div class="folders-footer">
 
             <p id="folderFooter">
@@ -346,6 +331,10 @@
     </div>
 
 </main>
+
+
+
+
 <!-- ==================================================
      FILE 01 — QUESTION
 ================================================== -->
@@ -401,6 +390,9 @@
 
 </main>
 
+
+
+
 <!-- ==================================================
      FILE 01 — SURPRISE INTRO
 ================================================== -->
@@ -447,6 +439,8 @@
 </main>
 
 
+
+
 <!-- ==================================================
      FILE 01 — GIFT SURPRISE
 ================================================== -->
@@ -459,13 +453,16 @@
             FILE 01 / SURPRISE — 001
         </div>
 
+
         <div class="tap-counter" id="tapCounter">
             TAP 0 / 7
         </div>
 
+
         <p class="gift-hint" id="giftHint">
             Click the gift box 7 times...
         </p>
+
 
 
         <!-- GIFT BOX -->
@@ -479,18 +476,22 @@
             <div class="gift-lid">
 
                 <div class="gift-bow-left"></div>
+
                 <div class="gift-bow-right"></div>
 
             </div>
 
+
             <div class="gift-body">
 
                 <div class="gift-ribbon-vertical"></div>
+
                 <div class="gift-ribbon-horizontal"></div>
 
             </div>
 
         </div>
+
 
 
         <!-- CELEBRATION -->
@@ -501,21 +502,27 @@
         ></div>
 
 
-        <!-- PANDA -->
+
+        <!-- PANDA REVEAL -->
 
         <div
             class="panda-reveal"
             id="pandaReveal"
         >
 
-        <div class="panda">
-    <img
-        id="pandaImage"
-        src="panda_gift.png"
-        alt="Cute panda"
-    >
-</div>
-            
+
+            <div class="panda">
+
+                <img
+                    id="pandaImage"
+                    src="panda_gift.png"
+                    alt="Cute panda"
+                >
+
+            </div>
+
+
+
             <div class="panda-message">
 
                 <h2>
@@ -523,40 +530,50 @@
                     <span>KANNAYAAAAA..❤️</span>
                 </h2>
 
+
                 <p class="anniversary-date">
                     12.10.2026
                 </p>
 
+
                 <div class="panda-line"></div>
+
 
                 <p>
                     ONE WHOLE YEAR OF US 😭
                 </p>
 
+
                 <p>
                     One year of memories 💕
                 </p>
+
 
                 <p>
                     One year of stupid conversations 😀
                 </p>
 
+
                 <p>
                     One year of random laughs 😚
                 </p>
+
 
                 <p>
                     One year of little fights 🙊
                     and making up.
                 </p>
 
+
                 <p>
                     And somehow...👀
                 </p>
 
+
                 <p class="pink-text">
                     everything became OURS. ❤️
                 </p>
+
 
                 <p class="big-love">
                     I LOVE YOUUUU SO MUCHHHHH,
@@ -565,6 +582,8 @@
 
             </div>
 
+
+
             <button
                 class="file01-button final-continue"
                 onclick="completeFile01()"
@@ -572,12 +591,16 @@
                 CONTINUE →
             </button>
 
+
         </div>
 
     </div>
 
 </main>
-    
+
+
+
+
 <!-- ==================================================
      FILE 02 — CORE MEMORY
 ================================================== -->
@@ -600,10 +623,6 @@
         <div class="file02-line"></div>
 
 
-        <!-- ==========================================
-             YOUR PERSONAL MESSAGE
-             WRITE WHATEVER YOU WANT HERE
-        =========================================== -->
 
         <div class="file02-story">
 
@@ -717,41 +736,35 @@
             </p>
 
 
+
             <div class="message-gap"></div>
 
 
-            <!-- ======================================
-                 WRITE MORE OF YOUR OWN MESSAGE HERE
-            ======================================= -->
 
             <p class="file02-love">
-
                 THIS IS WHERE I WANT TO TELL YOU
                 EVERYTHING I FEEL ABOUT YOU...
-
             </p>
 
 
             <p class="file02-love">
-
                 WRITE YOUR OWN WORDS HERE...
-
             </p>
 
 
             <p class="file02-love">
-
                 WRITE AS MUCH AS YOU WANT.
                 THIS PAGE WILL SCROLL IF THE MESSAGE
                 BECOMES LONG.
-
             </p>
 
 
         </div>
 
 
+
         <div class="file02-line"></div>
+
 
 
         <p class="file02-ending">
@@ -763,6 +776,7 @@
             THEY BECOME A PART OF US.
 
         </p>
+
 
 
         <button onclick="completeFile02()">
@@ -782,146 +796,6 @@
 ========================= -->
 
 <script src="script.js"></script>
-
-
-<!-- ==================================================
-     FILE UNLOCK SYSTEM
-================================================== -->
-
-<script>
-
-    /*
-       FILE 02 UNLOCK STATUS
-    */
-
-    let file02Unlocked =
-        localStorage.getItem("file02Unlocked") === "true";
-
-
-    /*
-       UPDATE FILE 02 APPEARANCE
-    */
-
-    function updateFile02Lock() {
-
-        const file02 =
-            document.getElementById("file02Folder");
-
-        const status =
-            document.getElementById("file02Status");
-
-        const footer =
-            document.getElementById("folderFooter");
-
-
-        if (file02Unlocked) {
-
-            file02.classList.remove("locked");
-
-            file02.classList.add("unlocked");
-
-            status.innerHTML =
-                "ACCESS AVAILABLE";
-
-            footer.innerHTML =
-                "5 FILES. 2 AVAILABLE.";
-
-        }
-
-    }
-
-
-    /*
-       RUN WHEN PAGE LOADS
-    */
-
-    updateFile02Lock();
-
-
-
-    /*
-       AFTER FILE 01 IS COMPLETED
-       RETURN TO FILES PAGE
-       AND UNLOCK FILE 02
-    */
-
-    function completeFile01() {
-
-        file02Unlocked = true;
-
-        localStorage.setItem(
-            "file02Unlocked",
-            "true"
-        );
-
-
-        document
-            .getElementById("file01SuccessScreen")
-            .classList.add("hidden");
-
-
-        document
-            .getElementById("foldersScreen")
-            .classList.remove("hidden");
-
-
-        updateFile02Lock();
-
-    }
-
-
-
-    /*
-       OPEN FILE 02
-    */
-
-    function openFile02() {
-
-        if (!file02Unlocked) {
-
-            return;
-
-        }
-
-
-        document
-            .getElementById("foldersScreen")
-            .classList.add("hidden");
-
-
-        document
-            .getElementById("file02Screen")
-            .classList.remove("hidden");
-
-
-        window.scrollTo(0, 0);
-
-    }
-
-
-
-    /*
-       FILE 02 CONTINUE
-       FOR NOW IT RETURNS TO FILES PAGE
-    */
-
-    function completeFile02() {
-
-        document
-            .getElementById("file02Screen")
-            .classList.add("hidden");
-
-
-        document
-            .getElementById("foldersScreen")
-            .classList.remove("hidden");
-
-
-        window.scrollTo(0, 0);
-
-    }
-
-</script>
 
 
 </body>
