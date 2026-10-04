@@ -740,6 +740,56 @@ document.addEventListener(
 
     }
     );
+
+// ==================================================
+// UPDATE FILE 03 LOCK
+// ==================================================
+
+function updateFile03Lock() {
+
+    const file03 =
+        document.getElementById("file03Folder");
+
+    const status =
+        document.getElementById("file03Status");
+
+
+    if (!file03) {
+        return;
+    }
+
+
+    const unlocked =
+        localStorage.getItem("file03Unlocked") === "true";
+
+
+    if (unlocked) {
+
+        file03.classList.remove("locked");
+
+        file03.classList.add("unlocked");
+
+
+        if (status) {
+
+            status.textContent =
+                "ACCESS AVAILABLE";
+        }
+
+    } else {
+
+        file03.classList.remove("unlocked");
+
+        file03.classList.add("locked");
+
+
+        if (status) {
+
+            status.textContent =
+                "🔒 ACCESS LOCKED";
+        }
+    }
+}
 // ==================================================
 // OPEN FILE 03
 // ==================================================
