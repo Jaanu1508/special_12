@@ -730,6 +730,7 @@ document.addEventListener(
         updateFile02Lock();
 
     }
+    );
 // ==================================================
 // OPEN FILE 03
 // ==================================================
@@ -772,5 +773,3 @@ function completeFile03() {
 
     window.scrollTo(0, 0);
 }
-
-);
