@@ -6,30 +6,33 @@ const heartsContainer = document.querySelector(".hearts");
 
 const heartSymbols = ["♡", "♥", "❤️", "💋"];
 
-for (let i = 0; i < 45; i++) {
+if (heartsContainer) {
 
-    const heart = document.createElement("div");
+    for (let i = 0; i < 45; i++) {
 
-    heart.className = "heart";
+        const heart = document.createElement("div");
 
-    heart.textContent =
-        heartSymbols[
-            Math.floor(Math.random() * heartSymbols.length)
-        ];
+        heart.className = "heart";
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+        heart.textContent =
+            heartSymbols[
+                Math.floor(Math.random() * heartSymbols.length)
+            ];
 
-    heart.style.fontSize =
-        (10 + Math.random() * 18) + "px";
+        heart.style.left =
+            Math.random() * 100 + "vw";
 
-    heart.style.animationDuration =
-        (8 + Math.random() * 12) + "s";
+        heart.style.fontSize =
+            (10 + Math.random() * 18) + "px";
 
-    heart.style.animationDelay =
-        -(Math.random() * 15) + "s";
+        heart.style.animationDuration =
+            (8 + Math.random() * 12) + "s";
 
-    heartsContainer.appendChild(heart);
+        heart.style.animationDelay =
+            -(Math.random() * 15) + "s";
+
+        heartsContainer.appendChild(heart);
+    }
 }
 
 
@@ -96,7 +99,6 @@ function login() {
 
         message.style.color =
             "#ff3333";
-
     }
 }
 
@@ -123,9 +125,12 @@ function playArchiveSequence() {
 
         setTimeout(() => {
 
-            document
-                .getElementById(id)
-                .classList.remove("hidden");
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+                element.classList.remove("hidden");
+            }
 
         }, delay);
 
@@ -134,15 +139,17 @@ function playArchiveSequence() {
             index === 0
                 ? 1000
                 : 1300;
-
     });
 
 
     setTimeout(() => {
 
-        document
-            .getElementById("finalIntro")
-            .classList.remove("hidden");
+        const finalIntro =
+            document.getElementById("finalIntro");
+
+        if (finalIntro) {
+            finalIntro.classList.remove("hidden");
+        }
 
     }, delay + 500);
 }
@@ -162,7 +169,11 @@ function startArchive() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+
+    // Check ALL unlocked files
     updateFile02Lock();
+    updateFile03Lock();
+
 
     window.scrollTo(0, 0);
 }
@@ -217,13 +228,16 @@ function verifyClue() {
 
         message.textContent = "";
 
+
         document
             .getElementById("file01Question")
             .classList.add("hidden");
 
+
         document
             .getElementById("giftIntroScreen")
             .classList.remove("hidden");
+
 
         window.scrollTo(0, 0);
 
@@ -291,8 +305,6 @@ function tapGift() {
         "TAP " + giftTaps + " / 7";
 
 
-    // Restart shake animation
-
     box.classList.remove("shake");
 
     void box.offsetWidth;
@@ -335,14 +347,9 @@ function openGift() {
     box.classList.add("open");
 
 
-    // Celebration
-
     createFireworks();
-
     createConfetti();
 
-
-    // Panda reveal
 
     setTimeout(() => {
 
@@ -356,17 +363,9 @@ function openGift() {
         pandaReveal.classList.add("show");
 
 
-        // ------------------------------------------
-        // EXPRESSION 1 — HAPPY
-        // ------------------------------------------
-
         panda.src =
             "panda_happy.png";
 
-
-        // ------------------------------------------
-        // EXPRESSION 2 — WINK
-        // ------------------------------------------
 
         setTimeout(() => {
 
@@ -375,10 +374,6 @@ function openGift() {
 
         }, 2200);
 
-
-        // ------------------------------------------
-        // EXPRESSION 3 — HUG HEART
-        // ------------------------------------------
 
         setTimeout(() => {
 
@@ -402,6 +397,11 @@ function createFireworks() {
         document.getElementById("celebration");
 
 
+    if (!celebration) {
+        return;
+    }
+
+
     for (let i = 0; i < 8; i++) {
 
         const centerX =
@@ -415,7 +415,6 @@ function createFireworks() {
 
             const particle =
                 document.createElement("div");
-
 
             particle.className =
                 "firework";
@@ -431,7 +430,6 @@ function createFireworks() {
 
             particle.style.left =
                 centerX + "vw";
-
 
             particle.style.top =
                 centerY + "vh";
@@ -478,11 +476,15 @@ function createConfetti() {
         document.getElementById("celebration");
 
 
+    if (!celebration) {
+        return;
+    }
+
+
     for (let i = 0; i < 90; i++) {
 
         const piece =
             document.createElement("div");
-
 
         piece.className =
             "confetti";
@@ -541,33 +543,31 @@ function createConfetti() {
 function completeFile01() {
 
     // Unlock File 02
-
     localStorage.setItem(
         "file02Unlocked",
         "true"
     );
 
 
-    // Hide Gift Screen
-
+    // Hide gift screen
     document
         .getElementById("giftScreen")
         .classList.add("hidden");
 
 
-    // Return to Archive Contents
-
+    // Return to folders
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    // Update File 02
-
+    // Update File 02 appearance
     updateFile02Lock();
 
 
-    // Go to top
+    // Also check File 03
+    updateFile03Lock();
+
 
     window.scrollTo(0, 0);
 }
@@ -670,21 +670,16 @@ function openFile02() {
         ) === "true";
 
 
-    // Don't open if locked
-
+    // Do NOT open if locked
     if (!unlocked) {
         return;
     }
 
 
-    // Hide folders
-
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
-
-    // Show File 02
 
     document
         .getElementById("file02Screen")
@@ -701,26 +696,38 @@ function openFile02() {
 
 function completeFile02() {
 
-    // Unlock File 03
+    // ==============================================
+    // UNLOCK FILE 03
+    // ==============================================
+
     localStorage.setItem(
         "file03Unlocked",
         "true"
     );
 
 
-    // Hide File 02
+    // ==============================================
+    // HIDE FILE 02
+    // ==============================================
+
     document
         .getElementById("file02Screen")
         .classList.add("hidden");
 
 
-    // Return to Archive
+    // ==============================================
+    // SHOW ARCHIVE
+    // ==============================================
+
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    // Update File 03 to ACCESS AVAILABLE
+    // ==============================================
+    // FORCE FILE 03 TO UNLOCK VISUALLY
+    // ==============================================
+
     updateFile03Lock();
 
 
@@ -729,30 +736,20 @@ function completeFile02() {
 
 
 // ==================================================
-// CHECK FILE 02 WHEN PAGE LOADS
-// ==================================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        updateFile02Lock();
-        updateFile03Lock();
-
-    }
-);
-
-// ==================================================
 // UPDATE FILE 03 LOCK
 // ==================================================
 
 function updateFile03Lock() {
 
     const file03 =
-        document.getElementById("file03Folder");
+        document.getElementById(
+            "file03Folder"
+        );
 
     const status =
-        document.getElementById("file03Status");
+        document.getElementById(
+            "file03Status"
+        );
 
 
     if (!file03) {
@@ -761,14 +758,23 @@ function updateFile03Lock() {
 
 
     const unlocked =
-        localStorage.getItem("file03Unlocked") === "true";
+        localStorage.getItem(
+            "file03Unlocked"
+        ) === "true";
 
 
     if (unlocked) {
 
-        file03.classList.remove("locked");
+        // Remove LOCKED styling
+        file03.classList.remove(
+            "locked"
+        );
 
-        file03.classList.add("unlocked");
+
+        // Add SAME styling as File 02
+        file03.classList.add(
+            "unlocked"
+        );
 
 
         if (status) {
@@ -777,11 +783,19 @@ function updateFile03Lock() {
                 "ACCESS AVAILABLE";
         }
 
+
     } else {
 
-        file03.classList.remove("unlocked");
+        // Remove unlocked styling
+        file03.classList.remove(
+            "unlocked"
+        );
 
-        file03.classList.add("locked");
+
+        // Add locked styling
+        file03.classList.add(
+            "locked"
+        );
 
 
         if (status) {
@@ -791,19 +805,43 @@ function updateFile03Lock() {
         }
     }
 }
+
+
 // ==================================================
 // OPEN FILE 03
 // ==================================================
 
 function openFile03() {
 
+    // ==============================================
+    // CHECK IF FILE 03 IS ACTUALLY UNLOCKED
+    // ==============================================
+
+    const unlocked =
+        localStorage.getItem(
+            "file03Unlocked"
+        ) === "true";
+
+
+    // If locked, DO NOTHING
+    if (!unlocked) {
+        return;
+    }
+
+
+    // ==============================================
+    // OPEN FILE 03
+    // ==============================================
+
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
+
     document
         .getElementById("file03Screen")
         .classList.remove("hidden");
+
 
     window.scrollTo(0, 0);
 }
@@ -815,21 +853,54 @@ function openFile03() {
 
 function completeFile03() {
 
+    // Stop song
     const audio =
-        document.querySelector("#file03Screen audio");
+        document.querySelector(
+            "#file03Screen audio"
+        );
+
 
     if (audio) {
+
         audio.pause();
+
         audio.currentTime = 0;
     }
 
+
+    // Hide File 03
     document
         .getElementById("file03Screen")
         .classList.add("hidden");
 
+
+    // Return to archive
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+
+    // Keep File 03 unlocked
+    updateFile03Lock();
+
+
     window.scrollTo(0, 0);
 }
+
+
+// ==================================================
+// PAGE LOAD
+// ==================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        // Restore File 02
+        updateFile02Lock();
+
+        // Restore File 03
+        updateFile03Lock();
+
+    }
+);
