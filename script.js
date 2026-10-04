@@ -51,15 +51,10 @@ const correctPassword = "38104015";
 function login() {
 
     const username =
-        document
-            .getElementById("username")
-            .value
-            .trim();
+        document.getElementById("username").value.trim();
 
     const password =
-        document
-            .getElementById("password")
-            .value;
+        document.getElementById("password").value;
 
     const message =
         document.getElementById("message");
@@ -139,6 +134,7 @@ function playArchiveSequence() {
             index === 0
                 ? 1000
                 : 1300;
+
     });
 
 
@@ -170,7 +166,6 @@ function startArchive() {
         .classList.remove("hidden");
 
 
-    // Check ALL unlocked files
     updateFile02Lock();
     updateFile03Lock();
 
@@ -416,6 +411,7 @@ function createFireworks() {
             const particle =
                 document.createElement("div");
 
+
             particle.className =
                 "firework";
 
@@ -430,6 +426,7 @@ function createFireworks() {
 
             particle.style.left =
                 centerX + "vw";
+
 
             particle.style.top =
                 centerY + "vh";
@@ -485,6 +482,7 @@ function createConfetti() {
 
         const piece =
             document.createElement("div");
+
 
         piece.className =
             "confetti";
@@ -542,30 +540,23 @@ function createConfetti() {
 
 function completeFile01() {
 
-    // Unlock File 02
     localStorage.setItem(
         "file02Unlocked",
         "true"
     );
 
 
-    // Hide gift screen
     document
         .getElementById("giftScreen")
         .classList.add("hidden");
 
 
-    // Return to folders
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    // Update File 02 appearance
     updateFile02Lock();
-
-
-    // Also check File 03
     updateFile03Lock();
 
 
@@ -580,19 +571,13 @@ function completeFile01() {
 function updateFile02Lock() {
 
     const file02 =
-        document.getElementById(
-            "file02Folder"
-        );
+        document.getElementById("file02Folder");
 
     const status =
-        document.getElementById(
-            "file02Status"
-        );
+        document.getElementById("file02Status");
 
     const footer =
-        document.getElementById(
-            "folderFooter"
-        );
+        document.getElementById("folderFooter");
 
 
     if (!file02) {
@@ -601,20 +586,14 @@ function updateFile02Lock() {
 
 
     const unlocked =
-        localStorage.getItem(
-            "file02Unlocked"
-        ) === "true";
+        localStorage.getItem("file02Unlocked") === "true";
 
 
     if (unlocked) {
 
-        file02.classList.remove(
-            "locked"
-        );
+        file02.classList.remove("locked");
 
-        file02.classList.add(
-            "unlocked"
-        );
+        file02.classList.add("unlocked");
 
 
         if (status) {
@@ -633,13 +612,9 @@ function updateFile02Lock() {
 
     } else {
 
-        file02.classList.remove(
-            "unlocked"
-        );
+        file02.classList.remove("unlocked");
 
-        file02.classList.add(
-            "locked"
-        );
+        file02.classList.add("locked");
 
 
         if (status) {
@@ -665,12 +640,9 @@ function updateFile02Lock() {
 function openFile02() {
 
     const unlocked =
-        localStorage.getItem(
-            "file02Unlocked"
-        ) === "true";
+        localStorage.getItem("file02Unlocked") === "true";
 
 
-    // Do NOT open if locked
     if (!unlocked) {
         return;
     }
@@ -696,9 +668,9 @@ function openFile02() {
 
 function completeFile02() {
 
-    // ==============================================
+    // ----------------------------------------------
     // UNLOCK FILE 03
-    // ==============================================
+    // ----------------------------------------------
 
     localStorage.setItem(
         "file03Unlocked",
@@ -706,27 +678,27 @@ function completeFile02() {
     );
 
 
-    // ==============================================
+    // ----------------------------------------------
     // HIDE FILE 02
-    // ==============================================
+    // ----------------------------------------------
 
     document
         .getElementById("file02Screen")
         .classList.add("hidden");
 
 
-    // ==============================================
+    // ----------------------------------------------
     // SHOW ARCHIVE
-    // ==============================================
+    // ----------------------------------------------
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    // ==============================================
-    // FORCE FILE 03 TO UNLOCK VISUALLY
-    // ==============================================
+    // ----------------------------------------------
+    // FORCE FILE 03 TO UPDATE
+    // ----------------------------------------------
 
     updateFile03Lock();
 
@@ -742,14 +714,10 @@ function completeFile02() {
 function updateFile03Lock() {
 
     const file03 =
-        document.getElementById(
-            "file03Folder"
-        );
+        document.getElementById("file03Folder");
 
     const status =
-        document.getElementById(
-            "file03Status"
-        );
+        document.getElementById("file03Status");
 
 
     if (!file03) {
@@ -758,23 +726,16 @@ function updateFile03Lock() {
 
 
     const unlocked =
-        localStorage.getItem(
-            "file03Unlocked"
-        ) === "true";
+        localStorage.getItem("file03Unlocked") === "true";
 
 
     if (unlocked) {
 
-        // Remove LOCKED styling
-        file03.classList.remove(
-            "locked"
-        );
+        // REMOVE LOCKED STYLE
+        file03.classList.remove("locked");
 
-
-        // Add SAME styling as File 02
-        file03.classList.add(
-            "unlocked"
-        );
+        // ADD SAME STYLE AS FILE 02
+        file03.classList.add("unlocked");
 
 
         if (status) {
@@ -786,16 +747,11 @@ function updateFile03Lock() {
 
     } else {
 
-        // Remove unlocked styling
-        file03.classList.remove(
-            "unlocked"
-        );
+        // REMOVE UNLOCKED STYLE
+        file03.classList.remove("unlocked");
 
-
-        // Add locked styling
-        file03.classList.add(
-            "locked"
-        );
+        // ADD LOCKED STYLE
+        file03.classList.add("locked");
 
 
         if (status) {
@@ -813,25 +769,23 @@ function updateFile03Lock() {
 
 function openFile03() {
 
-    // ==============================================
-    // CHECK IF FILE 03 IS ACTUALLY UNLOCKED
-    // ==============================================
+    // ----------------------------------------------
+    // CHECK WHETHER FILE 03 IS UNLOCKED
+    // ----------------------------------------------
 
     const unlocked =
-        localStorage.getItem(
-            "file03Unlocked"
-        ) === "true";
+        localStorage.getItem("file03Unlocked") === "true";
 
 
-    // If locked, DO NOTHING
+    // DO NOT OPEN IF LOCKED
     if (!unlocked) {
         return;
     }
 
 
-    // ==============================================
+    // ----------------------------------------------
     // OPEN FILE 03
-    // ==============================================
+    // ----------------------------------------------
 
     document
         .getElementById("foldersScreen")
@@ -853,7 +807,6 @@ function openFile03() {
 
 function completeFile03() {
 
-    // Stop song
     const audio =
         document.querySelector(
             "#file03Screen audio"
@@ -868,13 +821,11 @@ function completeFile03() {
     }
 
 
-    // Hide File 03
     document
         .getElementById("file03Screen")
         .classList.add("hidden");
 
 
-    // Return to archive
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
@@ -889,17 +840,15 @@ function completeFile03() {
 
 
 // ==================================================
-// PAGE LOAD
+// PAGE LOAD — RESTORE UNLOCKED FILES
 // ==================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        // Restore File 02
         updateFile02Lock();
 
-        // Restore File 03
         updateFile03Lock();
 
     }
