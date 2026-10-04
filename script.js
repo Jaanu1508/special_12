@@ -701,18 +701,27 @@ function openFile02() {
 
 function completeFile02() {
 
-    // Hide File 02
+    // Unlock File 03
+    localStorage.setItem(
+        "file03Unlocked",
+        "true"
+    );
 
+
+    // Hide File 02
     document
         .getElementById("file02Screen")
         .classList.add("hidden");
 
 
-    // Return to folders
-
+    // Return to Archive
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
+
+
+    // Update File 03 to ACCESS AVAILABLE
+    updateFile03Lock();
 
 
     window.scrollTo(0, 0);
