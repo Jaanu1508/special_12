@@ -808,36 +808,80 @@ function openFile03() {
 function completeFile03() {
 
     const audio =
-        document.querySelector(
-            "#file03Screen audio"
-        );
-
+        document.querySelector("#file03Screen audio");
 
     if (audio) {
-
         audio.pause();
-
         audio.currentTime = 0;
     }
 
 
+    // Unlock File 04
+    localStorage.setItem(
+        "file04Unlocked",
+        "true"
+    );
+
+
+    // Hide File 03
     document
         .getElementById("file03Screen")
         .classList.add("hidden");
 
 
+    // Return to archive
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
 
-    // Keep File 03 unlocked
-    updateFile03Lock();
+    // Make File 04 pink + available
+    updateFile04Lock();
 
 
     window.scrollTo(0, 0);
 }
+function updateFile04Lock() {
 
+    const file04 =
+        document.getElementById("file04Folder");
+
+    const status =
+        document.getElementById("file04Status");
+
+
+    if (!file04) {
+        return;
+    }
+
+
+    const unlocked =
+        localStorage.getItem("file04Unlocked") === "true";
+
+
+    if (unlocked) {
+
+        file04.classList.remove("locked");
+
+        file04.classList.add("unlocked");
+
+        if (status) {
+            status.textContent =
+                "ACCESS AVAILABLE";
+        }
+
+    } else {
+
+        file04.classList.remove("unlocked");
+
+        file04.classList.add("locked");
+
+        if (status) {
+            status.textContent =
+                "🔒 ACCESS LOCKED";
+        }
+    }
+}
 
 // ==================================================
 // PAGE LOAD — RESTORE UNLOCKED FILES
