@@ -59,7 +59,6 @@ function login() {
     const message =
         document.getElementById("message");
 
-
     if (
         username === correctUsername &&
         password === correctPassword
@@ -70,7 +69,6 @@ function login() {
 
         message.style.color =
             "#ffffff";
-
 
         setTimeout(() => {
 
@@ -85,7 +83,6 @@ function login() {
             playArchiveSequence();
 
         }, 1200);
-
 
     } else {
 
@@ -115,7 +112,6 @@ function playArchiveSequence() {
 
     let delay = 500;
 
-
     sequence.forEach((id, index) => {
 
         setTimeout(() => {
@@ -129,14 +125,11 @@ function playArchiveSequence() {
 
         }, delay);
 
-
         delay +=
             index === 0
                 ? 1000
                 : 1300;
-
     });
-
 
     setTimeout(() => {
 
@@ -165,10 +158,9 @@ function startArchive() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
-
     updateFile02Lock();
     updateFile03Lock();
-
+    updateFile04Lock();
 
     window.scrollTo(0, 0);
 }
@@ -208,7 +200,6 @@ function verifyClue() {
     const message =
         document.getElementById("clueMessage");
 
-
     const correctAnswers = [
         "12.10.25",
         "12/10/25",
@@ -218,21 +209,17 @@ function verifyClue() {
         "12-10-2025"
     ];
 
-
     if (correctAnswers.includes(answer)) {
 
         message.textContent = "";
-
 
         document
             .getElementById("file01Question")
             .classList.add("hidden");
 
-
         document
             .getElementById("giftIntroScreen")
             .classList.remove("hidden");
-
 
         window.scrollTo(0, 0);
 
@@ -282,9 +269,7 @@ function tapGift() {
         return;
     }
 
-
     giftTaps++;
-
 
     const box =
         document.getElementById("giftBox");
@@ -295,17 +280,14 @@ function tapGift() {
     const hint =
         document.getElementById("giftHint");
 
-
     counter.textContent =
         "TAP " + giftTaps + " / 7";
-
 
     box.classList.remove("shake");
 
     void box.offsetWidth;
 
     box.classList.add("shake");
-
 
     if (giftTaps < 7) {
 
@@ -316,7 +298,6 @@ function tapGift() {
 
         hint.textContent =
             "THE GIFT IS OPENING... ❤️";
-
 
         setTimeout(() => {
 
@@ -336,15 +317,12 @@ function openGift() {
     const box =
         document.getElementById("giftBox");
 
-
     box.classList.remove("shake");
 
     box.classList.add("open");
 
-
     createFireworks();
     createConfetti();
-
 
     setTimeout(() => {
 
@@ -354,13 +332,10 @@ function openGift() {
         const pandaReveal =
             document.getElementById("pandaReveal");
 
-
         pandaReveal.classList.add("show");
-
 
         panda.src =
             "panda_happy.png";
-
 
         setTimeout(() => {
 
@@ -369,14 +344,12 @@ function openGift() {
 
         }, 2200);
 
-
         setTimeout(() => {
 
             panda.src =
                 "panda_hug_heart.png";
 
         }, 4400);
-
 
     }, 800);
 }
@@ -391,11 +364,9 @@ function createFireworks() {
     const celebration =
         document.getElementById("celebration");
 
-
     if (!celebration) {
         return;
     }
-
 
     for (let i = 0; i < 8; i++) {
 
@@ -405,32 +376,25 @@ function createFireworks() {
         const centerY =
             15 + Math.random() * 45;
 
-
         for (let j = 0; j < 18; j++) {
 
             const particle =
                 document.createElement("div");
 
-
             particle.className =
                 "firework";
-
 
             const angle =
                 (Math.PI * 2 * j) / 18;
 
-
             const distance =
                 50 + Math.random() * 100;
-
 
             particle.style.left =
                 centerX + "vw";
 
-
             particle.style.top =
                 centerY + "vh";
-
 
             particle.style.setProperty(
                 "--x",
@@ -439,7 +403,6 @@ function createFireworks() {
                     "px"
             );
 
-
             particle.style.setProperty(
                 "--y",
                 Math.sin(angle) *
@@ -447,11 +410,9 @@ function createFireworks() {
                     "px"
             );
 
-
             celebration.appendChild(
                 particle
             );
-
 
             setTimeout(() => {
 
@@ -472,35 +433,28 @@ function createConfetti() {
     const celebration =
         document.getElementById("celebration");
 
-
     if (!celebration) {
         return;
     }
-
 
     for (let i = 0; i < 90; i++) {
 
         const piece =
             document.createElement("div");
 
-
         piece.className =
             "confetti";
-
 
         piece.style.left =
             Math.random() * 100 + "vw";
 
-
         piece.style.animationDelay =
             Math.random() * 1.5 + "s";
-
 
         piece.style.transform =
             "rotate(" +
             Math.random() * 360 +
             "deg)";
-
 
         const colors = [
             "#ff4fa3",
@@ -510,7 +464,6 @@ function createConfetti() {
             "#ff9ac5"
         ];
 
-
         piece.style.background =
             colors[
                 Math.floor(
@@ -519,11 +472,9 @@ function createConfetti() {
                 )
             ];
 
-
         celebration.appendChild(
             piece
         );
-
 
         setTimeout(() => {
 
@@ -545,20 +496,17 @@ function completeFile01() {
         "true"
     );
 
-
     document
         .getElementById("giftScreen")
         .classList.add("hidden");
-
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
-
     updateFile02Lock();
     updateFile03Lock();
-
+    updateFile04Lock();
 
     window.scrollTo(0, 0);
 }
@@ -579,15 +527,12 @@ function updateFile02Lock() {
     const footer =
         document.getElementById("folderFooter");
 
-
     if (!file02) {
         return;
     }
 
-
     const unlocked =
         localStorage.getItem("file02Unlocked") === "true";
-
 
     if (unlocked) {
 
@@ -595,13 +540,11 @@ function updateFile02Lock() {
 
         file02.classList.add("unlocked");
 
-
         if (status) {
 
             status.textContent =
                 "ACCESS AVAILABLE";
         }
-
 
         if (footer) {
 
@@ -609,20 +552,17 @@ function updateFile02Lock() {
                 "5 FILES. 2 AVAILABLE.";
         }
 
-
     } else {
 
         file02.classList.remove("unlocked");
 
         file02.classList.add("locked");
 
-
         if (status) {
 
             status.textContent =
                 "🔒 ACCESS LOCKED";
         }
-
 
         if (footer) {
 
@@ -642,21 +582,17 @@ function openFile02() {
     const unlocked =
         localStorage.getItem("file02Unlocked") === "true";
 
-
     if (!unlocked) {
         return;
     }
-
 
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
-
     document
         .getElementById("file02Screen")
         .classList.remove("hidden");
-
 
     window.scrollTo(0, 0);
 }
@@ -668,40 +604,20 @@ function openFile02() {
 
 function completeFile02() {
 
-    // ----------------------------------------------
-    // UNLOCK FILE 03
-    // ----------------------------------------------
-
     localStorage.setItem(
         "file03Unlocked",
         "true"
     );
 
-
-    // ----------------------------------------------
-    // HIDE FILE 02
-    // ----------------------------------------------
-
     document
         .getElementById("file02Screen")
         .classList.add("hidden");
-
-
-    // ----------------------------------------------
-    // SHOW ARCHIVE
-    // ----------------------------------------------
 
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
-
-    // ----------------------------------------------
-    // FORCE FILE 03 TO UPDATE
-    // ----------------------------------------------
-
     updateFile03Lock();
-
 
     window.scrollTo(0, 0);
 }
@@ -719,24 +635,18 @@ function updateFile03Lock() {
     const status =
         document.getElementById("file03Status");
 
-
     if (!file03) {
         return;
     }
 
-
     const unlocked =
         localStorage.getItem("file03Unlocked") === "true";
 
-
     if (unlocked) {
 
-        // REMOVE LOCKED STYLE
         file03.classList.remove("locked");
 
-        // ADD SAME STYLE AS FILE 02
         file03.classList.add("unlocked");
-
 
         if (status) {
 
@@ -744,15 +654,11 @@ function updateFile03Lock() {
                 "ACCESS AVAILABLE";
         }
 
-
     } else {
 
-        // REMOVE UNLOCKED STYLE
         file03.classList.remove("unlocked");
 
-        // ADD LOCKED STYLE
         file03.classList.add("locked");
-
 
         if (status) {
 
@@ -769,33 +675,20 @@ function updateFile03Lock() {
 
 function openFile03() {
 
-    // ----------------------------------------------
-    // CHECK WHETHER FILE 03 IS UNLOCKED
-    // ----------------------------------------------
-
     const unlocked =
         localStorage.getItem("file03Unlocked") === "true";
 
-
-    // DO NOT OPEN IF LOCKED
     if (!unlocked) {
         return;
     }
-
-
-    // ----------------------------------------------
-    // OPEN FILE 03
-    // ----------------------------------------------
 
     document
         .getElementById("foldersScreen")
         .classList.add("hidden");
 
-
     document
         .getElementById("file03Screen")
         .classList.remove("hidden");
-
 
     window.scrollTo(0, 0);
 }
@@ -808,13 +701,16 @@ function openFile03() {
 function completeFile03() {
 
     const audio =
-        document.querySelector("#file03Screen audio");
+        document.querySelector(
+            "#file03Screen audio"
+        );
 
     if (audio) {
+
         audio.pause();
+
         audio.currentTime = 0;
     }
-
 
     // Unlock File 04
     localStorage.setItem(
@@ -822,25 +718,24 @@ function completeFile03() {
         "true"
     );
 
-
-    // Hide File 03
     document
         .getElementById("file03Screen")
         .classList.add("hidden");
 
-
-    // Return to archive
     document
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
-
-    // Make File 04 pink + available
     updateFile04Lock();
-
 
     window.scrollTo(0, 0);
 }
+
+
+// ==================================================
+// UPDATE FILE 04 LOCK
+// ==================================================
+
 function updateFile04Lock() {
 
     const file04 =
@@ -849,15 +744,12 @@ function updateFile04Lock() {
     const status =
         document.getElementById("file04Status");
 
-
     if (!file04) {
         return;
     }
 
-
     const unlocked =
         localStorage.getItem("file04Unlocked") === "true";
-
 
     if (unlocked) {
 
@@ -866,6 +758,7 @@ function updateFile04Lock() {
         file04.classList.add("unlocked");
 
         if (status) {
+
             status.textContent =
                 "ACCESS AVAILABLE";
         }
@@ -877,11 +770,58 @@ function updateFile04Lock() {
         file04.classList.add("locked");
 
         if (status) {
+
             status.textContent =
                 "🔒 ACCESS LOCKED";
         }
     }
 }
+
+
+// ==================================================
+// OPEN FILE 04
+// ==================================================
+
+function openFile04() {
+
+    const unlocked =
+        localStorage.getItem("file04Unlocked") === "true";
+
+    if (!unlocked) {
+        return;
+    }
+
+    document
+        .getElementById("foldersScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file04Screen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==================================================
+// COMPLETE FILE 04
+// ==================================================
+
+function completeFile04() {
+
+    // File 05 will be unlocked here later.
+
+    document
+        .getElementById("file04Screen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
 
 // ==================================================
 // PAGE LOAD — RESTORE UNLOCKED FILES
@@ -894,6 +834,8 @@ document.addEventListener(
         updateFile02Lock();
 
         updateFile03Lock();
+
+        updateFile04Lock();
 
     }
 );
