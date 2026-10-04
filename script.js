@@ -737,9 +737,10 @@ document.addEventListener(
     () => {
 
         updateFile02Lock();
+        updateFile03Lock();
 
     }
-    );
+);
 
 // ==================================================
 // UPDATE FILE 03 LOCK
