@@ -730,4 +730,47 @@ document.addEventListener(
         updateFile02Lock();
 
     }
+// ==================================================
+// OPEN FILE 03
+// ==================================================
+
+function openFile03() {
+
+    document
+        .getElementById("foldersScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file03Screen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==================================================
+// COMPLETE FILE 03
+// ==================================================
+
+function completeFile03() {
+
+    const audio =
+        document.querySelector("#file03Screen audio");
+
+    if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+
+    document
+        .getElementById("file03Screen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
 );
