@@ -907,7 +907,7 @@ function openFile05() {
 
 
 // ==================================================
-// COMPLETE FILE 05
+// FILE 05 — COMPLETE
 // ==================================================
 
 function completeFile05() {
@@ -925,13 +925,17 @@ function completeFile05() {
     }
 
 
+    // Hide File 05
     document
         .getElementById("file05Screen")
         .classList.add("hidden");
 
+
+    // Show FINAL MESSAGE
     document
-        .getElementById("foldersScreen")
+        .getElementById("finalScreen")
         .classList.remove("hidden");
+
 
     window.scrollTo(0, 0);
 }
