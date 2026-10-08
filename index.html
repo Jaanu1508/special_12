@@ -270,33 +270,32 @@
         </p>
     </div>
 </div>
-            <!-- FILE 05 -->
+         
+<!-- FILE 05 -->
 
-            <div class="archive-folder locked">
+<div
+    class="archive-folder locked"
+    id="file05Folder"
+    onclick="openFile05()"
+>
 
-                <div class="folder-icon">
-                    📁
-                </div>
+    <div class="folder-icon">
+        📁
+    </div>
 
-                <div class="folder-details">
+    <div class="folder-details">
 
-                    <h3>
-                        FILE 05
-                    </h3>
+        <h3>
+            FILE 05
+        </h3>
 
-                    <p>
-                        🔒 ACCESS LOCKED
-                    </p>
+        <p id="file05Status">
+            🔒 ACCESS LOCKED
+        </p>
 
-                </div>
+    </div>
 
-            </div>
-
-
-        </div>
-
-
-
+</div>
         <div class="folders-footer">
 
             <p id="folderFooter">
@@ -989,6 +988,85 @@
 
 
         <button onclick="completeFile04()">
+            CONTINUE →
+        </button>
+
+    </div>
+
+</main>
+
+<!-- ==================================================
+     FILE 05 — US
+================================================== -->
+
+<main class="screen hidden" id="file05Screen">
+
+    <div class="file02-container">
+
+        <div class="file02-code">
+            FILE 05 / US — 005
+        </div>
+
+        <h2>
+            THIS IS US. ❤️
+        </h2>
+
+        <div class="file02-line"></div>
+
+        <div class="file02-story">
+
+            <p>
+                Some memories are better watched
+                than explained.
+            </p>
+
+            <p class="pink-text">
+                So here's a little piece of us. ❤️
+            </p>
+
+        </div>
+
+        <!-- VIDEO -->
+        <div class="song-player">
+
+            <div class="song-icon">
+                🎬
+            </div>
+
+            <h3>
+                US
+            </h3>
+
+            <p>
+                Press play... ❤️
+            </p>
+
+            <video
+                controls
+                width="100%"
+            >
+                <source
+                    src="Us.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support
+                video playback.
+            </video>
+
+        </div>
+
+        <div class="file02-line"></div>
+
+        <p class="file02-ending">
+            EVERYTHING WE'VE BEEN.
+            <br><br>
+            EVERYTHING WE'VE BECOME.
+            <br><br>
+            AND EVERYTHING THAT'S STILL WAITING FOR US. ❤️
+        </p>
+
+        <button onclick="completeFile05()">
             CONTINUE →
         </button>
 
