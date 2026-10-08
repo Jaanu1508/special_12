@@ -37,6 +37,20 @@ if (heartsContainer) {
 
 
 // ==================================================
+// FILE UNLOCK VARIABLES
+// ==================================================
+// IMPORTANT:
+// These are NOT saved anywhere.
+// Refreshing the page resets them.
+// ==================================================
+
+let file02Unlocked = false;
+let file03Unlocked = false;
+let file04Unlocked = false;
+let file05Unlocked = false;
+
+
+// ==================================================
 // LOGIN DETAILS
 // ==================================================
 
@@ -494,10 +508,8 @@ function createConfetti() {
 
 function completeFile01() {
 
-    localStorage.setItem(
-        "file02Unlocked",
-        "true"
-    );
+    // Unlock ONLY File 02
+    file02Unlocked = true;
 
     document
         .getElementById("giftScreen")
@@ -534,10 +546,8 @@ function updateFile02Lock() {
         return;
     }
 
-    const unlocked =
-        localStorage.getItem("file02Unlocked") === "true";
 
-    if (unlocked) {
+    if (file02Unlocked) {
 
         file02.classList.remove("locked");
 
@@ -570,10 +580,7 @@ function updateFile02Lock() {
 
 function openFile02() {
 
-    const unlocked =
-        localStorage.getItem("file02Unlocked") === "true";
-
-    if (!unlocked) {
+    if (!file02Unlocked) {
         return;
     }
 
@@ -595,10 +602,13 @@ function openFile02() {
 
 function completeFile02() {
 
-    localStorage.setItem(
-        "file03Unlocked",
-        "true"
-    );
+    if (!file02Unlocked) {
+        return;
+    }
+
+
+    // Unlock ONLY File 03
+    file03Unlocked = true;
 
     document
         .getElementById("file02Screen")
@@ -635,10 +645,8 @@ function updateFile03Lock() {
         return;
     }
 
-    const unlocked =
-        localStorage.getItem("file03Unlocked") === "true";
 
-    if (unlocked) {
+    if (file03Unlocked) {
 
         file03.classList.remove("locked");
 
@@ -671,10 +679,7 @@ function updateFile03Lock() {
 
 function openFile03() {
 
-    const unlocked =
-        localStorage.getItem("file03Unlocked") === "true";
-
-    if (!unlocked) {
+    if (!file03Unlocked) {
         return;
     }
 
@@ -696,6 +701,11 @@ function openFile03() {
 
 function completeFile03() {
 
+    if (!file03Unlocked) {
+        return;
+    }
+
+
     const audio =
         document.querySelector(
             "#file03Screen audio"
@@ -708,10 +718,9 @@ function completeFile03() {
         audio.currentTime = 0;
     }
 
-    localStorage.setItem(
-        "file04Unlocked",
-        "true"
-    );
+
+    // Unlock ONLY File 04
+    file04Unlocked = true;
 
     document
         .getElementById("file03Screen")
@@ -748,10 +757,8 @@ function updateFile04Lock() {
         return;
     }
 
-    const unlocked =
-        localStorage.getItem("file04Unlocked") === "true";
 
-    if (unlocked) {
+    if (file04Unlocked) {
 
         file04.classList.remove("locked");
 
@@ -784,10 +791,7 @@ function updateFile04Lock() {
 
 function openFile04() {
 
-    const unlocked =
-        localStorage.getItem("file04Unlocked") === "true";
-
-    if (!unlocked) {
+    if (!file04Unlocked) {
         return;
     }
 
@@ -809,10 +813,13 @@ function openFile04() {
 
 function completeFile04() {
 
-    localStorage.setItem(
-        "file05Unlocked",
-        "true"
-    );
+    if (!file04Unlocked) {
+        return;
+    }
+
+
+    // Unlock ONLY File 05
+    file05Unlocked = true;
 
     document
         .getElementById("file04Screen")
@@ -849,10 +856,8 @@ function updateFile05Lock() {
         return;
     }
 
-    const unlocked =
-        localStorage.getItem("file05Unlocked") === "true";
 
-    if (unlocked) {
+    if (file05Unlocked) {
 
         file05.classList.remove("locked");
 
@@ -885,10 +890,7 @@ function updateFile05Lock() {
 
 function openFile05() {
 
-    const unlocked =
-        localStorage.getItem("file05Unlocked") === "true";
-
-    if (!unlocked) {
+    if (!file05Unlocked) {
         return;
     }
 
@@ -910,6 +912,19 @@ function openFile05() {
 
 function completeFile05() {
 
+    const video =
+        document.querySelector(
+            "#file05Screen video"
+        );
+
+    if (video) {
+
+        video.pause();
+
+        video.currentTime = 0;
+    }
+
+
     document
         .getElementById("file05Screen")
         .classList.add("hidden");
@@ -929,37 +944,32 @@ function completeFile05() {
 function updateFolderFooter() {
 
     const footer =
-        document.getElementById("folderFooter");
+        document.querySelector(".folders-footer");
 
     if (!footer) {
         return;
     }
 
+
     let available = 1;
 
-    if (
-        localStorage.getItem("file02Unlocked") === "true"
-    ) {
+
+    if (file02Unlocked) {
         available = 2;
     }
 
-    if (
-        localStorage.getItem("file03Unlocked") === "true"
-    ) {
+    if (file03Unlocked) {
         available = 3;
     }
 
-    if (
-        localStorage.getItem("file04Unlocked") === "true"
-    ) {
+    if (file04Unlocked) {
         available = 4;
     }
 
-    if (
-        localStorage.getItem("file05Unlocked") === "true"
-    ) {
+    if (file05Unlocked) {
         available = 5;
     }
+
 
     footer.textContent =
         "5 FILES. " +
@@ -969,22 +979,31 @@ function updateFolderFooter() {
 
 
 // ==================================================
-// PAGE LOAD — RESTORE UNLOCKED FILES
+// INITIAL PAGE LOAD
 // ==================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        /*
+         * IMPORTANT:
+         * No localStorage.
+         *
+         * Every refresh starts with:
+         *
+         * FILE 01 → UNLOCKED
+         * FILE 02 → LOCKED
+         * FILE 03 → LOCKED
+         * FILE 04 → LOCKED
+         * FILE 05 → LOCKED
+         */
+
         updateFile02Lock();
-
         updateFile03Lock();
-
         updateFile04Lock();
-
         updateFile05Lock();
 
         updateFolderFooter();
-
     }
 );
