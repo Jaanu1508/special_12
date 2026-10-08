@@ -161,6 +161,9 @@ function startArchive() {
     updateFile02Lock();
     updateFile03Lock();
     updateFile04Lock();
+    updateFile05Lock();
+
+    updateFolderFooter();
 
     window.scrollTo(0, 0);
 }
@@ -507,6 +510,9 @@ function completeFile01() {
     updateFile02Lock();
     updateFile03Lock();
     updateFile04Lock();
+    updateFile05Lock();
+
+    updateFolderFooter();
 
     window.scrollTo(0, 0);
 }
@@ -523,9 +529,6 @@ function updateFile02Lock() {
 
     const status =
         document.getElementById("file02Status");
-
-    const footer =
-        document.getElementById("folderFooter");
 
     if (!file02) {
         return;
@@ -546,12 +549,6 @@ function updateFile02Lock() {
                 "ACCESS AVAILABLE";
         }
 
-        if (footer) {
-
-            footer.textContent =
-                "5 FILES. 2 AVAILABLE.";
-        }
-
     } else {
 
         file02.classList.remove("unlocked");
@@ -562,12 +559,6 @@ function updateFile02Lock() {
 
             status.textContent =
                 "🔒 ACCESS LOCKED";
-        }
-
-        if (footer) {
-
-            footer.textContent =
-                "5 FILES. 1 AVAILABLE.";
         }
     }
 }
@@ -617,7 +608,12 @@ function completeFile02() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+    updateFile02Lock();
     updateFile03Lock();
+    updateFile04Lock();
+    updateFile05Lock();
+
+    updateFolderFooter();
 
     window.scrollTo(0, 0);
 }
@@ -712,7 +708,6 @@ function completeFile03() {
         audio.currentTime = 0;
     }
 
-    // Unlock File 04
     localStorage.setItem(
         "file04Unlocked",
         "true"
@@ -726,7 +721,12 @@ function completeFile03() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+    updateFile02Lock();
+    updateFile03Lock();
     updateFile04Lock();
+    updateFile05Lock();
+
+    updateFolderFooter();
 
     window.scrollTo(0, 0);
 }
@@ -809,7 +809,10 @@ function openFile04() {
 
 function completeFile04() {
 
-    // File 05 will be unlocked here later.
+    localStorage.setItem(
+        "file05Unlocked",
+        "true"
+    );
 
     document
         .getElementById("file04Screen")
@@ -819,7 +822,149 @@ function completeFile04() {
         .getElementById("foldersScreen")
         .classList.remove("hidden");
 
+    updateFile02Lock();
+    updateFile03Lock();
+    updateFile04Lock();
+    updateFile05Lock();
+
+    updateFolderFooter();
+
     window.scrollTo(0, 0);
+}
+
+
+// ==================================================
+// UPDATE FILE 05 LOCK
+// ==================================================
+
+function updateFile05Lock() {
+
+    const file05 =
+        document.getElementById("file05Folder");
+
+    const status =
+        document.getElementById("file05Status");
+
+    if (!file05) {
+        return;
+    }
+
+    const unlocked =
+        localStorage.getItem("file05Unlocked") === "true";
+
+    if (unlocked) {
+
+        file05.classList.remove("locked");
+
+        file05.classList.add("unlocked");
+
+        if (status) {
+
+            status.textContent =
+                "ACCESS AVAILABLE";
+        }
+
+    } else {
+
+        file05.classList.remove("unlocked");
+
+        file05.classList.add("locked");
+
+        if (status) {
+
+            status.textContent =
+                "🔒 ACCESS LOCKED";
+        }
+    }
+}
+
+
+// ==================================================
+// OPEN FILE 05
+// ==================================================
+
+function openFile05() {
+
+    const unlocked =
+        localStorage.getItem("file05Unlocked") === "true";
+
+    if (!unlocked) {
+        return;
+    }
+
+    document
+        .getElementById("foldersScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("file05Screen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==================================================
+// COMPLETE FILE 05
+// ==================================================
+
+function completeFile05() {
+
+    document
+        .getElementById("file05Screen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("foldersScreen")
+        .classList.remove("hidden");
+
+    window.scrollTo(0, 0);
+}
+
+
+// ==================================================
+// FOLDER FOOTER
+// ==================================================
+
+function updateFolderFooter() {
+
+    const footer =
+        document.getElementById("folderFooter");
+
+    if (!footer) {
+        return;
+    }
+
+    let available = 1;
+
+    if (
+        localStorage.getItem("file02Unlocked") === "true"
+    ) {
+        available = 2;
+    }
+
+    if (
+        localStorage.getItem("file03Unlocked") === "true"
+    ) {
+        available = 3;
+    }
+
+    if (
+        localStorage.getItem("file04Unlocked") === "true"
+    ) {
+        available = 4;
+    }
+
+    if (
+        localStorage.getItem("file05Unlocked") === "true"
+    ) {
+        available = 5;
+    }
+
+    footer.textContent =
+        "5 FILES. " +
+        available +
+        " AVAILABLE.";
 }
 
 
@@ -836,6 +981,10 @@ document.addEventListener(
         updateFile03Lock();
 
         updateFile04Lock();
+
+        updateFile05Lock();
+
+        updateFolderFooter();
 
     }
 );
